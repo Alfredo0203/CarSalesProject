@@ -23,5 +23,25 @@ namespace SistemaInventario.Controllers
 
             return View(clientes);
         }
+
+        //REDIRECCIÓN A LA VISTA CON EL OBJETO CLIENTE
+        public ActionResult AgregarClientes()
+        {
+          var cliente = new  tabClientes();
+
+            return View(cliente);
+        }
+        // INSERCIÓN DE LOS DATOS
+        [HttpPost]
+        public ActionResult AgregarClientes(tabClientes cliente)
+        {
+            if(ModelState.IsValid)
+            {
+                clienteRepository.AgregarClientes(cliente);
+                return RedirectToAction("MostrarClientes");
+            }
+
+            return View(cliente);
+        }
     }
 }

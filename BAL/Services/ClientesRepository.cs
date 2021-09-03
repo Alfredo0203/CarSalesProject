@@ -2,6 +2,7 @@
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ namespace BAL.Services
         public ClientesRepository(Contexto _contexto)
         {
             this.contexto = _contexto;
+        }
+        // IMPLEMENTACIÓN DEL MÉTODO AGREGAR CLIENTES
+        public void AgregarClientes(tabClientes clientes)
+        {
+            contexto.Entry(clientes).State = EntityState.Added;
+            contexto.SaveChanges();
         }
 
         public void Dispose()

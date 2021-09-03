@@ -9,6 +9,9 @@ namespace BAL.IServices
 {
    public interface IClientesRepositoty : IDisposable
     {
-         List<tabClientes> ListaClientes();
+        //MÉTODO LISTAR CLIENTES
+        List<tabClientes> ListaClientes();
+
+        void AgregarClientes(tabClientes clientes);
     }
 }
