@@ -1,0 +1,42 @@
+﻿@using DAL.Models;
+@model tabProveedores
+@{
+    ViewBag.Title = "EditOrAddProveedores";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <h2>Agregar Proveedores</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.idProveedor)
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nombre: </label>
+                        @Html.TextBoxFor(x => x.proveedor, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.proveedor, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono: </label>
+                        @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.telefono, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección: </label>
+                        @Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.direccion, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Registrar</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>

@@ -10,5 +10,9 @@ namespace BAL.IServices
     public interface IProveedoresRepository : IDisposable
     {
         List<tabProveedores> listaProveedores();
+        bool CreateOrAddProveedores(tabProveedores proveedores);
+        tabProveedores ObtenerProveedorPorId(int idProveedor);
+        void EliminarProveedor(int idProveedor);
     }
+
 }

@@ -13,6 +13,7 @@ namespace SistemaInventario.Controllers
     {
         private IProveedoresRepository proveedoresRepository;
 
+        //Constructor
         public ProveedoresController()
         {
             this.proveedoresRepository = new ProveedoresRepository(new Contexto());
@@ -23,6 +24,41 @@ namespace SistemaInventario.Controllers
         {
             var proveedores = proveedoresRepository.listaProveedores();
             return View(proveedores);
+        }
+        
+        //EDITAR PROVEEDORES
+        public ActionResult EditOrAddProveedores(int idProveedor = 0)
+        {
+            var proveedores = new tabProveedores();
+
+            if (idProveedor > 0)
+            {
+                proveedores = proveedoresRepository.ObtenerProveedorPorId(idProveedor);
+            }
+            return View(proveedores);
+        }
+
+        [HttpPost]
+        //AGREGAR PROVEEDOR
+        public ActionResult EditOrAddProveedores(tabProveedores proveedores)
+        {
+            if (ModelState.IsValid)
+            {
+                var creado = proveedoresRepository.CreateOrAddProveedores(proveedores);
+
+                if (creado)
+                {
+                    return RedirectToAction("MostrarProveedores");
+                }
+            }
+            return View(proveedores);
+        }
+
+        //ELIMINAR PROVEEDOR
+        public ActionResult EliminarProveedor(int idProv)
+        {
+            proveedoresRepository.EliminarProveedor(idProv);
+            return RedirectToAction("MostrarProveedores");
         }
     }
 }
