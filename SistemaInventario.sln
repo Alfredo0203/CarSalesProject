@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaInventario", "SistemaInventario\SistemaInventario.csproj", "{A34ACF82-03C1-4AC4-A477-6B36945929B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{B963B6B4-F656-42DF-97EE-759175A55668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{AABD7E91-766A-4C79-B62C-791C4B3C3D8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A34ACF82-03C1-4AC4-A477-6B36945929B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A34ACF82-03C1-4AC4-A477-6B36945929B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A34ACF82-03C1-4AC4-A477-6B36945929B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A34ACF82-03C1-4AC4-A477-6B36945929B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B963B6B4-F656-42DF-97EE-759175A55668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B963B6B4-F656-42DF-97EE-759175A55668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B963B6B4-F656-42DF-97EE-759175A55668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B963B6B4-F656-42DF-97EE-759175A55668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABD7E91-766A-4C79-B62C-791C4B3C3D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABD7E91-766A-4C79-B62C-791C4B3C3D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABD7E91-766A-4C79-B62C-791C4B3C3D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABD7E91-766A-4C79-B62C-791C4B3C3D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBBA28D4-AA98-4D1D-977A-C82B25D4C811}
+	EndGlobalSection
+EndGlobal
