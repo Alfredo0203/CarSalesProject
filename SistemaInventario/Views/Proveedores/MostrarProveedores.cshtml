@@ -1,0 +1,51 @@
+﻿@using DAL.Models
+@model List<tabProveedores>
+@{
+    ViewBag.Title = "MostrarProveedores";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <h1>Listado de proveedores</h1>
+            </center>
+            <br />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var i in Model)
+                        {
+                            <tr>
+                                <td>@i.idProveedor</td>
+                                <td>@i.proveedor</td>
+                                <td>@i.telefono</td>
+                                <td>@i.direccion</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">
+                                <center class="text-danger">
+                                    ¡No hay datos para mostrar!
+                                </center>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

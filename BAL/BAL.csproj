@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServices\IClientesRepositoty.cs" />
+    <Compile Include="IServices\IProveedoresRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClientesRepository.cs" />
+    <Compile Include="Services\ProveedoresRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
