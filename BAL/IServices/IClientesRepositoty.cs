@@ -11,7 +11,13 @@ namespace BAL.IServices
     {
         //MÉTODO LISTAR CLIENTES
         List<tabClientes> ListaClientes();
-
+        //MÉTODO AGREGAR CLIENTES
         void AgregarClientes(tabClientes clientes);
+        //MÉTODO ACTUALIZAR CLIENTES
+        void ActualizarClientes(tabClientes clientes);
+        //MÉTODO OBTENER ID CLIENTE 
+        tabClientes ObtenerClientesPorID(int idCliente);
+        //MÉTODO ELIMINAR CLIENTE
+        void EliminarCliente(int idCliente);
     }
 }

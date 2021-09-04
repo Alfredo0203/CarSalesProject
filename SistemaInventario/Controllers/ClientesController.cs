@@ -19,29 +19,52 @@ namespace SistemaInventario.Controllers
         }
         public ActionResult MostrarClientes()
         {
-          var clientes  = clienteRepository.ListaClientes();
+            var clientes = clienteRepository.ListaClientes();
 
             return View(clientes);
         }
 
         //REDIRECCIÓN A LA VISTA CON EL OBJETO CLIENTE
-        public ActionResult AgregarClientes()
+        public ActionResult AgregarOEditarClientes(int idCliente = 0)
         {
-          var cliente = new  tabClientes();
+            var cliente = new tabClientes();
+
+            if (idCliente > 0)
+            {
+                cliente = clienteRepository.ObtenerClientesPorID(idCliente);
+            }
 
             return View(cliente);
         }
         // INSERCIÓN DE LOS DATOS
         [HttpPost]
-        public ActionResult AgregarClientes(tabClientes cliente)
+        public ActionResult AgregarOEditarClientes(tabClientes cliente)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                clienteRepository.AgregarClientes(cliente);
+                if (cliente.idCliente > 0)
+                {
+                    TempData["Message"] = "Datos de " + cliente.nombre + " actualizados";
+                    clienteRepository.ActualizarClientes(cliente);
+
+                }
+                else
+                {
+                    clienteRepository.AgregarClientes(cliente);
+                    TempData["Message"] = "Datos de agregados correctamente";
+                }
+
                 return RedirectToAction("MostrarClientes");
             }
 
             return View(cliente);
+        }
+
+        public ActionResult EliminarClientes(int id)
+        {
+            TempData["Message"] = "Cliente con nombre" + clienteRepository.ObtenerClientesPorID(id).nombre + " eliminado correctamente";
+            clienteRepository.EliminarCliente(id);
+            return RedirectToAction("MostrarClientes");
         }
     }
 }
