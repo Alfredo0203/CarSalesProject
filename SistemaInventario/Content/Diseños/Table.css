@@ -1,0 +1,32 @@
+﻿table {
+    text-align: center;
+    margin: 30px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+    table th, td {
+        border: 1px solid #78767B;
+        font-weight: bold;
+    }
+
+
+    table th {
+        color: white;
+    }
+
+    table tbody {
+        background-color: #E2E2E2;
+    }
+
+    table a {
+        cursor: pointer;
+    }
+
+.container-fluid {
+    width: 1000px;
+}
+
+table thead {
+    background-color: #78767B;
+}

@@ -1,0 +1,21 @@
+﻿
+footer {
+    background-color: #1e1732;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    color: #FFDBFF;
+    margin: 0;
+    padding: 0;
+}
+
+a, a i {
+    color: white;
+    width: 40px;
+    text-decoration: none;
+}
+
+a i:hover {
+    color: hotpink;
+}

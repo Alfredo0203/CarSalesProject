@@ -10,7 +10,7 @@
                 <h1>Listado de proveedores</h1>
             </center>
             <br />
-            <button class="btn btn-success"
+            <button class="btn btn-default" 
                     onclick="window.location.href = '/Proveedores/EditOrAddProveedores'">
                 Agregar
             </button>
@@ -22,7 +22,7 @@
                         <th>Nombre</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
-                        <th>Acciones</th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +35,13 @@
                                 <td>@i.proveedor</td>
                                 <td>@i.telefono</td>
                                 <td>@i.direccion</td>
-                                <td>
-                                    <button class="btn btn-success"
+                                <td width="20">
+                                    <button class="btn " style="background-color: #82E897"
                                             onclick="window.location.href = '/Proveedores/EditOrAddProveedores?idProveedor='+@i.idProveedor">
                                         Editar
                                     </button>
+                                    </td>
+                                <td width="20">
                                     <button class="btn btn-danger"
                                             onclick="window.location.href = '/Proveedores/EliminarProveedor?idProv='+@i.idProveedor">
                                         Eliminar
