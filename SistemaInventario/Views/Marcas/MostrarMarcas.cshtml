@@ -4,15 +4,17 @@
     ViewBag.Title = "MostrarMarcas";
 }
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <br />
+            <br />
+            <br />
             <center><h1>Listado de Marcas</h1></center>
             <br />
-            <button class="btn btn-default" onclick="window.location.href='/Marcas/AgregarOEditarMarcas'">Agregar Marca</button>
+            <button class="btn agregarBtn" onclick="window.location.href='/Marcas/AgregarOEditarMarcas'">Agregar Marca</button>
             <br />
-            <table class="table table-hover">
+            <table class="table-striped table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -29,10 +31,10 @@
                                 <td>@mar.idMarca</td>
                                 <td>@mar.marca</td>
                                 <td width="20">
-                                    <button class="btn btn-success" onclick="window.location.href='/Marcas/AgregarOEditarMarcas?idMarca=' +@mar.idMarca">Editar</button>
-                                    </td>
+                                    <button class="btn btn-info" onclick="window.location.href='/Marcas/AgregarOEditarMarcas?idMarca=' +@mar.idMarca">Editar</button>
+                                </td>
                                 <td width="20">
-                                   <button class="btn btn-danger" onclick="window.location.href='/Marcas/EliminarMarcas?id=' +@mar.idMarca">Eliminar</button>
+                                    <button class="btn btn-danger" onclick="window.location.href='/Marcas/EliminarMarcas?id=' +@mar.idMarca">Eliminar</button>
 
                                 </td>
                             </tr>

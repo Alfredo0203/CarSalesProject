@@ -4,13 +4,13 @@
     ViewBag.Title = "MostrarAutos";
 }
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <center><h1>Listado de Autos</h1></center>
             <br />
-            <button class="btn btn-default" onclick="window.location.href='/Autos/AgregarOEditarAutos'">Agregar Auto</button>
-            <table class="table table-hover">
+            <button class="btn agregarBtn" onclick="window.location.href='/Autos/AgregarOEditarAutos'">Agregar Auto</button>
+            <table class="table-hover table-striped ">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -44,7 +44,7 @@
                         <td>@car.descripcion</td>
                         <td >@car.fechaRegistro</td>
                         <td width="20">
-                            <button class="btn btn-success" onclick="window.location.href='/Autos/AgregarOEditarAutos?id=' +@car.idAuto">Editar</button>
+                            <button class="btn btn-info" onclick="window.location.href='/Autos/AgregarOEditarAutos?id=' +@car.idAuto">Editar</button>
                             </td>
                         <td width="20">
                             <button class="btn btn-danger" onclick="window.location.href='/Autos/EliminarAutos?id=' +@car.idAuto">Eliminar</button>

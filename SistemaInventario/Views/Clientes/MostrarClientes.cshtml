@@ -13,15 +13,15 @@
 }
 <br />
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <center><h1>Lista Clientes</h1></center>
             <br />
-            <button class="btn btn-default" onclick="window.location.href='/Clientes/AgregarOEditarClientes'">Agregar</button>
+            <button class="btn agregarBtn" onclick="window.location.href='/Clientes/AgregarOEditarClientes'">Agregar</button>
 
             <br />
-            <table class="table table-hover">
+            <table class="table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -41,7 +41,7 @@
                         <td>@cl.direccion</td>
                         <td width="20">
                       
-                            <button class="btn " style="background-color: #82E897"
+                            <button class="btn btn-info "
                                onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente">Editar</button>
                         </td>
                         <td width="20">
