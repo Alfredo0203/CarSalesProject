@@ -3,19 +3,24 @@
 @{
     ViewBag.Title = "MostrarProveedores";
 }
-<div class="container-fluid">
+<!--class="container"-->
+<div class="container">
     <div class="row">
         <div class="col-md-12">
+            <br />
+            <br />
+            <br />
             <center>
                 <h1>Listado de proveedores</h1>
             </center>
             <br />
-            <button class="btn btn-default" 
+            <button class="btn agregarBtn"
                     onclick="window.location.href = '/Proveedores/EditOrAddProveedores'">
                 Agregar
             </button>
             <br />
-            <table class="table table-hover">
+            <!--table-striped-->
+            <table class="table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -36,11 +41,12 @@
                                 <td>@i.telefono</td>
                                 <td>@i.direccion</td>
                                 <td width="20">
-                                    <button class="btn " style="background-color: #82E897"
+                                    <!-- style="background-color: #82E897"-->
+                                    <button class="btn btn-info"
                                             onclick="window.location.href = '/Proveedores/EditOrAddProveedores?idProveedor='+@i.idProveedor">
                                         Editar
                                     </button>
-                                    </td>
+                                </td>
                                 <td width="20">
                                     <button class="btn btn-danger"
                                             onclick="window.location.href = '/Proveedores/EliminarProveedor?idProv='+@i.idProveedor">

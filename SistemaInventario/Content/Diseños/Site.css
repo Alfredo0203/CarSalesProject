@@ -1,11 +1,10 @@
-﻿html {
+﻿
+html {
     min-height: 100%;
     position: relative;
 }
-
-body {
-
-    margin-bottom: 100px;
+* {
+    font-family: 'Times New Roman', Times, serif;
 }
 
 button {
