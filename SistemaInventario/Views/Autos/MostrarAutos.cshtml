@@ -1,0 +1,59 @@
+﻿@using DAL.Models
+@model List<tabAutos>
+@{
+    ViewBag.Title = "MostrarAutos";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <center><h1>Listado de Autos</h1></center>
+            <br />
+            <button class="btn btn-default" onclick="window.location.href='/Autos/AgregarOEditarAutos'">Agregar Auto</button>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Placa</th>
+                        <th>Precio</th>
+                        <th>Imagen</th>
+                        <th>Color</th>
+                        <th>Motor</th>
+                        <th>Descripción</th>
+                        <th >Fecha registro</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null)
+            {
+                foreach(var car in Model)
+                {
+                    <tr>
+                        <td>@car.codigo</td>
+                        <td>@car.NombreMarca</td>
+                        <td>@car.modelo</td>
+                        <td>@car.placa</td>
+                        <td><b>$</b>@car.precio</td>
+
+                        <td>@car.imagen</td>
+                        <td>@car.color</td>
+                        <td>@car.motor</td>
+                        <td>@car.descripcion</td>
+                        <td >@car.fechaRegistro</td>
+                        <td width="20">
+                            <button class="btn btn-success" onclick="window.location.href='/Autos/AgregarOEditarAutos?id=' +@car.idAuto">Editar</button>
+                            </td>
+                        <td width="20">
+                            <button class="btn btn-danger" onclick="window.location.href='/Autos/EliminarAutos?id=' +@car.idAuto">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -127,8 +127,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +181,10 @@
     <Content Include="Views\Proveedores\MostrarProveedores.cshtml" />
     <Content Include="Views\Clientes\AgregarOEditarClientes.cshtml" />
     <Content Include="Views\Proveedores\EditOrAddProveedores.cshtml" />
+    <Content Include="Views\Marcas\MostrarMarcas.cshtml" />
+    <Content Include="Views\Marcas\AgregarOEditarMarcas.cshtml" />
+    <Content Include="Views\Autos\MostrarAutos.cshtml" />
+    <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

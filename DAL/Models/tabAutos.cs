@@ -5,9 +5,11 @@ namespace DAL.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class tabAutos
     {
+        private Contexto contexto =new Contexto();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tabAutos()
         {
@@ -65,5 +67,14 @@ namespace DAL.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabInventario> tabInventario { get; set; }
+
+        [NotMapped]
+        public string NombreMarca
+        {
+            get
+            {
+                return contexto.tabMarcas.FirstOrDefault(x => x.idMarca == fk_marca).marca;
+            }
+        }
     }
 }

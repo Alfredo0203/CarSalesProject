@@ -1,0 +1,49 @@
+﻿@using DAL.Models;
+@model List<tabMarcas>
+@{
+    ViewBag.Title = "MostrarMarcas";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <center><h1>Listado de Marcas</h1></center>
+            <br />
+            <button class="btn btn-default" onclick="window.location.href='/Marcas/AgregarOEditarMarcas'">Agregar Marca</button>
+            <br />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th colspan="2">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        foreach (var mar in Model)
+                        {
+                            <tr>
+                                <td>@mar.idMarca</td>
+                                <td>@mar.marca</td>
+                                <td width="20">
+                                    <button class="btn btn-success" onclick="window.location.href='/Marcas/AgregarOEditarMarcas?idMarca=' +@mar.idMarca">Editar</button>
+                                    </td>
+                                <td width="20">
+                                   <button class="btn btn-danger" onclick="window.location.href='/Marcas/EliminarMarcas?id=' +@mar.idMarca">Eliminar</button>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

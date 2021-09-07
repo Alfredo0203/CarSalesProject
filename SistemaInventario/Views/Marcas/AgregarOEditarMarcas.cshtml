@@ -1,0 +1,28 @@
+﻿@using DAL.Models
+@model tabMarcas
+@{
+    ViewBag.Title = "AgregarOEditarMarcas";
+}
+
+<div class="container-fluid">
+    <div class="col-md-12">
+        <center><h1>Agregar Marca</h1></center>
+        <br />
+        
+        @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.idMarca);
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-label">Nombre Marca</label>
+            @Html.TextBoxFor(x => x.marca, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.marca, null, htmlAttributes: new { @class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Guardar"/>
+        </div>
+    </div>
+            }
+    </div>
+</div>
