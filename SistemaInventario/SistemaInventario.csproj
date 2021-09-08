@@ -132,6 +132,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,6 +186,8 @@
     <Content Include="Views\Marcas\AgregarOEditarMarcas.cshtml" />
     <Content Include="Views\Autos\MostrarAutos.cshtml" />
     <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
+    <Content Include="Views\Ventas\MostrarVentas.cshtml" />
+    <Content Include="Views\Ventas\AgregarOEditarVentas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
