@@ -1,0 +1,68 @@
+﻿@using DAL.Models;
+@model tabUsuarios
+
+@{
+    ViewBag.Title = "EditarOCrearUsuarios";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <h2>Agregar Usuarios</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.idUsuario)
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Nombre: </label>
+                @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Apellido: </label>
+                @Html.TextBoxFor(x => x.apellido, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.apellido, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Edad: </label>
+                @Html.TextBoxFor(x => x.edad, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.edad, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Correo: </label>
+                @Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.correo, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Contraseña: </label>
+                @Html.TextBoxFor(x => x.pass, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.pass, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Estado: </label>
+                <label>Activo </label>
+                @Html.RadioButtonFor(x => x.isActivo, true))
+                <label>Inactivo </label>
+                @Html.RadioButtonFor(x => x.isActivo, false))
+            </div>
+            <div class="form-group">
+                <label>Rol: </label>
+                @Html.EnumDropDownListFor(x => x.rol, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.rol, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Registrar</button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+            }
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BAL.Services
 {
-    class UsuariosRepository : IUsuariosRepository, IDisposable
+   public class UsuariosRepository : IUsuariosRepository, IDisposable
     {
         //VARIABLE QUE ALMACENA CLASE OBJETO
         private readonly Contexto contexto;

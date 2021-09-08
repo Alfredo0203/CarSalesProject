@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BAL.IServices
 {
-    interface IUsuariosRepository : IDisposable
+   public interface IUsuariosRepository : IDisposable
     {
         //MÉTODO LISTAR USUARIOS
         List<tabUsuarios> listaUsuarios();
