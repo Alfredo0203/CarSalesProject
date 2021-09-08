@@ -1,0 +1,54 @@
+﻿@using DAL.Models
+@model List<tabVentas>
+@{
+    ViewBag.Title = "MostrarVentas";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <center><h1>Listado de Autos</h1></center>
+            <br />
+            <button class="btn agregarBtn" onclick="window.location.href='/Ventas/AgregarOEditarVentas'">Vender</button>
+            <table class="table-hover table-striped ">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Cliente</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Fecha registro</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var ven in Model)
+                        {
+                    <tr>
+                        <td>@ven.idVenta</td>
+                        <td>@ven.MarcaAuto</td>
+                        <td>@ven.ModeloAuto</td>
+                        <td>@ven.NombreCliente</td>
+                        <td>@ven.cantidad</td>
+                        <td>$ @ven.PrecioAuto</td>
+                        <td>@ven.descripcion</td>
+                        <td>@ven.fecha</td>
+                        <td width="20">
+                            <button class="btn btn-info" onclick="window.location.href='/Ventas/AgregarOEditarVentas?id=' +@ven.idVenta">Editar</button>
+                        </td>
+                        <td width="20">
+                            <button class="btn btn-danger" onclick="window.location.href='/Ventas/EliminarVentas?id=' +@ven.idVenta">Eliminar</button>
+                        </td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

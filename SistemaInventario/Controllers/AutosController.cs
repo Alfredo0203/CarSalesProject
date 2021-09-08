@@ -11,8 +11,8 @@ namespace SistemaInventario.Controllers
 {
     public class AutosController : Controller
     {
-        IAutosRepository autosRepository;
-        IMarcasRepository marcasRepository;
+        private IAutosRepository autosRepository;
+        private readonly IMarcasRepository marcasRepository;
         public AutosController()
         {
             this.autosRepository = new AutosRepository(new Contexto());
@@ -27,14 +27,8 @@ namespace SistemaInventario.Controllers
 
         public ActionResult AgregarOEditarAutos(int id = 0)
         {
-            var listaMarcas = new List<SelectListItem>();
 
-            foreach (var item in marcasRepository.ListarMarcas())
-            {
-                listaMarcas.Add(new SelectListItem { Text = item.marca, Value = item.idMarca.ToString() });
-
-            }
-            ViewBag.listaMarcas = listaMarcas;
+            ViewBag.listaMarcas = SeleccionarMarcas();
             var auto = new tabAutos();
             if(id > 0)
             {
@@ -43,17 +37,13 @@ namespace SistemaInventario.Controllers
 
             return View(auto);
         }
+
+
         [HttpPost]
         public ActionResult AgregarOEditarAutos(tabAutos model)
         {
-            var listaMarcas = new List<SelectListItem>();
 
-            foreach (var item in marcasRepository.ListarMarcas())
-            {
-                listaMarcas.Add(new SelectListItem { Text = item.marca, Value = item.idMarca.ToString() });
-
-            }
-            ViewBag.listaMarcas = listaMarcas;
+            ViewBag.listaMarcas = SeleccionarMarcas();
             if (ModelState.IsValid)
             {
                
@@ -75,16 +65,26 @@ namespace SistemaInventario.Controllers
         {
             if(id > 0)
             {
-                try
-                {
-                    autosRepository.EliminarAutos(id);
-                }catch(Exception e)
-                {
 
-                }
+                    autosRepository.EliminarAutos(id);
+
             }
             return RedirectToAction("MostrarAutos");
         }
-           
+
+        //MÉTODO AGREGAR NARCAS AL ELEMENTO SelectListItem
+        public List<SelectListItem> SeleccionarMarcas()
+        {
+            var listaMarcas = new List<SelectListItem>();
+
+            foreach (var item in marcasRepository.ListarMarcas())
+            {
+                listaMarcas.Add(new SelectListItem { Text = item.marca, Value = item.idMarca.ToString() });
+
+            }
+            return listaMarcas;
         }
+
+
     }
+}
