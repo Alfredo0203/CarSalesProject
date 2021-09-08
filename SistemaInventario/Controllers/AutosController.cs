@@ -43,7 +43,7 @@ namespace SistemaInventario.Controllers
         public ActionResult AgregarOEditarAutos(tabAutos model)
         {
 
-            ViewBag.listaMarcas = SeleccionarMarcas();
+           
             if (ModelState.IsValid)
             {
                

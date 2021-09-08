@@ -1,0 +1,55 @@
+﻿@using DAL.Models;
+@model tabCompras
+@{
+    ViewBag.Title = "AgregarOEditarCompras";
+}
+
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <h2>Agregar Proveedores</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.idCompra)
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Marca: </label>
+                        @Html.DropDownListFor(x => x.fk_auto, (IEnumerable<SelectListItem>)ViewBag.listaAutos, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.fk_auto, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Cliente: </label>
+                        @Html.DropDownListFor(x => x.fk_Proveedor, (IEnumerable<SelectListItem>)ViewBag.listaProveedores, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.fk_Proveedor, null, htmlAttributes: new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad: </label>
+                        @Html.TextBoxFor(x => x.cantidad, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.cantidad, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción: </label>
+                        @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha </label>
+                        @Html.TextBoxFor(x => x.fecha, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.fecha, null, new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>

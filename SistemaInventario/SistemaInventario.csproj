@@ -129,7 +129,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
@@ -188,6 +190,9 @@
     <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
     <Content Include="Views\Ventas\MostrarVentas.cshtml" />
     <Content Include="Views\Ventas\AgregarOEditarVentas.cshtml" />
+    <Content Include="Views\Compras\MostrarCompras.cshtml" />
+    <Content Include="Views\Compras\AgregarOEditarCompras.cshtml" />
+    <Content Include="Views\Inventario\MostrarInventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
