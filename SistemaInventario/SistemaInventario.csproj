@@ -134,6 +134,7 @@
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,6 +194,8 @@
     <Content Include="Views\Compras\MostrarCompras.cshtml" />
     <Content Include="Views\Compras\AgregarOEditarCompras.cshtml" />
     <Content Include="Views\Inventario\MostrarInventario.cshtml" />
+    <Content Include="Views\Usuarios\MostrarUsuarios.cshtml" />
+    <Content Include="Views\Usuarios\EditarOCrearUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
