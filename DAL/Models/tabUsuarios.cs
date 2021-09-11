@@ -31,6 +31,6 @@ namespace DAL.Models
 
         public bool isActivo { get; set; }
 
-        public short rol { get; set; }
+        public int rol { get; set; }
     }
 }
