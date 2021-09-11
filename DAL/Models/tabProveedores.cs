@@ -29,6 +29,9 @@ namespace DAL.Models
         [StringLength(55)]
         public string direccion { get; set; }
 
+        [StringLength(20)]
+        public string estadoProveedor { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabCompras> tabCompras { get; set; }
     }

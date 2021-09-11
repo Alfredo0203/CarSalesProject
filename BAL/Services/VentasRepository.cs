@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BAL.Services
 {
-    public class VentasRepository : IVentasRepository, IDisposable
+    public class VentasRepository : IDetalleVentasRepository, IDisposable
     {
         private readonly Contexto contexto;
         public VentasRepository(Contexto _contexto)
@@ -18,26 +18,26 @@ namespace BAL.Services
         }
 
         //IMPLEMENTACIÓN DEL MÉTODO LISTAR
-        public List<tabVentas> ListarVentas()
+        public List<tabDetalleVentas> ListarDetalleVentas()
         {
-            var listaVentas = contexto.tabVentas.ToList();
+            var listaVentas = contexto.tabDetalleVentas.ToList();
             return listaVentas;
         }
         //IMPLEMENTACIÓN DEL MÉTODO Obtener ID Venta
-        public tabVentas ObtenerVentaPorID(int id)
+        public tabDetalleVentas ObtenerVentaPorID(int id)
         {
-            var ventaEncontrada = contexto.tabVentas.FirstOrDefault(v => v.idVenta == id);
+            var ventaEncontrada = contexto.tabDetalleVentas.FirstOrDefault(v => v.idVenta == id);
             return ventaEncontrada;
         }
 
-        public void AgregarVentas(tabVentas venta)
+        public void AgregarVentas(tabDetalleVentas venta)
         {
             contexto.Entry(venta).State = EntityState.Added;
             contexto.SaveChanges();
             
         }
 
-        public void ActualizarVentas(tabVentas venta)
+        public void ActualizarDetalleVentas(tabDetalleVentas venta)
         {
             contexto.Entry(venta).State = EntityState.Modified;
             contexto.SaveChanges();

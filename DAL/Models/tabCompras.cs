@@ -9,60 +9,30 @@ namespace DAL.Models
 
     public partial class tabCompras
     {
-        private readonly Contexto contexto = new Contexto();
+        Contexto contexto = new Contexto();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tabCompras()
+        {
+            tabDetalleCompras = new HashSet<tabDetalleCompras>();
+        }
+
         [Key]
-        public int idCompra { get; set; }
+        public int IdCompra { get; set; }
 
-        public int fk_auto { get; set; }
+        public int CodigoFactura { get; set; }
 
-        public DateTime fecha { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime Fecha { get; set; }
 
-        public int cantidad { get; set; }
+        public int? FkProveedor { get; set; }
 
-        [StringLength(105)]
-        public string descripcion { get; set; }
+        public double Total { get; set; }
 
-        public int fk_Proveedor { get; set; }
-
-        public virtual tabAutos tabAutos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tabDetalleCompras> tabDetalleCompras { get; set; }
 
         public virtual tabProveedores tabProveedores { get; set; }
 
-
-        [NotMapped]
-        public string MarcaAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(a => a.idAuto == fk_auto).NombreMarca;
-            }
-        }
-
-        [NotMapped]
-        public string ModeloAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(a => a.idAuto == fk_auto).modelo;
-            }
-        }
-
-        [NotMapped]
-        public double PrecioAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(a => a.idAuto == fk_auto).precio;
-            }
-        }
-
-        [NotMapped]
-        public string NombreProveedor
-        {
-            get
-            {
-                return contexto.tabProveedores.FirstOrDefault(m => m.idProveedor == fk_Proveedor).proveedor;
-            }
-        }
+        
     }
 }

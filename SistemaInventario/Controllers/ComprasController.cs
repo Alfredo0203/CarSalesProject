@@ -11,7 +11,7 @@ namespace SistemaInventario.Controllers
 {
     public class ComprasController : Controller
     {
-        private IComprasRepository comprasRepository;
+        private IDetalleComprasRepository comprasRepository;
         private IProveedoresRepository proveedoresRepositoty;
         private IAutosRepository autosRepository;
         //INICIALIZACIÓN DE LOS OBJETOS DE CLASE E INTERFACE
@@ -25,7 +25,7 @@ namespace SistemaInventario.Controllers
         public ActionResult MostrarCompras()
         {
    
-              var listadoCompras = comprasRepository.ListarCompras();
+              var listadoCompras = comprasRepository.ListarDetalleCompras();
 
                 return View(listadoCompras );
            
@@ -36,7 +36,7 @@ namespace SistemaInventario.Controllers
         {
             ViewBag.listaAutos= SeleccionarAutos();
             ViewBag.listaProveedores = SeleccionarProveedores();
-            var model = new tabCompras();
+            var model = new tabDetalleCompras();
             if(id > 0)
             {
                 model = comprasRepository.ObtenerComprasPorID(id);
@@ -46,7 +46,7 @@ namespace SistemaInventario.Controllers
 
          
         [HttpPost]
-        public ActionResult AgregarOEditarCompras(tabCompras model)
+        public ActionResult AgregarOEditarCompras(tabDetalleCompras model)
         {
             ViewBag.listaAutos = SeleccionarAutos();
             ViewBag.listaProveedores = SeleccionarProveedores();
@@ -54,7 +54,7 @@ namespace SistemaInventario.Controllers
             {
                 if(model.idCompra >  0)
                 {
-                    comprasRepository.ActualizarCompras(model);
+                    comprasRepository.ActualizarDetalleCompras(model);
                 }
                 else
                 {

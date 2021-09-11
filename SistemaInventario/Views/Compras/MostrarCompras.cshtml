@@ -1,5 +1,5 @@
 ﻿@using DAL.Models
-@model List<tabCompras>
+@model List<tabDetalleCompras>
 @{
     ViewBag.Title = "MostrarCompras";
 }
@@ -16,36 +16,41 @@
                         <th>Id</th>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        <th>Proveedor</th>
                         <th>Cantidad</th>
                         <th>Precio</th>
-                        <th>Descripción</th>
-                        <th>Fecha registro</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null)
+                    @if (Model.Count() > 0)
                     {
                         foreach (var com in Model)
                         {
-                            <tr>
-                                <td>@com.idCompra</td>
-                                <td>@com.MarcaAuto</td>
-                                <td>@com.ModeloAuto</td>
-                                <td>@com.NombreProveedor</td>
-                                <td>@com.cantidad</td>
-                                <td>$ @com.PrecioAuto</td>
-                                <td>@com.descripcion</td>
-                                <td>@com.fecha</td>
-                                <td width="20">
-                                    <button class="btn btn-info" onclick="window.location.href='/Compras/AgregarOEditarCompras?id=' +@com.idCompra">Editar</button>
-                                </td>
-                                <td width="20">
-                                    <button class="btn btn-danger" onclick="window.location.href='/Compras/EliminarCompras?id=' +@com.idCompra">Eliminar</button>
-                                </td>
-                            </tr>
+                    <tr>
+                        <td>@com.idDetalleCompra</td>
+                        <td>@com.MarcaAuto</td>
+                        <td>@com.ModeloAuto</td>
+                        <td>@com.cantidad</td>
+                        <td>$ @com.PrecioAuto</td>
+            
+                        <td width="20">
+                            <button class="btn btn-info" onclick="window.location.href='/Compras/AgregarOEditarCompras?id=' +@com.idCompra">Editar</button>
+                        </td>
+                        <td width="20">
+                            <button class="btn btn-danger" onclick="window.location.href='/Compras/EliminarCompras?id=' +@com.idCompra">Eliminar</button>
+                        </td>
+                    </tr>
                         }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">
+                                <center class="text-danger">
+                                    ¡No hay datos para mostrar!
+                                </center>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

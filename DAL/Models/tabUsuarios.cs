@@ -2,7 +2,6 @@ namespace DAL.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -32,17 +31,6 @@ namespace DAL.Models
 
         public bool isActivo { get; set; }
 
-        public Rol rol { get; set; }
-    }
-
-    //CLASE DE TIPO ENUM PARA LOS ROLES
-    public enum Rol
-    { 
-        [Description("Administrador")]
-        admin,
-        [Description("Vendedor")]
-        vendedor,
-        [Description("Cliente")]
-        cliente
+        public short rol { get; set; }
     }
 }

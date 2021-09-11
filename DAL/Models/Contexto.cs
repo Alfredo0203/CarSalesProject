@@ -15,6 +15,8 @@ namespace DAL.Models
         public virtual DbSet<tabAutos> tabAutos { get; set; }
         public virtual DbSet<tabClientes> tabClientes { get; set; }
         public virtual DbSet<tabCompras> tabCompras { get; set; }
+        public virtual DbSet<tabDetalleCompras> tabDetalleCompras { get; set; }
+        public virtual DbSet<tabDetalleVentas> tabDetalleVentas { get; set; }
         public virtual DbSet<tabInventario> tabInventario { get; set; }
         public virtual DbSet<tabMarcas> tabMarcas { get; set; }
         public virtual DbSet<tabProveedores> tabProveedores { get; set; }
@@ -23,10 +25,6 @@ namespace DAL.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<tabAutos>()
-                .Property(e => e.codigo)
-                .IsUnicode(false);
-
             modelBuilder.Entity<tabAutos>()
                 .Property(e => e.placa)
                 .IsUnicode(false);
@@ -52,22 +50,19 @@ namespace DAL.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<tabAutos>()
-                .HasMany(e => e.tabCompras)
-                .WithRequired(e => e.tabAutos)
-                .HasForeignKey(e => e.fk_auto)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.tabDetalleCompras)
+                .WithOptional(e => e.tabAutos)
+                .HasForeignKey(e => e.fk_auto);
 
             modelBuilder.Entity<tabAutos>()
-                .HasMany(e => e.tabVentas)
-                .WithRequired(e => e.tabAutos)
-                .HasForeignKey(e => e.fk_auto)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.tabDetalleVentas)
+                .WithOptional(e => e.tabAutos)
+                .HasForeignKey(e => e.fk_auto);
 
             modelBuilder.Entity<tabAutos>()
                 .HasMany(e => e.tabInventario)
                 .WithRequired(e => e.tabAutos)
-                .HasForeignKey(e => e.fk_auto)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(e => e.fk_auto);
 
             modelBuilder.Entity<tabClientes>()
                 .Property(e => e.nombre)
@@ -82,13 +77,29 @@ namespace DAL.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<tabClientes>()
+                .Property(e => e.estadoCliente)
+                .IsFixedLength();
+
+            modelBuilder.Entity<tabClientes>()
                 .HasMany(e => e.tabVentas)
-                .WithRequired(e => e.tabClientes)
-                .HasForeignKey(e => e.fk_Cliente)
-                .WillCascadeOnDelete(false);
+                .WithOptional(e => e.tabClientes)
+                .HasForeignKey(e => e.FkCliente);
 
             modelBuilder.Entity<tabCompras>()
-                .Property(e => e.descripcion)
+                .HasMany(e => e.tabDetalleCompras)
+                .WithRequired(e => e.tabCompras)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<tabDetalleCompras>()
+                .Property(e => e.marcaModelo)
+                .IsFixedLength();
+
+            modelBuilder.Entity<tabDetalleVentas>()
+                .Property(e => e.marcaModelo)
+                .IsFixedLength();
+
+            modelBuilder.Entity<tabInventario>()
+                .Property(e => e.estado)
                 .IsUnicode(false);
 
             modelBuilder.Entity<tabMarcas>()
@@ -98,8 +109,7 @@ namespace DAL.Models
             modelBuilder.Entity<tabMarcas>()
                 .HasMany(e => e.tabAutos)
                 .WithRequired(e => e.tabMarcas)
-                .HasForeignKey(e => e.fk_marca)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(e => e.fk_marca);
 
             modelBuilder.Entity<tabProveedores>()
                 .Property(e => e.proveedor)
@@ -114,10 +124,13 @@ namespace DAL.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<tabProveedores>()
+                .Property(e => e.estadoProveedor)
+                .IsFixedLength();
+
+            modelBuilder.Entity<tabProveedores>()
                 .HasMany(e => e.tabCompras)
-                .WithRequired(e => e.tabProveedores)
-                .HasForeignKey(e => e.fk_Proveedor)
-                .WillCascadeOnDelete(false);
+                .WithOptional(e => e.tabProveedores)
+                .HasForeignKey(e => e.FkProveedor);
 
             modelBuilder.Entity<tabUsuarios>()
                 .Property(e => e.nombre)
@@ -133,10 +146,6 @@ namespace DAL.Models
 
             modelBuilder.Entity<tabUsuarios>()
                 .Property(e => e.pass)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<tabVentas>()
-                .Property(e => e.descripcion)
                 .IsUnicode(false);
         }
     }

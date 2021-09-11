@@ -11,12 +11,12 @@ namespace SistemaInventario.Controllers
 {
     public class VentasController : Controller
     {
-        private IVentasRepository ventasRepository;
+        private IDetalleVentasRepository detalleVentasRepository;
         private IAutosRepository autosRepository;
         private IClientesRepositoty clientesRepositoty;
         public VentasController()
         {
-            this.ventasRepository = new VentasRepository(new Contexto());
+            this.detalleVentasRepository = new VentasRepository(new Contexto());
             this.autosRepository = new AutosRepository(new Contexto());
             this.clientesRepositoty = new ClientesRepository(new Contexto());
         }
@@ -25,10 +25,10 @@ namespace SistemaInventario.Controllers
         {
             try
             {
-                var model = ventasRepository.ListarVentas();
+                var model = detalleVentasRepository.ListarDetalleVentas();
                 return View(model);
             } 
-            catch(Exception e)
+            catch(Exception )
             {
                 return View();
             }
@@ -36,18 +36,18 @@ namespace SistemaInventario.Controllers
 
         public ActionResult AgregarOEditarVentas(int id = 0)
         {
-            var model = new tabVentas();
+            var model = new tabDetalleVentas();
             ViewBag.listaAutos = SeleccionarAutos();
             ViewBag.listaClientes = SeleccionarClientes();
             if (id > 0)
             {
-                model = ventasRepository.ObtenerVentaPorID(id);
+                model = detalleVentasRepository.ObtenerVentaPorID(id);
             }
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AgregarOEditarVentas(tabVentas venta)
+        public ActionResult AgregarOEditarVentas(tabDetalleVentas venta)
         {
             ViewBag.listaAutos = SeleccionarAutos();
             ViewBag.listaClientes = SeleccionarClientes();
@@ -55,10 +55,10 @@ namespace SistemaInventario.Controllers
             {
                 if (venta.idVenta > 0)
                 {
-                    ventasRepository.ActualizarVentas(venta);
+                    detalleVentasRepository.ActualizarDetalleVentas(venta);
                  } else
                 {
-                    ventasRepository.AgregarVentas(venta);
+                    detalleVentasRepository.AgregarVentas(venta);
                 }
                 return RedirectToAction("MostrarVentas");
             }
@@ -68,7 +68,7 @@ namespace SistemaInventario.Controllers
 
         public ActionResult EliminarVentas(int id = 0)
         {
-            ventasRepository.EliminarVentas(id);
+            detalleVentasRepository.EliminarVentas(id);
             return RedirectToAction("MostrarVentas");
         }
 
