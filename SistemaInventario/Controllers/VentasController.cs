@@ -11,6 +11,7 @@ namespace SistemaInventario.Controllers
 {
     public class VentasController : Controller
     {
+        Contexto contexto = new Contexto();
         private IDetalleVentasRepository detalleVentasRepository;
         private IAutosRepository autosRepository;
         private IClientesRepositoty clientesRepositoty;
@@ -26,6 +27,7 @@ namespace SistemaInventario.Controllers
             try
             {
                 var model = detalleVentasRepository.ListarDetalleVentas();
+                ViewBag.Ventas = contexto.tabVentas.ToList();
                 return View(model);
             } 
             catch(Exception )

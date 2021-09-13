@@ -13,7 +13,7 @@ namespace DAL.Models
         {
             tabDetalleVentas = new HashSet<tabDetalleVentas>();
         }
-
+        
         [Key]
         public int IdVenta { get; set; }
 

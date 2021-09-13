@@ -1,58 +1,105 @@
 ﻿@using DAL.Models
 @model List<tabDetalleVentas>
+
+
+
+
 @{
-    ViewBag.Title = "MostrarVentas";
+    ViewBag.Title = "MostrarProductos";
+    var ventas = ViewBag.Ventas;
+    
 }
 
-<div class="container">
+
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <center><h1>Listado de Autos</h1></center>
+        <div class="col-md-8">
+            <center>
+                <h1>Listado de Ventas</h1>
+            </center>
             <br />
-            <button class="btn agregarBtn" onclick="window.location.href='/Ventas/AgregarOEditarVentas'">Vender</button>
-            <table class="table-hover table-striped ">
+
+            <br />
+            <table class="table ">
                 <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
+                  <tr>
+                   <th></th>
+                  </tr>
                 </thead>
                 <tbody>
-                    @if (Model.Count() > 0)
+                    @if (ventas != null)
                     {
-                        foreach (var ven in Model)
+                        foreach (var ven in ventas)
                         {
-                            <tr>
-                                <td>@ven.idDetalleVenta</td>
-                                <td>@ven.MarcaAuto</td>
-                                <td>@ven.ModeloAuto</td>
-                                <td>@ven.cantidad</td>
-                                <td>$ @ven.PrecioAuto</td>
-                                <td width="20">
-                                    <button class="btn btn-info" onclick="window.location.href='/Ventas/AgregarOEditarVentas?id=' +@ven.idVenta">Editar</button>
-                                </td>
-                                <td width="20">
-                                    <button class="btn btn-danger" onclick="window.location.href='/Ventas/EliminarVentas?id=' +@ven.idVenta">Eliminar</button>
+                            <tr style="padding: 0; margin:0; background-color: cornflowerblue">
+                                <td> @ven.CodigoFactura  </td>
+                                <td>@ven.FkCliente </td>
+                                <td> @ven.Fecha</td>
+                                <td> $ @ven.Total</td>
+
+                                <td>
+                                    <table class="table " style="padding: 0; margin:0; border: solid 2px black">
+                                        <thead style="background-color: darkgray; padding: 0; margin: 0; border: solid 2px black">
+                                            <tr style="border: solid 2px black; text-align: center">
+
+                                                <th>Marca y Modelo </th>
+                                                <th>Cantidad </th>
+                                                <th>Precio Venta</th>
+                                                <th>SubTotal</th>
+                                                <th rowspan="2">
+                                                    <button class="btn btn-success"
+                                                            onclick="window.location.href=''">
+                                                        Ver Detalles
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Count() > 0)
+                                            {
+                                                foreach (var prod in Model)
+                                                {
+                                                    if (prod.idVenta == ven.IdVenta)
+                                                    {
+                                                        <tr style="border: solid 2px black; text-align: center">
+
+                                                            <td>@prod.marcaModelo</td>
+                                                            <td>@prod.cantidad</td>
+                                                            <td>@prod.precio</td>
+                                                            <td>@prod.subTotal</td>
+
+
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                   
                                 </td>
                             </tr>
+
+
                         }
+
                     }
-                    else
-                    {
-                        <tr>
-                            <td colspan="6">
-                                <center class="text-danger">
-                                    ¡No hay datos para mostrar!
-                                </center>
-                            </td>
-                        </tr>
-                    }
+                   
+                   
+
                 </tbody>
             </table>
+
+
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+

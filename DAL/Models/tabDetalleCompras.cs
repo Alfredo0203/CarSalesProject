@@ -46,14 +46,7 @@ namespace DAL.Models
             }
         }
 
-        [NotMapped]
-        public double PrecioAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(x => x.idAuto == fk_auto).precio;
-            }
-        }
+       
 
     }
 }
