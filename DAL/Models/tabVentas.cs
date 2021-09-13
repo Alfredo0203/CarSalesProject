@@ -5,64 +5,30 @@ namespace DAL.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     public partial class tabVentas
     {
-        private Contexto contexto = new Contexto();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tabVentas()
+        {
+            tabDetalleVentas = new HashSet<tabDetalleVentas>();
+        }
+
         [Key]
-        public int idVenta { get; set; }
+        public int IdVenta { get; set; }
 
-        public int fk_auto { get; set; }
+        public int CodigoFactura { get; set; }
 
-        public DateTime fecha { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime Fecha { get; set; }
 
-        public int cantidad { get; set; }
+        public int? FkCliente { get; set; }
 
-        [StringLength(105)]
-        public string descripcion { get; set; }
-
-        public int fk_Cliente { get; set; }
-
-        public virtual tabAutos tabAutos { get; set; }
+        public double Total { get; set; }
 
         public virtual tabClientes tabClientes { get; set; }
 
-        [NotMapped]
-        public string MarcaAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(m => m.idAuto == fk_auto).NombreMarca;
-            }
-        }
-
-        [NotMapped]
-        public string ModeloAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(a => a.idAuto == fk_auto).modelo;
-            }
-        }
-
-        [NotMapped]
-        public double PrecioAuto
-        {
-            get
-            {
-                return contexto.tabAutos.FirstOrDefault(a => a.idAuto == fk_auto).precio;
-            }
-        }
-
-        [NotMapped]
-        public string NombreCliente
-        {
-            get
-            {
-                return contexto.tabClientes.FirstOrDefault(m => m.idCliente == fk_Cliente).nombre;
-            }
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tabDetalleVentas> tabDetalleVentas { get; set; }
     }
-   
 }

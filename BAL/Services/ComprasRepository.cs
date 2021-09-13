@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BAL.Services
 {
-    public class ComprasRepository : IComprasRepository, IDisposable
+    public class ComprasRepository : IDetalleComprasRepository, IDisposable
     {
         private readonly Contexto contexto;
         public ComprasRepository(Contexto _contexto)
@@ -18,27 +18,27 @@ namespace BAL.Services
         }
 
         //MÉTODO LISTAR
-        public List<tabCompras> ListarCompras()
+        public List<tabDetalleCompras> ListarDetalleCompras()
         {
-            var listaCompras = contexto.tabCompras.ToList();
-            return listaCompras;
+            var listaDetalleCompras = contexto.tabDetalleCompras.ToList();
+            return listaDetalleCompras;
 
         }
         // MÉTODO AGREGAR
-        public void AgregarCompras(tabCompras compra)
+        public void AgregarCompras(tabDetalleCompras compra)
         {
             contexto.Entry(compra).State = EntityState.Added;
             contexto.SaveChanges();
         }
 
         //BUSCAR POR ID
-        public tabCompras ObtenerComprasPorID(int id)
+        public tabDetalleCompras ObtenerComprasPorID(int id)
         {
-            var compraEncontrada = contexto.tabCompras.FirstOrDefault(c => c.idCompra == id);
+            var compraEncontrada = contexto.tabDetalleCompras.FirstOrDefault(c => c.idCompra== id);
             return compraEncontrada;
         }
         // ACTUALZAR
-        public void ActualizarCompras(tabCompras compra)
+        public void ActualizarDetalleCompras(tabDetalleCompras compra)
         {
             contexto.Entry(compra).State = EntityState.Modified;
             contexto.SaveChanges();

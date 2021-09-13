@@ -9,21 +9,18 @@ namespace DAL.Models
 
     public partial class tabAutos
     {
-        private Contexto contexto =new Contexto();
+        Contexto contexto = new Contexto();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tabAutos()
         {
-            tabCompras = new HashSet<tabCompras>();
-            tabVentas = new HashSet<tabVentas>();
+            tabDetalleCompras = new HashSet<tabDetalleCompras>();
+            tabDetalleVentas = new HashSet<tabDetalleVentas>();
             tabInventario = new HashSet<tabInventario>();
         }
 
+
         [Key]
         public int idAuto { get; set; }
-
-        [Required]
-        [StringLength(55)]
-        public string codigo { get; set; }
 
         public int fk_marca { get; set; }
 
@@ -55,26 +52,26 @@ namespace DAL.Models
 
         public DateTime fechaLanzamiento { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tabCompras> tabCompras { get; set; }
+        public virtual ICollection<tabDetalleCompras> tabDetalleCompras { get; set; }
 
         public virtual tabMarcas tabMarcas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tabVentas> tabVentas { get; set; }
+        public virtual ICollection<tabDetalleVentas> tabDetalleVentas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabInventario> tabInventario { get; set; }
 
         [NotMapped]
-        public string NombreMarca
+        public string NombreMarca 
         {
-            get
-            {
+            get {
                 return contexto.tabMarcas.FirstOrDefault(x => x.idMarca == fk_marca).marca;
-            }
+            } 
         }
     }
 }

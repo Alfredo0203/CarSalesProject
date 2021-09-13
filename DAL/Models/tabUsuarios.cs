@@ -2,7 +2,6 @@ namespace DAL.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -28,6 +27,8 @@ namespace DAL.Models
         public string pass { get; set; }
         [Required]
         public bool isActivo { get; set; }
+
+        public int rol { get; set; }
         [Required]
         public Rol rol { get; set; }
     }

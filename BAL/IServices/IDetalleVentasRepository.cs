@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace BAL.IServices
 {
-   public interface IVentasRepository : IDisposable
+   public interface IDetalleVentasRepository : IDisposable
     {
         //METODO LISTAR
-        List<tabVentas> ListarVentas();
+        List<tabDetalleVentas> ListarDetalleVentas();
         //METODO AGREGAR
-        void AgregarVentas(tabVentas venta);
+        void AgregarVentas(tabDetalleVentas venta);
         //METODO OBTENER POR ID
-        tabVentas ObtenerVentaPorID(int id);
+        tabDetalleVentas ObtenerVentaPorID(int id);
         //METODO LISTAR ACTUALIZAR
-        void ActualizarVentas(tabVentas venta);
+        void ActualizarDetalleVentas(tabDetalleVentas venta);
         //METODO ELIMINAR
         void EliminarVentas(int id);
     }
