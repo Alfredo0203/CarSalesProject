@@ -1,0 +1,39 @@
+﻿body {
+    padding-top: 50px;
+}
+
+.login {
+    width: 300px;
+    height: 330px;
+    background-color: #1e1732;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 5px solid rgb(209, 42, 159);
+    border-left: 10px solid rgb(209, 42, 159);
+    border-radius: 10px;
+}
+    .login p {
+        color: rgb(209, 42, 159);
+    }
+    .login img {
+        margin-top: 10px;
+    }
+
+    .login input {
+        padding: 7px 10px 7px 10px;
+        margin: 10px 20px 10px 20px;
+        border-radius: 5px;
+    }
+
+        .login input[type="submit"] {
+            background-color: rgb(209, 42, 159);
+            border: 1px solid rgb(209, 42, 159);
+            width: 100px;
+        }
+
+            .login input[type="submit"]:hover {
+                border: 1px solid rgb(246, 216, 237);
+            }

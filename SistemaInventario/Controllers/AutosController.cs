@@ -1,14 +1,13 @@
 ﻿using BAL.IServices;
 using BAL.Services;
+using DAL.Encriptado;
 using DAL.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    
     public class AutosController : Controller
     {
         private IAutosRepository autosRepository;
@@ -24,7 +23,7 @@ namespace SistemaInventario.Controllers
            var listaAutos = autosRepository.ListarAutos();
             return View(listaAutos);
         }
-
+        [Permisos]
         public ActionResult AgregarOEditarAutos(int id = 0)
         {
 
@@ -38,7 +37,7 @@ namespace SistemaInventario.Controllers
             return View(auto);
         }
 
-
+        [Permisos]
         [HttpPost]
         public ActionResult AgregarOEditarAutos(tabAutos model)
         {
@@ -60,7 +59,7 @@ namespace SistemaInventario.Controllers
 
             return View(model);
         }
-
+        [Permisos]
         public ActionResult EliminarAutos(int id = 0)
         {
             if(id > 0)
@@ -71,6 +70,7 @@ namespace SistemaInventario.Controllers
             }
             return RedirectToAction("MostrarAutos");
         }
+        [Permisos]
 
         //MÉTODO AGREGAR NARCAS AL ELEMENTO SelectListItem
         public List<SelectListItem> SeleccionarMarcas()

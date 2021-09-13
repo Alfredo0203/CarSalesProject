@@ -1,5 +1,6 @@
 ﻿using BAL.IServices;
 using BAL.Services;
+using DAL.Encriptado;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    [Permisos]
     public class ComprasController : Controller
     {
         private IDetalleComprasRepository comprasRepository;

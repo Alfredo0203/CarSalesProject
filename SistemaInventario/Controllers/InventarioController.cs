@@ -1,5 +1,6 @@
 ﻿using BAL.IServices;
 using BAL.Services;
+using DAL.Encriptado;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    [Permisos]
     public class InventarioController : Controller
     {
         InterfazInventario inventarioRepository;
