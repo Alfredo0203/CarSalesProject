@@ -31,31 +31,44 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto py-4 py-md-0">
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Autos</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44366/Autos/MostrarAutos">Ver autos</a>
-                                        <a class="dropdown-item" href="https://localhost:44366/Marcas/MostrarMarcas">Marcas</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compras</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44366/Compras/MostrarCompras">Ver compras</a>
-                                        <a class="dropdown-item" href="https://localhost:44366/Proveedores/MostrarProveedores">Proveedores</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ventas</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="https://localhost:44366/Ventas/MostrarVentas">Ver ventas</a>
-                                        <a class="dropdown-item" href="https://localhost:44366/Clientes/MostrarClientes">Clientes</a>
-                                    </div>
-                                </li>
 
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="https://localhost:44366/Inventario/MostrarInventario">Inventario</a>
-                                </li>
+                                @if (Session["UserId"] != null)
+                                {
+
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Autos</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="https://localhost:44366/Autos/MostrarAutos">Ver autos</a>
+                                            <a class="dropdown-item" href="https://localhost:44366/Marcas/MostrarMarcas">Marcas</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compras</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="https://localhost:44366/Compras/MostrarCompras">Ver compras</a>
+                                            <a class="dropdown-item" href="https://localhost:44366/Proveedores/MostrarProveedores">Proveedores</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ventas</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="https://localhost:44366/Ventas/MostrarVentas">Ver ventas</a>
+                                            <a class="dropdown-item" href="https://localhost:44366/Clientes/MostrarClientes">Clientes</a>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="https://localhost:44366/Inventario/MostrarInventario">Inventario</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="https://localhost:44366/Usuarios/MostrarUsuarios">Usuario</a>
+                                    </li>
+
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="https://localhost:44366/Home/LogOut">Salir</a>
+                                    </li>
+                                }
+
                             </ul>
                         </div>
                     </nav>

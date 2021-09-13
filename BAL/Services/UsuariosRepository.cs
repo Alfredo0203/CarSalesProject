@@ -1,4 +1,5 @@
 ﻿using BAL.IServices;
+using DAL.Encriptado;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -42,10 +43,12 @@ namespace BAL.Services
                 if (usuarios.idUsuario > 0)
                 {
                     contexto.Entry(usuarios).State = EntityState.Modified;
+
                 }
                 else
                 {
                     contexto.Entry(usuarios).State = EntityState.Added;
+                    
                 }
                 contexto.SaveChanges();
                 success = true;

@@ -18,27 +18,29 @@
             <div class="form-group">
                 <label>Nombre: </label>
                 @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "text-danger" })
+               
+               @* @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "text-danger" })*@
             </div>
             <div class="form-group">
                 <label>Apellido: </label>
                 @Html.TextBoxFor(x => x.apellido, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.apellido, null, new { @class = "text-danger" })
+                
+                @*@Html.ValidationMessageFor(x => x.apellido, null, new { @class = "text-danger" })*@
             </div>
             <div class="form-group">
                 <label>Edad: </label>
                 @Html.TextBoxFor(x => x.edad, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.edad, null, new { @class = "text-danger" })
+               @* @Html.ValidationMessageFor(x => x.edad, null, new { @class = "text-danger" })*@
             </div>
             <div class="form-group">
                 <label>Correo: </label>
                 @Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.correo, null, new { @class = "text-danger" })
+              @*  @Html.ValidationMessageFor(x => x.correo, null, new { @class = "text-danger" })*@
             </div>
             <div class="form-group">
                 <label>Contraseña: </label>
                 @Html.PasswordFor(x => x.pass, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.pass, null, new { @class = "text-danger" })
+                @*@Html.ValidationMessageFor(x => x.pass, null, new { @class = "text-danger" })*@
             </div>
             <div class="form-group">
                 <label>Estado: </label>

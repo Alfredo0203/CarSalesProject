@@ -148,6 +148,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Diseños\body-color.css" />
     <Content Include="Content\Diseños\Footer.css" />
+    <Content Include="Content\Diseños\Login.css" />
+    <Content Include="Content\Diseños\login.png" />
     <Content Include="Content\Diseños\Navbar.css" />
     <Content Include="Content\Diseños\tarjetas.css" />
     <Content Include="Content\Diseños\Table.css" />
@@ -189,8 +191,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Clientes\MostrarClientes.cshtml" />
     <Content Include="Views\Proveedores\MostrarProveedores.cshtml" />
@@ -207,6 +207,7 @@
     <Content Include="Views\Inventario\MostrarInventario.cshtml" />
     <Content Include="Views\Usuarios\MostrarUsuarios.cshtml" />
     <Content Include="Views\Usuarios\EditarOCrearUsuarios.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,17 +11,14 @@ namespace DAL.Models
     {
         [Key]
         public int idUsuario { get; set; }
-
-        [Required]
+        [Required] 
         [StringLength(50)]
         public string nombre { get; set; }
-
         [Required]
         [StringLength(50)]
         public string apellido { get; set; }
-
+        [Required]
         public int edad { get; set; }
-
         [Required]
         [StringLength(50)]
         public string correo { get; set; }
@@ -29,9 +26,9 @@ namespace DAL.Models
         [Required]
         [StringLength(50)]
         public string pass { get; set; }
-
+        [Required]
         public bool isActivo { get; set; }
-
+        [Required]
         public Rol rol { get; set; }
     }
 

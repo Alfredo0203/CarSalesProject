@@ -1,5 +1,6 @@
 ﻿using BAL.IServices;
 using BAL.Services;
+using DAL.Encriptado;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    [Permisos]
     public class UsuariosController : Controller
     { 
        private IUsuariosRepository usuariosRepository;
@@ -19,14 +21,14 @@ namespace SistemaInventario.Controllers
         this.usuariosRepository = new UsuariosRepository(new Contexto());
     }
 
-    //Método para mostrar proveedores
+    //Método para mostrar usuarios
     public ActionResult MostrarUsuarios()
     {
         var usuarios = usuariosRepository.listaUsuarios();
         return View(usuarios);
     }
 
-    //EDITAR PROVEEDORES
+    //EDITAR USUARIO
     public ActionResult EditarOCrearUsuarios(int idUsuario = 0)
     {
         var usuarios = new tabUsuarios();
@@ -39,14 +41,13 @@ namespace SistemaInventario.Controllers
     }
 
     [HttpPost]
-    //AGREGAR PROVEEDOR
+    //AGREGAR USUARIO
     public ActionResult EditarOCrearUsuarios(tabUsuarios usuarios)
     {
         if (ModelState.IsValid)
         {
             var creado = usuariosRepository.CrearOEditarUsuario(usuarios);
-
-            if (creado)
+                if (creado)
             {
                 return RedirectToAction("MostrarUsuarios");
             }
@@ -54,8 +55,8 @@ namespace SistemaInventario.Controllers
         return View(usuarios);
     }
 
-    //ELIMINAR PROVEEDOR
-    public ActionResult EliminarUsuario(int idUsuario)
+        //ELIMINAR USUARIO
+        public ActionResult EliminarUsuario(int idUsuario)
     {
         usuariosRepository.EliminarUsuario(idUsuario);
         return RedirectToAction("MostrarUsuarios");
