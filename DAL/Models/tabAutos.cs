@@ -28,8 +28,6 @@ namespace DAL.Models
         [StringLength(55)]
         public string placa { get; set; }
 
-        public double precio { get; set; }
-
         [Required]
         [StringLength(55)]
         public string imagen { get; set; }
