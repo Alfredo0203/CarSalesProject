@@ -27,12 +27,12 @@
                         foreach (var car in Model)
                         {
                     <tr>
-                        <td>@car.MarcaAuto</td>
-                        <td>@car.ModeloAuto</td>
-                        <td><b>$</b>@car.PrecioAuto</td>
-                        <td>@car.Imagen</td>
+                        <td>@car.tabAutos.fk_marca</td>
+                        <td>@car.tabAutos.modelo</td>
+                        <td><b>$</b>@car.tabAutos.precio</td>
+                        <td>@car.tabAutos.precio</td>
                         <td>@car.existenciaProducto</td>
-                        <td>@car.Fecha</td>
+                        <td>@car.tabAutos.fechaRegistro</td>
 
                     </tr>
                         }

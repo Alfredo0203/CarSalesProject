@@ -15,70 +15,36 @@
     {
         foreach (var car in Model)
         {
-    <div class="card">
-        <img src="~/Content/img_cars/@car.imagen" />
-        <h4>@car.NombreMarca @car.color ($@car.precio)</h4>
-        <p>Modelo: @car.modelo  Motor: @car.motor</p>
-        <p>@car.descripcion</p>
-        <label>
-            <button class="btn btn-success">Comprar</button>
-            <button class="btn btn-info">Añadir al carrito</button>
-        </label>
+            <div class="card">
+                <img src="~/Content/img_cars/@car.imagen" />
+                <h4>@car.NombreMarca @car.color ($@car.precio)</h4>
+                <p>Modelo: @car.modelo  Motor: @car.motor</p>
+                <p>@car.descripcion</p>
+                <label>
+                    <button class="btn btn-success">Comprar</button>
+                    <button class="btn btn-info">Añadir al carrito</button>
+                </label>
 
-        <br />
-        <br />
-    </div>
+                <br />
+                <br />
+            </div>
         }
     }
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <center><h1>Listado de Autos</h1></center>
-                <br />
-                <button class="btn agregarBtn" onclick="window.location.href='/Autos/AgregarOEditarAutos'">Agregar Auto</button>
-                <table class="table-hover table-striped ">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Placa</th>
-                            <th>Precio</th>
-                            <th>Imagen</th>
-                            <th>Color</th>
-                            <th>Motor</th>
-
-                            <th>Fecha registro</th>
-                            <th colspan="2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null)
-                        {
-                            foreach (var car in Model)
-                            {
-                                <tr>
-                              
-                                    <td>@car.NombreMarca</td>
-                                    <td>@car.modelo</td>
-                                    <td>@car.placa</td>
-                                    <td><b>$</b>@car.precio</td>
 </div>
 <script type="text/javascript">
-  
-        function mostrarTabla() {
-            var tabla = document.getElementById("tabla");
-            var tarjeta = document.getElementById("tarjetas");
-            tabla.style.display = "block";
-            tarjeta.style.display = "none";
-        }
+
+    function mostrarTabla() {
+        var tabla = document.getElementById("tabla");
+        var tarjeta = document.getElementById("tarjetas");
+        tabla.style.display = "block";
+        tarjeta.style.display = "none";
+    }
 
     function mostrarTarjeta() {
-            var tabla = document.getElementById("tabla");
-            var tarjeta = document.getElementById("tarjetas");
-            tabla.style.display = "none";
-            tarjeta.style.display = "flex";
+        var tabla = document.getElementById("tabla");
+        var tarjeta = document.getElementById("tarjetas");
+        tabla.style.display = "none";
+        tarjeta.style.display = "flex";
     }
 
 </script>
@@ -90,7 +56,6 @@
             <table class="table-hover table-striped ">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Placa</th>
@@ -109,7 +74,6 @@
                         foreach (var car in Model)
                         {
                             <tr>
-                                <td>@car.codigo</td>
                                 <td>@car.NombreMarca</td>
                                 <td>@car.modelo</td>
                                 <td>@car.placa</td>
