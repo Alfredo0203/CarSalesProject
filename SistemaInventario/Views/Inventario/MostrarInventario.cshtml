@@ -52,7 +52,7 @@
                         <h1>Listado de productos</h1>
                     </center>
                     <br />
-     
+
                     <br />
                     <table class="table table-bordered table-striped">
                         <tr>
@@ -82,13 +82,6 @@
                                                 onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
                                             Quitar
                                         </button>
-                    <tr>
-                        <td>@car.tabAutos.fk_marca</td>
-                        <td>@car.tabAutos.modelo</td>
-                        <td><b>$</b>@car.tabAutos.precio</td>
-                        <td>@car.tabAutos.precio</td>
-                        <td>@car.existenciaProducto</td>
-                        <td>@car.tabAutos.fechaRegistro</td>
 
                                     </td>
                                 </tr>
@@ -130,4 +123,5 @@ else
 {
     <script>document.getElementById("BtnRealizarVenta").style.display = "block"</script>
 }
+
 

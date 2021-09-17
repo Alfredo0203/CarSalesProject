@@ -150,6 +150,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Diseños\body-color.css" />
     <Content Include="Content\Diseños\Footer.css" />
+    <Content Include="Content\Diseños\formularios.css" />
     <Content Include="Content\Diseños\Login.css" />
     <Content Include="Content\Diseños\login.png" />
     <Content Include="Content\Diseños\Navbar.css" />

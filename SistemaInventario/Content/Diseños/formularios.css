@@ -1,0 +1,65 @@
+﻿body {
+    padding-top: 80px;
+    text-align: center;
+}
+
+.formulario {
+    margin-top: 40px;
+    background-color: #000000;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+}
+    .formulario.marca {
+        width: 260px;
+        height: 280px;
+    }
+
+    .formulario.proveedores , .formulario.cliente{
+        width: 300px !important;
+        height: 375px;
+    }
+    .formulario.usuario {
+        width: 400px;
+    }
+
+    .formulario:hover {
+        box-shadow: 0 12px 16px rgb(22 21 21);
+    }
+    .formulario.marca input{
+        width: 200px;
+    }
+    .formulario.usuario input[type="text"], .formulario.usuario input[type="password"],
+    .formulario.usuario select {
+        width: 200px;
+        height: 30px;
+    }
+    .formulario.proveedores input, .formulario.cliente input {
+        width: 240px;
+    }
+    .formulario label {
+        color: #893dc2;
+        margin-top: 5px;
+    }
+    .formulario.marca label {
+        padding-bottom: 10px;
+    }
+
+    .formulario input[type="submit"] {
+        background-color: #893dc2;
+        border: #893dc2;
+        border-radius: 5px;
+        width: 90px;
+        margin-top: 15px;
+    }
+    .formulario.usuario input[type="submit"] {
+        margin-bottom: 10px;
+    }
+
+.formulario input[type="submit"]:hover {
+    border: 1px solid rgb(255 255 255);
+}

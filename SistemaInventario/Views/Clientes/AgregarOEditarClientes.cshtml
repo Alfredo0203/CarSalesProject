@@ -3,46 +3,23 @@
 @{
     ViewBag.Title = "AgregarClientes";
 }
+<link href="~/Content/Diseños/formularios.css" rel="stylesheet" />
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <center>
-                <h2>Agregar Producto</h2>
-            </center>
-            <br />
+    <h2>Agregar Producto</h2>
 
-            @using (Html.BeginForm())
-            {
-                @Html.HiddenFor(x => x.idCliente)
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Nombre Cliente: </label>
-                        @Html.TextBoxFor(x => x.nombre, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.nombre, null, htmlAttributes: new { @class = "text-danger" })
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Teléfono </label>
-                        @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.telefono, null, htmlAttributes: new { @class = "text-danger" })
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Dirección: </label>
-                        @Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.direccion, null, htmlAttributes: new { @class = "text-danger" })
-
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Registrar</button>
-                    </div>
-                </div>
-            }
-
-        </div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.idCliente)
+    <div class="formulario cliente">
+        <label>Nombre Cliente: </label>
+        @Html.TextBoxFor(x => x.nombre, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.nombre, null, htmlAttributes: new { @class = "text-danger" })
+        <label>Teléfono </label>
+        @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.telefono, null, htmlAttributes: new { @class = "text-danger" })
+        <label>Dirección: </label>
+        @Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.direccion, null, htmlAttributes: new { @class = "text-danger" })
+        <input type="submit" value="Registrar" />
     </div>
-</div>
+}
