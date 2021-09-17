@@ -1,4 +1,4 @@
-﻿using BAL.ProductoParaVender;
+﻿using BAL.AgregarAInventario;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -16,22 +16,22 @@ namespace SistemaInventario.Controllers
         public ActionResult SeleccionarProducto(int id)
         {
             int Cantidad = 1;
-            AutosAVender auto = new AutosAVender();
-            var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).MarcaAuto;
-            var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).ModeloAuto;
+            AgregarAInventario auto = new AgregarAInventario();
+            var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).tabAutos.NombreMarca;
+            var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).tabAutos.modelo;
             var Precio = contexto.tabInventario.FirstOrDefault(x => x.idInventario == id).precio;
             var Total = Cantidad * Precio;
-            AutosAVender.TotalAPagar += Total;
-            bool existe = (from a in AutosAVender.listaAutosAVender where a.Id == id select a).Any();
+            AgregarAInventario.TotalAPagar += Total;
+            bool existe = (from a in AgregarAInventario.listaAutosAComprar where a.Id == id select a).Any();
             if (existe == false)
             {
-                auto.AgregarParaVender(id, Marca, Modelo, Cantidad, Precio, Total);
+                auto.AgregarparaComprar(id, Marca, Modelo, Cantidad, Precio, Total);
 
             }
             else
             {
 
-                foreach (var a in AutosAVender.listaAutosAVender.Where(a => a.Id == id))
+                foreach (var a in AgregarAInventario.listaAutosAComprar.Where(a => a.Id == id))
                 {
 
                     a.Cantidad = a.Cantidad + 1;
@@ -40,50 +40,48 @@ namespace SistemaInventario.Controllers
 
                 }
 
-
-
             }
 
-            return RedirectToAction("MostrarInventario","Inventario");
+            return RedirectToAction("AgregarOEditarCompras","Compras");
         }
 
         //QUITAR ELEMENTOS DELCARRITO
         public ActionResult EliminarElementoDeLaLista(int id = 0)
         {
-            var precio = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Precio;
-            var cantidad = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Cantidad;
-            AutosAVender.TotalAPagar -= (precio * cantidad);
-            AutosAVender.listaAutosAVender.RemoveAll(x => x.Id == id);
-            return RedirectToAction("MostrarInventario", "Inventario");
+            var precio = AgregarAInventario.listaAutosAComprar.FirstOrDefault(x => x.Id == id).PrecioCompra;
+            var cantidad = AgregarAInventario.listaAutosAComprar.FirstOrDefault(x => x.Id == id).Cantidad;
+            AgregarAInventario.TotalAPagar -= (precio * cantidad);
+            AgregarAInventario.listaAutosAComprar.RemoveAll(x => x.Id == id);
+            return RedirectToAction("MostrarCompras", "Compras");
         }
 
 
-        public ActionResult Vender()
+        public ActionResult RealizarCompras()
         {
-            var ven = new tabVentas();
-            ven.Total = AutosAVender.TotalAPagar;
+            var compra = new tabCompras();
+            compra.Total = AgregarAInventario.TotalAPagar;
 
-            ven.CodigoFactura = ven.CodigoFactura > 0 ? ven.CodigoFactura = contexto.tabVentas.OrderByDescending(x => x.CodigoFactura).First().CodigoFactura + 1 : ven.CodigoFactura = 1;
-            contexto.Entry(ven).State = EntityState.Added;
+            compra.CodigoFactura = compra.CodigoFactura > 0 ? compra.CodigoFactura = contexto.tabCompras.OrderByDescending(x => x.CodigoFactura).First().CodigoFactura + 1 : compra.CodigoFactura = 1;
+            contexto.Entry(compra).State = EntityState.Added;
 
-            foreach (var p in AutosAVender.listaAutosAVender)
+            foreach (var p in AgregarAInventario.listaAutosAComprar)
             {
 
-                var model = new DAL.Models.tabDetalleVentas();
+                var model = new DAL.Models.tabDetalleCompras();
                 model.fk_auto= p.Id;
                 model.marcaModelo = p.Marca + " " + p.Modelo;
                 model.cantidad = p.Cantidad;
-                model.precio = p.Precio;
+                model.precioCompra= p.PrecioCompra;
                 model.subTotal = p.SubTotal;
-                model.idVenta = ven.IdVenta;
+                model.idCompra = compra.IdCompra;
                 contexto.Entry(model).State = EntityState.Added;
                 contexto.SaveChanges();
 
             }
 
-            AutosAVender.listaAutosAVender.RemoveRange(0, AutosAVender.listaAutosAVender.Count());
-            AutosAVender.TotalAPagar = 0;
-            return RedirectToAction("MostrarInventario", "Inventario");
+            AgregarAInventario.listaAutosAComprar.RemoveRange(0, AgregarAInventario.listaAutosAComprar.Count());
+            AgregarAInventario.TotalAPagar = 0;
+            return RedirectToAction("MostrarCompras", "Compras");
         }
 
     }

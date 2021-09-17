@@ -1,55 +1,139 @@
-﻿@using DAL.Models;
-@model tabCompras
+﻿@using DAL.Models
+@using BAL.AgregarAInventario;
+@model List<tabInventario>
+
 @{
-    ViewBag.Title = "AgregarOEditarCompras";
+    ViewBag.Title = "MostrarAutos";
+    var tabla = ViewBag.Proveedor;
+    tabProveedores prov = new tabProveedores();
 }
 
-<br />
-<div class="container-fluid">
+
+<div class="container">
     <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-8">
-            <h2>Agregar Proveedores</h2>
+        <div class="col-md-12">
+            <center><h1>Listado de Inventario</h1></center>
+            <br />
 
-            @using (Html.BeginForm())
-            {
-                @Html.HiddenFor(x => x.idCompra)
+            <table class="table-hover table-striped " id="tabla">
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Precio Venta</th>
+                        <th>Existencia</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var car in Model)
+                        {
+                            <tr>
+                                <td>@car.MarcaAuto</td>
+                                <td>@car.ModeloAuto</td>
+                                <td><b>$</b>@car.precio</td>
+                                <td>@car.existenciaProducto</td>
+                                <td>@car.estado</td>
+                                <td>
+
+
+                                    <button class="btn btn-danger"
+                                            onclick="window.location.href='/AgregarAInventario/SeleccionarProducto?id='+@car.idInventario">
+                                        Seleccionar
+                                    </button>
+                               
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+
+
+
+            <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Marca: </label>
-                        @Html.DropDownListFor(x => x.fk_auto, (IEnumerable<SelectListItem>)ViewBag.listaAutos, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.fk_auto, null, htmlAttributes: new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label>Cliente: </label>
-                        @Html.DropDownListFor(x => x.fk_Proveedor, (IEnumerable<SelectListItem>)ViewBag.listaProveedores, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.fk_Proveedor, null, htmlAttributes: new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label>Cantidad: </label>
-                        @Html.TextBoxFor(x => x.cantidad, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.cantidad, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label>Descripción: </label>
-                        @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "text-danger" })
-                    </div>
+                    <center>
+                        <h5>Elegir Proveedor</h5>
+                        <div class="form-group">
+                            <label>Cliente: </label>
+                            @Html.DropDownListFor(x => prov.idProveedor, (IEnumerable<SelectListItem>)ViewBag.listaProveedores, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => prov.idProveedor, null, htmlAttributes: new { @class = "text-danger" })
+                        </div>
+                    </center>
+                    <br />
 
-                    <div class="form-group">
-                        <label>Fecha </label>
-                        @Html.TextBoxFor(x => x.fecha, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.fecha, null, new { @class = "text-danger" })
-                    </div>
+                    <br />
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>ID</td>
+                            <td>Marca</td>
+                            <td>Modelo</td>
+                            <td>Cantidad</td>
+                            <td>Precio</td>
+                            <td>Total</td>
+                            <td>Sacar de la Lista</td>
+                        </tr>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                    </div>
+                        @if (Model.Count() > 0)
+                        {
+                            foreach (var auto in AgregarAInventario.listaAutosAComprar)
+                            {
+                                <tr>
+                                    <td>@auto.Id</td>
+                                    <td>@auto.Marca</td>
+                                    <td>@auto.Modelo</td>
+                                    <td>@auto.Cantidad</td>
+                                    <td>$ @auto.PrecioCompra</td>
+                                    <td>@auto.SubTotal</td>
+                                    <td>
+
+                                        <button class="btn btn-danger"
+                                                onclick="window.location.href='/AgregarAInventario/EliminarElementoDeLaLista?id='+@auto.Id">
+                                            Quitar
+                                        </button>
+
+                                    </td>
+                                </tr>
+
+                            }
+
+                        }
+                    </table>
+
+                    <h4 style="color: white">Total: $ @AgregarAInventario.TotalAPagar</h4>
+
+                    <button class="btn btn-primary" id="BtnRealizarVenta"
+                            onclick="window.location.href = '/AgregarAInventario/RealizarCompras'">
+                        Realizar Compra
+                    </button>
+
+                    <button class="btn btn-success" style="margin-top: 10px"
+                            onclick="window.location.href = '/Compras/MostrarCompras'">
+                        Ver Ventas
+                    </button>
                 </div>
-            }
-        </div>
-        <div class="col-md-2">
+            </div>
+
+
+
+
+
+
+
         </div>
     </div>
 </div>
+
+@if (!AgregarAInventario.listaAutosAComprar.Any())
+{
+    <script>document.getElementById("BtnRealizarVenta").style.display = "none"</script>
+}
+else
+{
+    <script>document.getElementById("BtnRealizarVenta").style.display = "block"</script>
+}
+

@@ -2,6 +2,7 @@ namespace DAL.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -28,7 +29,6 @@ namespace DAL.Models
         [Required]
         public bool isActivo { get; set; }
 
-        public int rol { get; set; }
         [Required]
         public Rol rol { get; set; }
     }
@@ -37,10 +37,10 @@ namespace DAL.Models
     public enum Rol
     { 
         [Description("Administrador")]
-        admin,
+        admin = 1,
         [Description("Vendedor")]
-        vendedor,
+        vendedor = 2,
         [Description("Cliente")]
-        cliente
+        cliente = 3
     }
 }

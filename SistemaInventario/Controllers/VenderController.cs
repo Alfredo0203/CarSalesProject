@@ -63,7 +63,7 @@ namespace SistemaInventario.Controllers
             var ven = new tabVentas();
             ven.Total = AutosAVender.TotalAPagar;
 
-            ven.CodigoFactura = ven.CodigoFactura > 0 ? ven.CodigoFactura = contexto.tabVentas.OrderByDescending(x => x.CodigoFactura).First().CodigoFactura + 1 : ven.CodigoFactura = 1;
+            ven.CodigoFactura = ven.CodigoFactura > 0 ? ven.CodigoFactura = contexto.tabVentas.OrderByDescending(x => x.CodigoFactura).First().CodigoFactura += 1 : ven.CodigoFactura = 1;
             contexto.Entry(ven).State = EntityState.Added;
 
             foreach (var p in AutosAVender.listaAutosAVender)
