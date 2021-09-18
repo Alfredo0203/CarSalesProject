@@ -42,7 +42,8 @@ table thead {
     margin: 5px;
     background-color: #82E897;
 }
-    .agregarBtn:hover {
-        background-color: #5bbe6f;
-    }
+
+.agregarBtn:hover {
+    background-color: #5bbe6f;
+}
 

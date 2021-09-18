@@ -4,16 +4,16 @@
     ViewBag.Title = "AgregarOEditarMarcas";
 }
 <link href="~/Content/Diseños/formularios.css" rel="stylesheet" />
-
-        <center><h1>Agregar Marca</h1></center>
         
         @using (Html.BeginForm())
             {
                 @Html.HiddenFor(x => x.idMarca);
-    <div class="formulario marca">
-            <label>Nombre Marca</label>
-            @Html.TextBoxFor(x => x.marca, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.marca, null, htmlAttributes: new { @class = "text-danger"})
-            <input type="submit" value="Guardar"/>
-    </div>
+<div class="formulario marca">
+    <h3>Agregar Marcas</h3>
+
+    <label>Nombre Marca</label>
+    @Html.TextBoxFor(x => x.marca, htmlAttributes: new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.marca, null, htmlAttributes: new { @class = "text-danger" })
+    <input type="submit" value="Guardar" />
+</div>
             }

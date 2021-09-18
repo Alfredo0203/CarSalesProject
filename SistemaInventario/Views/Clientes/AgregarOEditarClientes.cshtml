@@ -5,21 +5,21 @@
 }
 <link href="~/Content/Diseños/formularios.css" rel="stylesheet" />
 
-    <h2>Agregar Producto</h2>
-
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(x => x.idCliente)
-    <div class="formulario cliente">
-        <label>Nombre Cliente: </label>
-        @Html.TextBoxFor(x => x.nombre, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.nombre, null, htmlAttributes: new { @class = "text-danger" })
-        <label>Teléfono </label>
-        @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.telefono, null, htmlAttributes: new { @class = "text-danger" })
-        <label>Dirección: </label>
-        @Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.direccion, null, htmlAttributes: new { @class = "text-danger" })
-        <input type="submit" value="Registrar" />
-    </div>
+<div class="formulario cliente">
+    <h3>Agregar Clientes</h3>
+
+    <label>Nombre Cliente: </label>
+    @Html.TextBoxFor(x => x.nombre, htmlAttributes: new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.nombre, null, htmlAttributes: new { @class = "text-danger" })
+    <label>Teléfono </label>
+    @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.telefono, null, htmlAttributes: new { @class = "text-danger" })
+    <label>Dirección: </label>
+    @Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.direccion, null, htmlAttributes: new { @class = "text-danger" })
+    <input type="submit" value="Registrar" />
+</div>
 }

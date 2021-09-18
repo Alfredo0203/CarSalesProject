@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
-    
     public class AutosController : Controller
     {
         private IAutosRepository autosRepository;
@@ -72,7 +71,7 @@ namespace SistemaInventario.Controllers
         }
         [Permisos]
 
-        //MÉTODO AGREGAR NARCAS AL ELEMENTO SelectListItem
+        //MÉTODO AGREGAR MARCAS AL ELEMENTO SelectListItem
         public List<SelectListItem> SeleccionarMarcas()
         {
             var listaMarcas = new List<SelectListItem>();
@@ -84,7 +83,7 @@ namespace SistemaInventario.Controllers
             }
             return listaMarcas;
         }
-
+       
 
     }
 }

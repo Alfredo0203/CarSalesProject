@@ -5,35 +5,37 @@
     ViewBag.Title = "EditarOCrearUsuarios";
 }
 <link href="~/Content/Diseños/formularios.css" rel="stylesheet" />
-<h2>Agregar Usuarios</h2>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(x => x.idUsuario)
-    <div class="formulario usuario">
-        <label>Nombre: </label>
-        @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "text-danger" })
-        <label>Apellido: </label>
-        @Html.TextBoxFor(x => x.apellido, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.apellido, null, new { @class = "text-danger" })
-        <label>Edad: </label>
-        @Html.TextBoxFor(x => x.edad, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.edad, null, new { @class = "text-danger" })
-        <label>Correo: </label>
-        @Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.correo, null, new { @class = "text-danger" })
-        <label>Contraseña: </label>
-        @Html.PasswordFor(x => x.pass, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.pass, null, new { @class = "text-danger" })
-        <label>Estado:
+<div class="formulario usuario">
+    <h3>Agregar Usuarios</h3>
+
+    <label>Nombre: </label>
+    @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "text-danger" })
+    <label>Apellido: </label>
+    @Html.TextBoxFor(x => x.apellido, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.apellido, null, new { @class = "text-danger" })
+    <label>Edad: </label>
+    @Html.TextBoxFor(x => x.edad, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.edad, null, new { @class = "text-danger" })
+    <label>Correo: </label>
+    @Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.correo, null, new { @class = "text-danger" })
+    <label>Contraseña: </label>
+    @Html.PasswordFor(x => x.pass, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.pass, null, new { @class = "text-danger" })
+    <label>
+        Estado:
         Activo @Html.RadioButtonFor(x => x.isActivo, true)
         Inactivo @Html.RadioButtonFor(x => x.isActivo, false)
-        </label>
-        <label>Rol: </label>
-        @Html.EnumDropDownListFor(x => x.rol, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.rol, null, new { @class = "text-danger" })
-        <input type="submit" value="Registrar" />
-    </div>
+    </label>
+    <label>Rol: </label>
+    @Html.EnumDropDownListFor(x => x.rol, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.rol, null, new { @class = "text-danger" })
+    <input type="submit" value="Registrar" />
+</div>
 }
 

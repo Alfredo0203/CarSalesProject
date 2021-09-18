@@ -12,7 +12,7 @@
             <br />
             <button class="btn agregarBtn"
                     onclick="window.location.href = '/Usuarios/EditarOCrearUsuarios'">
-                Agregar
+                <i class="fas fa-plus"></i> Agregar
             </button>
             <br />
             <!--table-striped-->
@@ -54,13 +54,13 @@
                         <td width="20">
                             <button class="btn btn-info"
                                     onclick="window.location.href = '/Usuarios/EditarOCrearUsuarios?idUsuario='+@i.idUsuario">
-                                Editar
+                                <i class="fas fa-pencil-alt"></i> Editar
                             </button>
                         </td>
                         <td width="20">
                             <button class="btn btn-danger"
                                     onclick="window.location.href = '/Usuarios/EliminarUsuario?idUsuario='+@i.idUsuario">
-                                Eliminar
+                                <i class="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </td>
                     </tr>

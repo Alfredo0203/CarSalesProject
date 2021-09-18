@@ -5,17 +5,17 @@ footer {
     bottom: 0;
     width: 100%;
     height: 80px;
-    color: #FFDBFF;
+    color: #e5bfff;
     margin: 0;
     padding: 0;
 }
 
-footer a, a i {
-    color: white;
-    width: 40px;
-    text-decoration: none;
-}
+    footer a, a i {
+        color: #e5bfff;
+        width: 40px;
+        text-decoration: none;
+    }
 
 a i:hover {
-    color: hotpink;
+    color: white;
 }

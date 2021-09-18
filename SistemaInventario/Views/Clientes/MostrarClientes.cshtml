@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <center><h1>Lista Clientes</h1></center>
             <br />
-            <button class="btn agregarBtn" onclick="window.location.href='/Clientes/AgregarOEditarClientes'">Agregar</button>
+            <button class="btn agregarBtn" onclick="window.location.href='/Clientes/AgregarOEditarClientes'"><i class="fas fa-plus"></i> Agregar</button>
 
             <br />
             <table class="table-hover table-striped">
@@ -40,11 +40,11 @@
                         <td width="20">
                       
                             <button class="btn btn-info "
-                               onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente">Editar</button>
+                               onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente"><i class="fas fa-pencil-alt"></i> Editar</button>
                         </td>
                         <td width="20">
                         <button class="btn btn-danger"
-                           onclick="window.location.href = '/Clientes/EliminarClientes?id='+@cl.idCliente">Eliminar</button>
+                           onclick="window.location.href = '/Clientes/EliminarClientes?id='+@cl.idCliente"><i class="fas fa-trash-alt"></i> Eliminar</button>
                             </td>
                     </tr>
 

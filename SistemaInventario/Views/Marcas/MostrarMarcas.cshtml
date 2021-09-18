@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <center><h1>Listado de Marcas</h1></center>
             <br />
-            <button class="btn agregarBtn" onclick="window.location.href='/Marcas/AgregarOEditarMarcas'">Agregar Marca</button>
+            <button class="btn agregarBtn" onclick="window.location.href='/Marcas/AgregarOEditarMarcas'"><i class="fas fa-plus"></i>Agregar Marca</button>
             <br />
             <table class="table-striped table-hover">
                 <thead>
@@ -28,10 +28,10 @@
                                 <td>@mar.idMarca</td>
                                 <td>@mar.marca</td>
                                 <td width="20">
-                                    <button class="btn btn-info" onclick="window.location.href='/Marcas/AgregarOEditarMarcas?idMarca=' +@mar.idMarca">Editar</button>
+                                    <button class="btn btn-info" onclick="window.location.href='/Marcas/AgregarOEditarMarcas?idMarca=' +@mar.idMarca"><i class="fas fa-pensil-alt"></i> Editar</button>
                                 </td>
                                 <td width="20">
-                                    <button class="btn btn-danger" onclick="window.location.href='/Marcas/EliminarMarcas?id=' +@mar.idMarca">Eliminar</button>
+                                    <button class="btn btn-danger" onclick="window.location.href='/Marcas/EliminarMarcas?id=' +@mar.idMarca"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
                                 </td>
                             </tr>

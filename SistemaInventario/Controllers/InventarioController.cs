@@ -23,5 +23,10 @@ namespace SistemaInventario.Controllers
            var model = inventarioRepository.ListarInventario();
             return View(model);
         }
+        public ActionResult InventarioClientes()
+        {
+            var model = inventarioRepository.ListarInventario();
+            return View(model);
+        }
     }
 }

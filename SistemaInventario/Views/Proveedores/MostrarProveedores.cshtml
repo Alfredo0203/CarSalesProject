@@ -14,7 +14,7 @@
             <br />
             <button class="btn agregarBtn"
                     onclick="window.location.href = '/Proveedores/EditOrAddProveedores'">
-                Agregar
+                <i class="fas fa-plus"></i> Agregar
             </button>
             <br />
             <!--table-striped-->
@@ -41,14 +41,14 @@
                                 <td width="20">
                                     <!-- style="background-color: #82E897"-->
                                     <button class="btn btn-info"
-                                            onclick="window.location.href = '/Proveedores/EditOrAddProveedores?idProveedor='+@i.idProveedor">
-                                        Editar
+                                            onclick="window.location.href = '/Proveedores/EditOrAddProveedores?idProveedor='+@i.idProveedor"><i class="fas fa-pencil-alt"></i> 
+                                         Editar
                                     </button>
                                 </td>
                                 <td width="20">
                                     <button class="btn btn-danger"
                                             onclick="window.location.href = '/Proveedores/EliminarProveedor?idProv='+@i.idProveedor">
-                                        Eliminar
+                                         <i class="fas fa-trash-alt"></i> Eliminar
                                     </button>
                                 </td>
                             </tr>

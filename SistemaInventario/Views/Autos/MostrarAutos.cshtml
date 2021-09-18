@@ -10,90 +10,92 @@
     <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
     <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
 </center>
-<div class="containerCards" id="tarjetas">
-    @if (Model != null)
-    {
-        foreach (var car in Model)
-        {
-            <div class="card">
-                <img src="~/Content/img_cars/@car.imagen" />
-                <h4>@car.NombreMarca @car.color</h4>
-                <p>Modelo: @car.modelo  Motor: @car.motor</p>
-                <p>@car.descripcion</p>
-                <label>
-                    <button class="btn btn-success">Comprar</button>
-                    <button class="btn btn-info">Añadir al carrito</button>
-                </label>
 
-                <br />
-                <br />
+        <div class="container">
+            <button style="margin-left: 20px" class="btn agregarBtn" onclick="window.location.href='/Autos/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
             </div>
-        }
-    }
-</div>
-<script type="text/javascript">
 
-    function mostrarTabla() {
-        var tabla = document.getElementById("tabla");
-        var tarjeta = document.getElementById("tarjetas");
-        tabla.style.display = "block";
-        tarjeta.style.display = "none";
-    }
-
-    function mostrarTarjeta() {
-        var tabla = document.getElementById("tabla");
-        var tarjeta = document.getElementById("tarjetas");
-        tabla.style.display = "none";
-        tarjeta.style.display = "flex";
-    }
-
-</script>
-
-<div class="container" id="tabla" style="display: none">
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn agregarBtn" onclick="window.location.href='/Autos/AgregarOEditarAutos'">Agregar Auto</button>
-            <table class="table-hover table-striped ">
-                <thead>
-                    <tr>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Placa</th>
-                        <th>Precio</th>
-                        <th>Imagen</th>
-                        <th>Color</th>
-                        <th>Motor</th>
-                        <th>Descripción</th>
-                        <th>Fecha registro</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null)
+            <div class="containerCards" id="tarjetas">
+                @if (Model != null)
+                {
+                    foreach (var car in Model)
                     {
-                        foreach (var car in Model)
-                        {
-                            <tr>
-                                <td>@car.NombreMarca</td>
-                                <td>@car.modelo</td>
-                                <td>@car.placa</td>
-
-                                <td>@car.imagen</td>
-                                <td>@car.color</td>
-                                <td>@car.motor</td>
-                                <td>@car.descripcion</td>
-                                <td>@car.fechaRegistro</td>
-                                <td width="20">
-                                    <button class="btn btn-info" onclick="window.location.href='/Autos/AgregarOEditarAutos?id=' +@car.idAuto">Editar</button>
-                                </td>
-                                <td width="20">
-                                    <button class="btn btn-danger" onclick="window.location.href='/Autos/EliminarAutos?id=' +@car.idAuto">Eliminar</button>
-                                </td>
-                            </tr>
-                        }
+                        <div class="card">
+                            <img src="~/Content/img_cars/@car.imagen" />
+                            <h4>@car.NombreMarca</h4>
+                            <p>Modelo: @car.modelo  Motor: @car.motor</p>
+                            <p>@car.descripcion</p>
+                            <label>
+                                <button class="btn btn-info" onclick="window.location.href='/Autos/AgregarOEditarAutos?id=' +@car.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                <button class="btn btn-danger" onclick="window.location.href='/Autos/EliminarAutos?id=' +@car.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                            </label>
+                            <br />
+                            <br />
+                        </div>
                     }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                }
+            </div>
+            <script type="text/javascript">
+
+                function mostrarTabla() {
+                    var tabla = document.getElementById("tabla");
+                    var tarjeta = document.getElementById("tarjetas");
+                    tabla.style.display = "block";
+                    tarjeta.style.display = "none";
+                }
+
+                function mostrarTarjeta() {
+                    var tabla = document.getElementById("tabla");
+                    var tarjeta = document.getElementById("tarjetas");
+                    tabla.style.display = "none";
+                    tarjeta.style.display = "flex";
+                }
+
+            </script>
+
+            <div class="container" id="tabla" style="display: none">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-hover table-striped ">
+                            <thead>
+                                <tr>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Placa</th>
+                                    <th>Imagen</th>
+                                    <th>Color</th>
+                                    <th>Motor</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha registro</th>
+                                    <th colspan="2">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    foreach (var car in Model)
+                                    {
+                                        <tr>
+                                            <td>@car.NombreMarca</td>
+                                            <td>@car.modelo</td>
+                                            <td>@car.placa</td>
+
+                                            <td>@car.imagen</td>
+                                            <td>@car.color</td>
+                                            <td>@car.motor</td>
+                                            <td>@car.descripcion</td>
+                                            <td>@car.fechaRegistro</td>
+                                            <td width="20">
+                                                <button class="btn btn-info" onclick="window.location.href='/Autos/AgregarOEditarAutos?id=' +@car.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                            </td>
+                                            <td width="20">
+                                                <button class="btn btn-danger" onclick="window.location.href='/Autos/EliminarAutos?id=' +@car.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>

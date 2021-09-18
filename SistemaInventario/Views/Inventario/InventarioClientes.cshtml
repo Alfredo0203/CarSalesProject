@@ -1,0 +1,105 @@
+﻿@using DAL.Models
+@using BAL.ProductoParaVender;
+@model List<tabInventario>
+@{
+    ViewBag.Title = "InventarioClientes";
+}
+<link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
+
+<div class="containerCards" id="tarjetas">
+    @if (Model != null)
+    {
+        foreach (var car in Model)
+        {
+            if (car.existenciaProducto > 0)
+            {
+
+                <div class="card">
+                    <img src="~/Content/img_cars/@car.tabAutos.imagen" />
+                    <h4>@car.tabAutos.NombreMarca</h4>
+                    <p>Modelo: @car.tabAutos.modelo  Motor: @car.tabAutos.motor</p>
+                    <p>@car.tabAutos.descripcion</p>
+                    <label>
+                        <button class="btn btn-info" onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">Añadir al carrito</button>
+                    </label>
+
+                    <br />
+                    <br />
+                </div>
+            }
+        }
+    }
+</div>
+
+
+
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>ID</td>
+        <td>Marca</td>
+        <td>Modelo</td>
+        <td>Cantidad</td>
+        <td>Precio</td>
+        <td>Total</td>
+        <td>Sacar de la Lista</td>
+    </tr>
+
+    @if (Model.Count > 0)
+    {
+        foreach (var auto in AutosAVender.listaAutosAVender)
+        {
+            <tr>
+                <td>@auto.Id</td>
+                <td>@auto.Marca</td>
+                <td>@auto.Modelo</td>
+                <td>@auto.Cantidad</td>
+                <td>$ @auto.Precio</td>
+                <td>$ @auto.SubTotal</td>
+                <td>
+
+                    <button class="btn btn-danger"
+                            onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
+                        Quitar
+                    </button>
+
+                </td>
+            </tr>
+
+        }
+
+    }
+</table>
+
+<h4 style="color: white">Total: $ @AutosAVender.TotalAPagar</h4>
+<button class="btn btn-primary" id="BtnRealizarVenta"
+        onclick="window.location.href = '/Vender/Vender'">
+    comprar
+</button>
+
+<button class="btn btn-success" style="margin-top: 10px"
+        onclick="window.location.href = '/Ventas/MostrarVentas'">
+    Ver Ventas
+</button>
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+@if (!AutosAVender.listaAutosAVender.Any())
+{
+    <script>document.getElementById("BtnRealizarVenta").style.display = "none"</script>
+}
+else
+{
+    <script>document.getElementById("BtnRealizarVenta").style.display = "block"</script>
+}
+
+
+

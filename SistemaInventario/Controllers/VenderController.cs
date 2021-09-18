@@ -44,7 +44,7 @@ namespace SistemaInventario.Controllers
 
             }
 
-            return RedirectToAction("MostrarInventario","Inventario");
+            return RedirectToAction("InventarioClientes","Inventario");
         }
 
         //QUITAR ELEMENTOS DELCARRITO
@@ -54,7 +54,7 @@ namespace SistemaInventario.Controllers
             var cantidad = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Cantidad;
             AutosAVender.TotalAPagar -= (precio * cantidad);
             AutosAVender.listaAutosAVender.RemoveAll(x => x.Id == id);
-            return RedirectToAction("MostrarInventario", "Inventario");
+            return RedirectToAction("InventarioClientes", "Inventario");
         }
 
 
@@ -84,7 +84,7 @@ namespace SistemaInventario.Controllers
 
             AutosAVender.listaAutosAVender.RemoveRange(0, AutosAVender.listaAutosAVender.Count());
             AutosAVender.TotalAPagar = 0;
-            return RedirectToAction("MostrarInventario", "Inventario");
+            return RedirectToAction("InventarioClientes", "Inventario");
         }
 
     }
