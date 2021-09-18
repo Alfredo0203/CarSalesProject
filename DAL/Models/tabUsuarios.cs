@@ -37,10 +37,10 @@ namespace DAL.Models
     public enum Rol
     { 
         [Description("Administrador")]
-        admin,
+        admin = 1,
         [Description("Vendedor")]
-        vendedor,
+        vendedor = 2,
         [Description("Cliente")]
-        cliente
+        cliente = 3
     }
 }

@@ -2,56 +2,90 @@
 @model List<tabDetalleCompras>
 @{
     ViewBag.Title = "MostrarCompras";
+    var Compras = ViewBag.Compras;
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <center><h1>Listado de Autos</h1></center>
-            <br />
-            <button class="btn agregarBtn" onclick="window.location.href='/Compras/AgregarOEditarCompras'">Vender</button>
-            <table class="table-hover table-striped ">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Cantidad</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Count() > 0)
-                    {
-                        foreach (var com in Model)
-                        {
-                    <tr>
-                        <td>@com.idDetalleCompra</td>
-                        <td>@com.MarcaAuto</td>
-                        <td>@com.ModeloAuto</td>
-                        <td>@com.cantidad</td>
-            
-                        <td width="20">
-                            <button class="btn btn-info" onclick="window.location.href='/Compras/AgregarOEditarCompras?id=' +@com.idCompra">Editar</button>
-                        </td>
-                        <td width="20">
-                            <button class="btn btn-danger" onclick="window.location.href='/Compras/EliminarCompras?id=' +@com.idCompra">Eliminar</button>
-                        </td>
-                    </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="6">
-                                <center class="text-danger">
-                                    ¡No hay datos para mostrar!
-                                </center>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <center>
+                    <h1>Listado de Ventas</h1>
+                </center>
+                <br />
+                <button class="btn btn-success"
+                        onclick="window.location.href='AgregarOEditarCompras'">
+                    Agregar A Inventario
+                </button>
+                <br />
+                <center>
+                    <table class="" style="margin-bottom: 10px">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Compras != null)
+                            {
+                                foreach (var com in Compras)
+                                {
+                                    <tr style="padding: 0; margin:0;">
+                                        <td> @com.CodigoFactura  </td>
+
+                                        <td> @com.Fecha</td>
+                                        <td> $ @com.Total</td>
+
+                                        <td>
+                                            <table class="" style=" margin-bottom:10px; border: solid 2px black">
+                                                <thead style=" padding: 0; margin: 0; border: solid 2px black">
+                                                    <tr style="border: solid 2px black; text-align: center">
+
+                                                        <th>Marca y Modelo </th>
+                                                        <th>Cantidad </th>
+                                                        <th>Precio Compra</th>
+                                                        <th>SubTotal</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model.Count() > 0)
+                                                    {
+                                                        foreach (var prod in Model)
+                                                        {
+                                                            if (prod.idCompra == com.IdCompra)
+                                                            {
+                                                                <tr style="border: solid 2px black; text-align: center">
+
+                                                                    <td>@prod.marcaModelo</td>
+                                                                    <td>@prod.cantidad</td>
+                                                                    <td>@prod.precioCompra</td>
+                                                                    <td>@prod.subTotal</td>
+
+
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+
+
+                                }
+
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                    </center>
+
+</div>
         </div>
     </div>
-</div>
+
+

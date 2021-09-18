@@ -15,9 +15,9 @@ namespace BAL.AgregarAInventario
         public int Cantidad { get; set; }
         public double SubTotal { get; set; }
         public static double TotalAPagar { get; set; }
-        public static List<AgregarAInventario> listaAutosAVender = new List<AgregarAInventario>();
+        public static List<AgregarAInventario> listaAutosAComprar = new List<AgregarAInventario>();
 
-        public List<AgregarAInventario> AgregarParaVender(int id, string marca, string modelo, int cantidad, double precio, double total)
+        public List<AgregarAInventario> AgregarparaComprar(int id, string marca, string modelo, int cantidad, double precio, double total)
         {
             AgregarAInventario auto = new AgregarAInventario();
             auto.Id = id;
@@ -27,9 +27,9 @@ namespace BAL.AgregarAInventario
             auto.PrecioCompra = precio;
             auto.SubTotal = total;
 
-            listaAutosAVender.Add(auto);
+            listaAutosAComprar.Add(auto);
 
-            return listaAutosAVender;
+            return listaAutosAComprar;
         }
     }
 }

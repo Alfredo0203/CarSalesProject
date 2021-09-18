@@ -13,6 +13,7 @@ namespace SistemaInventario.Controllers
     [Permisos]
     public class ComprasController : Controller
     {
+        private Contexto contexto = new Contexto();
         private IDetalleComprasRepository comprasRepository;
         private IProveedoresRepository proveedoresRepositoty;
         private IAutosRepository autosRepository;
@@ -28,21 +29,18 @@ namespace SistemaInventario.Controllers
         {
    
               var listadoCompras = comprasRepository.ListarDetalleCompras();
-
-                return View(listadoCompras );
+            ViewBag.Compras = contexto.tabCompras.ToList();
+            return View(listadoCompras);
            
         }
 
         // AGREGAR O EDITAR COMPRAS
-        public ActionResult AgregarOEditarCompras(int id = 0)
+        public ActionResult AgregarOEditarCompras()
         {
             ViewBag.listaAutos= SeleccionarAutos();
             ViewBag.listaProveedores = SeleccionarProveedores();
-            var model = new tabDetalleCompras();
-            if(id > 0)
-            {
-                model = comprasRepository.ObtenerComprasPorID(id);
-            }
+            var model = contexto.tabInventario.ToList();
+           
             return View(model);
         }
 
