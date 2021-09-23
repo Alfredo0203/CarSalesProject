@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.Encriptado;
+using DAL.Seguridad;
 
 namespace SistemaInventario.Controllers
 {

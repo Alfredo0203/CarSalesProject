@@ -127,7 +127,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
@@ -149,11 +148,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Diseños\body-color.css" />
     <Content Include="Content\Diseños\Footer.css" />
     <Content Include="Content\Diseños\formularios.css" />
     <Content Include="Content\Diseños\Login.css" />
-    <Content Include="Content\Diseños\login.png" />
     <Content Include="Content\Diseños\Navbar.css" />
     <Content Include="Content\Diseños\tarjetas.css" />
     <Content Include="Content\Diseños\Table.css" />
@@ -166,7 +163,7 @@
     <Content Include="Content\img_cars\red-car.jpg" />
     <Content Include="Content\img_cars\white-black-car.jpg" />
     <Content Include="Content\img_cars\yellow-black-car.jpg" />
-    <Content Include="Scripts\JavaScript.js" />
+    <Content Include="Scripts\navbar.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -202,8 +199,7 @@
     <Content Include="Views\Proveedores\EditOrAddProveedores.cshtml" />
     <Content Include="Views\Marcas\MostrarMarcas.cshtml" />
     <Content Include="Views\Marcas\AgregarOEditarMarcas.cshtml" />
-    <Content Include="Views\Autos\MostrarAutos.cshtml" />
-    <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
+    <Content Include="Views\Inventario\AgregarOEditarAutos.cshtml" />
     <Content Include="Views\Ventas\MostrarVentas.cshtml" />
     <Content Include="Views\Ventas\AgregarOEditarVentas.cshtml" />
     <Content Include="Views\Compras\MostrarCompras.cshtml" />

@@ -1,4 +1,4 @@
-﻿using DAL.Encriptado;
+﻿using DAL.Seguridad;
 using DAL.Models;
 using System;
 using System.Collections.Generic;

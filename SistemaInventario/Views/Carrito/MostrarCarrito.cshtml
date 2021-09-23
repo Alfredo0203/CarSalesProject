@@ -1,9 +1,7 @@
-﻿@using DAL.Models
-@using BAL.ProductoParaVender;
+﻿@using BAL.ProductoParaVender;
 @{
     ViewBag.Title = "MostrarCarrito";
 }
-
 
 <table class="table table-bordered table-striped">
     <tr>
@@ -28,17 +26,13 @@
                 <td>$ @auto.Precio</td>
                 <td>$ @auto.SubTotal</td>
                 <td>
-
                     <button class="btn btn-danger"
                             onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
                         Quitar
                     </button>
-
                 </td>
             </tr>
-
         }
-
     }
 </table>
 
