@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
-    [Permisos]
     public class ComprasController : Controller
     {
         private Contexto contexto = new Contexto();

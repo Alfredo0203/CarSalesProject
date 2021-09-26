@@ -1,4 +1,9 @@
-﻿
+﻿.swal-wide {
+    width: 100px !important;
+}
+.Swal.fire{
+    width: 100px !important;
+}
 html {
     min-height: 100%;
     position: relative;

@@ -2,48 +2,52 @@
 @{
     ViewBag.Title = "MostrarCarrito";
 }
+<link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <td>ID</td>
-        <td>Marca</td>
-        <td>Modelo</td>
-        <td>Cantidad</td>
-        <td>Precio</td>
-        <td>Total</td>
-        <td>Sacar de la Lista</td>
-    </tr>
-
+<div class="containerCards cars">
     @if (Model.Count > 0)
     {
         foreach (var auto in AutosAVender.listaAutosAVender)
         {
-            <tr>
-                <td>@auto.Id</td>
-                <td>@auto.Marca</td>
-                <td>@auto.Modelo</td>
-                <td>@auto.Cantidad</td>
-                <td>$ @auto.Precio</td>
-                <td>$ @auto.SubTotal</td>
-                <td>
-                    <button class="btn btn-danger"
-                            onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
-                        Quitar
-                    </button>
-                </td>
-            </tr>
+    <div class="card">
+        <div class="content cars">
+            <img src="~/Content/img_cars/blackCar.jpg">
+        </div>
+        <h5>@auto.Marca @auto.Modelo</h5>
+        @if (@auto.Cantidad > 1)
+        {
+            <p>@auto.Cantidad autos por @auto.Precio C/U</p> }
+        else
+        {
+            <p>@auto.Cantidad auto por @auto.Precio C/U</p>
+        }
+
+        <p>Precio total $ @auto.SubTotal</p>
+        <button class="btn btn-danger"
+                onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
+            Quitar del carrito
+        </button>
+    </div>
+
         }
     }
-</table>
 
-<h4 style="color: white">Total: $ @AutosAVender.TotalAPagar</h4>
-<button class="btn btn-primary" id="BtnRealizarVenta"
-        onclick="window.location.href = '/Vender/Vender'">
-    comprar
-</button>
+</div>
 
-<button class="btn btn-success" style="margin-top: 10px"
-        onclick="window.location.href = '/Ventas/MostrarVentas'">
-    Ver Ventas
-</button>
+<center>
 
+    <h4 style="color: #dc3545">Total: $ @AutosAVender.TotalAPagar</h4>
+
+
+    <button class="btn btn-primary" id="BtnRealizarVenta"
+            onclick="window.location.href = '/Vender/Vender'">
+        Comprar
+    </button>
+
+    <button class="btn btn-success"
+            onclick="window.location.href = '/Ventas/MostrarVentas'">
+        Ver compras
+    </button>
+
+
+</center>

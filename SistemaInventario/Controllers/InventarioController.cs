@@ -16,16 +16,14 @@ namespace SistemaInventario.Controllers
         //:::::::::::::::::::::::::VARIABLES GLOBALES::::::::::::::::::::::::::::::::
         private IAutosRepository autosRepository;
         private readonly IMarcasRepository marcasRepository;
-        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        Contexto contexto = new Contexto();
 
         InterfazInventario inventarioRepository;
         public InventarioController()
         {
             this.inventarioRepository = new InventarioRepository(new Contexto());
-            //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
             this.autosRepository = new AutosRepository(new Contexto());
             this.marcasRepository = new MarcasRepository(new Contexto());
-            //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
         }
         // GET: Inventario
@@ -39,6 +37,7 @@ namespace SistemaInventario.Controllers
         [Permisos]
         public ActionResult AgregarOEditarAutos(int id = 0)
         {
+            
             ViewBag.listaMarcas = SeleccionarMarcas();
             var auto = new tabAutos();
             if (id > 0)
@@ -75,11 +74,14 @@ namespace SistemaInventario.Controllers
         [Permisos]
         public ActionResult EliminarAutos(int id = 0)
         {
-            if (id > 0)
+            //Almacena cantidad de autos de tabla inventario
+            var hayAutos = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).existenciaProducto;
+            if (hayAutos == 0 && id>0)
             {
-                autosRepository.EliminarAutos(id);
-
+                    autosRepository.EliminarAutos(id);
             }
+           
+            
             return RedirectToAction("MostrarInventario");
         }
         [Permisos]

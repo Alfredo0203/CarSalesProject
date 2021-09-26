@@ -1,13 +1,11 @@
 ﻿@using DAL.Models
 @using DAL.Seguridad
 @using BAL.ProductoParaVender;
-
 @{
     var permisos = false;
 }
 @if (Session["UserId"] != null)
 {
-
     var id = Session["UserId"];
     var idStr = id.ToString();
     var idInt = int.Parse(idStr);
@@ -36,23 +34,27 @@
     {
         foreach (var car in Model)
         {
-    <div class="card">
-        <img src="~/Content/img_cars/@car.Image" />
-        <h4>@car.MarcaAuto @car.precio</h4>
-        <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
-        <p>@car.tabAutos.descripcion</p>
-        @if (permisos == true)
-        {
-            <label>
-                <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
-                <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
-            </label>
-        }
-        @if (permisos == false)
-        {
-            <button class="btn btn-info" onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">Añadir al carrito</button>
-        }
-    </div>
+            <div class="card">
+                <img src="~/Content/img_cars/@car.Image" />
+                <h4>@car.MarcaAuto @car.precio</h4>
+                <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
+                <p>@car.tabAutos.descripcion</p>
+                @if (permisos == true)
+                {
+                    <label>
+                        <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                        @if (car.existenciaProducto == 0)
+                        {
+
+                            <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        }
+                    </label>
+                }
+                @if (permisos == false)
+                {
+                    <button class="btn btn-info" onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">Añadir al carrito</button>
+                }
+            </div>
         }
     }
 </div>
@@ -86,6 +88,7 @@
                         <th>Imagen</th>
                         <th>Color</th>
                         <th>Motor</th>
+                        <th>Cantidad</th>
                         <th>Descripción</th>
                         <th>Fecha registro</th>
                         <th colspan="2">Acciones</th>
@@ -104,13 +107,22 @@
                                 <td>@car.tabAutos.imagen</td>
                                 <td>@car.tabAutos.color</td>
                                 <td>@car.tabAutos.motor</td>
+                                <td>@car.existenciaProducto</td>
                                 <td>@car.tabAutos.descripcion</td>
                                 <td>@car.tabAutos.fechaRegistro</td>
                                 <td width="20">
                                     <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
                                 </td>
                                 <td width="20">
-                                    <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    @if (car.existenciaProducto == 0)
+                                    {
+
+                                        <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-danger" onclick="AlertDelete()"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -120,64 +132,5 @@
         </div>
     </div>
 </div>
-
-@if (permisos == false )
-{
-
-<table class="table table-bordered table-striped">
-    <tr>
-        <td>ID</td>
-        <td>Marca</td>
-        <td>Modelo</td>
-        <td>Cantidad</td>
-        <td>Precio</td>
-        <td>Total</td>
-        <td>Sacar de la Lista</td>
-    </tr>
-
-    @if (Model.Count > 0)
-    {
-        foreach (var auto in AutosAVender.listaAutosAVender)
-        {
-            <tr>
-                <td>@auto.Id</td>
-                <td>@auto.Marca</td>
-                <td>@auto.Modelo</td>
-                <td>@auto.Cantidad</td>
-                <td>$ @auto.Precio</td>
-                <td>$ @auto.SubTotal</td>
-                <td>
-                    <button class="btn btn-danger"
-                            onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
-                        Quitar
-                    </button>
-
-                </td>
-            </tr>
-
-        }
-
-    }
-</table>
-
-<h4 style="color: white">Total: $ @AutosAVender.TotalAPagar</h4><button class="btn btn-primary" id="BtnRealizarVenta"
-        onclick="window.location.href = '/Vender/Vender'">
-    comprar
-</button><button class="btn btn-success" style="margin-top: 10px"
-        onclick="window.location.href = '/Ventas/MostrarVentas'">
-    Ver Ventas
-</button>    
- }
-
-
-@if (!AutosAVender.listaAutosAVender.Any())
-{
-    <script>document.getElementById("BtnRealizarVenta").style.display = "none"</script>
-}
-else
-{
-    <script>document.getElementById("BtnRealizarVenta").style.display = "block"</script>
-}
-
-
-
+<script src="~/Scripts/Alerta.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
