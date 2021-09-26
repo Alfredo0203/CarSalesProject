@@ -34,27 +34,43 @@
     {
         foreach (var car in Model)
         {
-            <div class="card">
-                <img src="~/Content/img_cars/@car.Image" />
-                <h4>@car.MarcaAuto @car.precio</h4>
-                <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
-                <p>@car.tabAutos.descripcion</p>
-                @if (permisos == true)
-                {
+            if (permisos == true)
+            {
+                <div class="card">
+                    <img src="~/Content/img_cars/@car.Image" />
+                    <h4>@car.MarcaAuto @car.precio</h4>
+                    <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
+                    <p>Cantidad disponible: @car.existenciaProducto</p>
+                    <p>@car.tabAutos.descripcion</p>
                     <label>
                         <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+
                         @if (car.existenciaProducto == 0)
                         {
-
                             <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
                         }
+                        else
+                        {
+                            <button class="btn btn-danger" onclick="AlertDelete()"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        }
                     </label>
-                }
-                @if (permisos == false)
+                </div>
+            }
+            else
+            {
+                if (car.existenciaProducto > 0)
                 {
-                    <button class="btn btn-info" onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">Añadir al carrito</button>
+                    <div class="card">
+                        <img src="~/Content/img_cars/@car.Image" />
+                        <h4>@car.MarcaAuto @car.precio</h4>
+                        <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
+                        <p>Cantidad disponible: @car.existenciaProducto</p>
+                        <p>@car.tabAutos.descripcion</p>
+                        <button class="btn btn-info" onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">Añadir al carrito</button>
+                    </div>
                 }
-            </div>
+
+            }
         }
     }
 </div>
