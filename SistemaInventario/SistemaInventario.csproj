@@ -127,7 +127,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AutosController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
@@ -149,16 +148,23 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Diseños\body-color.css" />
     <Content Include="Content\Diseños\Footer.css" />
     <Content Include="Content\Diseños\formularios.css" />
+    <Content Include="Content\Diseños\index.css" />
     <Content Include="Content\Diseños\Login.css" />
-    <Content Include="Content\Diseños\login.png" />
     <Content Include="Content\Diseños\Navbar.css" />
     <Content Include="Content\Diseños\tarjetas.css" />
     <Content Include="Content\Diseños\Table.css" />
+    <Content Include="Content\img_cars\1.jpg" />
+    <Content Include="Content\img_cars\2.jpg" />
+    <Content Include="Content\img_cars\3.jpg" />
+    <Content Include="Content\img_cars\4.jpg" />
     <Content Include="Content\img_cars\blackCar.jpg" />
     <Content Include="Content\img_cars\blue-car.jpg" />
+    <Content Include="Content\img_cars\car1.jpg" />
+    <Content Include="Content\img_cars\car3.jpg" />
+    <Content Include="Content\img_cars\car4.jpg" />
+    <Content Include="Content\img_cars\car5.jpg" />
     <Content Include="Content\img_cars\card.css" />
     <Content Include="Content\img_cars\gray-car.jpg" />
     <Content Include="Content\img_cars\green-car.jpeg" />
@@ -166,13 +172,16 @@
     <Content Include="Content\img_cars\red-car.jpg" />
     <Content Include="Content\img_cars\white-black-car.jpg" />
     <Content Include="Content\img_cars\yellow-black-car.jpg" />
-    <Content Include="Scripts\JavaScript.js" />
+    <Content Include="Scripts\Alerta.js" />
+    <Content Include="Scripts\navbar.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Diseños\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\img_cars\car2.webp" />
+    <Content Include="Content\img_cars\5.jpg" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -202,8 +211,7 @@
     <Content Include="Views\Proveedores\EditOrAddProveedores.cshtml" />
     <Content Include="Views\Marcas\MostrarMarcas.cshtml" />
     <Content Include="Views\Marcas\AgregarOEditarMarcas.cshtml" />
-    <Content Include="Views\Autos\MostrarAutos.cshtml" />
-    <Content Include="Views\Autos\AgregarOEditarAutos.cshtml" />
+    <Content Include="Views\Inventario\AgregarOEditarAutos.cshtml" />
     <Content Include="Views\Ventas\MostrarVentas.cshtml" />
     <Content Include="Views\Ventas\AgregarOEditarVentas.cshtml" />
     <Content Include="Views\Compras\MostrarCompras.cshtml" />
@@ -212,7 +220,6 @@
     <Content Include="Views\Usuarios\MostrarUsuarios.cshtml" />
     <Content Include="Views\Usuarios\EditarOCrearUsuarios.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Inventario\InventarioClientes.cshtml" />
     <Content Include="Views\Carrito\MostrarCarrito.cshtml" />
   </ItemGroup>
   <ItemGroup>

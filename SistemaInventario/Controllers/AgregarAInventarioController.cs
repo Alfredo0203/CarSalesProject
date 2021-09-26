@@ -1,5 +1,6 @@
 ﻿using BAL.AgregarAInventario;
 using DAL.Models;
+using DAL.Seguridad;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    [Permisos]
     public class AgregarAInventarioController : Controller
     {
 

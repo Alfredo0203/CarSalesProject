@@ -1,4 +1,5 @@
 ﻿using BAL.ProductoParaVender;
+using DAL.Seguridad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    //[Permisos]
     public class CarritoController : Controller
     {
         // GET: Carrito

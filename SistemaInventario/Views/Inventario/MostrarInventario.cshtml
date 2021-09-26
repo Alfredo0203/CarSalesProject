@@ -1,23 +1,113 @@
 ﻿@using DAL.Models
+@using DAL.Seguridad
 @using BAL.ProductoParaVender;
+@{
+    var permisos = false;
+}
+@if (Session["UserId"] != null)
+{
+    var id = Session["UserId"];
+    var idStr = id.ToString();
+    var idInt = int.Parse(idStr);
+    permisos = PermisosPorRol.IsAdmin(idInt);
+}
 @model List<tabInventario>
 @{
     ViewBag.Title = "MostrarAutos";
 }
-<div class="container"> 
+<link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
+<center><h1>Autos</h1></center>
+<br />
+@if (permisos == true)
+{
+    <center>
+        <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
+        <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
+    </center>
+
+    <div class="container">
+        <button style="margin-left: 20px" class="btn agregarBtn" onclick="window.location.href='/Inventario/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
+    </div>
+}
+<div class="containerCards" id="tarjetas">
+    @if (Model != null)
+    {
+        foreach (var car in Model)
+        {
+            if (permisos == true)
+            {
+                <div class="card">
+                    <img src="~/Content/img_cars/@car.Image" />
+                    <h4>@car.MarcaAuto @car.precio</h4>
+                    <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
+                    <p>Cantidad disponible: @car.existenciaProducto</p>
+                    <p>@car.tabAutos.descripcion</p>
+                    <label>
+                        <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+
+                        @if (car.existenciaProducto == 0)
+                        {
+                            <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" onclick="AlertDelete()"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        }
+                    </label>
+                </div>
+            }
+            else
+            {
+                if (car.existenciaProducto > 0)
+                {
+                    <div class="card">
+                        <img src="~/Content/img_cars/@car.Image" />
+                        <h4>@car.MarcaAuto @car.precio</h4>
+                        <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
+                        <p>Cantidad disponible: @car.existenciaProducto</p>
+                        <p>@car.tabAutos.descripcion</p>
+                        <button class="btn btn-info" onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">Añadir al carrito</button>
+                    </div>
+                }
+
+            }
+        }
+    }
+</div>
+<script type="text/javascript">
+
+    function mostrarTabla() {
+        var tabla = document.getElementById("tabla");
+        var tarjeta = document.getElementById("tarjetas");
+        tabla.style.display = "block";
+        tarjeta.style.display = "none";
+    }
+
+    function mostrarTarjeta() {
+        var tabla = document.getElementById("tabla");
+        var tarjeta = document.getElementById("tarjetas");
+        tabla.style.display = "none";
+        tarjeta.style.display = "flex";
+    }
+
+</script>
+
+<div class="container" id="tabla" style="display: none">
     <div class="row">
         <div class="col-md-12">
-            <center><h1>Listado de Inventario</h1></center>
-            <br />
-
             <table class="table-hover table-striped ">
                 <thead>
                     <tr>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        <th>Precio Venta</th>
-                        <th>Existencia</th>
-                        <th>Estado</th>
+                        <th>Placa</th>
+                        <th>Imagen</th>
+                        <th>Color</th>
+                        <th>Motor</th>
+                        <th>Cantidad</th>
+                        <th>Descripción</th>
+                        <th>Fecha registro</th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,103 +115,38 @@
                     {
                         foreach (var car in Model)
                         {
-
                             <tr>
-                                <td>@car.MarcaAuto</td>
+                                <td>@car.tabAutos.NombreMarca</td>
                                 <td>@car.ModeloAuto</td>
-                                <td><b>$</b>@car.precio</td>
+                                <td>@car.tabAutos.placa</td>
+
+                                <td>@car.tabAutos.imagen</td>
+                                <td>@car.tabAutos.color</td>
+                                <td>@car.tabAutos.motor</td>
                                 <td>@car.existenciaProducto</td>
-                                <td>@car.estado</td>
-                                <td>
-                                    <button class="btn btn-danger"
-                                            onclick="window.location.href='/Vender/SeleccionarProducto?id='+@car.fk_auto">
-                                        Seleccionar
-                                    </button>
+                                <td>@car.tabAutos.descripcion</td>
+                                <td>@car.tabAutos.fechaRegistro</td>
+                                <td width="20">
+                                    <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                </td>
+                                <td width="20">
+                                    @if (car.existenciaProducto == 0)
+                                    {
+
+                                        <button class="btn btn-danger" onclick="window.location.href='/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-danger" onclick="AlertDelete()"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    }
                                 </td>
                             </tr>
-
-
                         }
-
                     }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <center>
-                <h1>Listado de productos</h1>
-            </center>
-            <br />
-
-            <br />
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <td>ID</td>
-                    <td>Marca</td>
-                    <td>Modelo</td>
-                    <td>Cantidad</td>
-                    <td>Precio</td>
-                    <td>Total</td>
-                    <td>Sacar de la Lista</td>
-                </tr>
-
-                @if (Model.Count > 0)
-                {
-                    foreach (var auto in AutosAVender.listaAutosAVender)
-                    {
-
-
-                        <tr>
-                            <td>@auto.Id</td>
-                            <td>@auto.Marca</td>
-                            <td>@auto.Modelo</td>
-                            <td>@auto.Cantidad</td>
-                            <td>$ @auto.Precio</td>
-                            <td>$ @auto.SubTotal</td>
-                            <td>
-
-                                <button class="btn btn-danger"
-                                        onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
-                                    Quitar
-                                </button>
-
-                            </td>
-                        </tr>
-
-                    }
-
-                }
-            </table>
-
-            <h4 style="color: white">Total: $ @AutosAVender.TotalAPagar</h4>
-
-            <button class="btn btn-primary" id="BtnRealizarVenta"
-                    onclick="window.location.href = '/Vender/Vender'">
-                comprar
-            </button>
-
-            <button class="btn btn-success" style="margin-top: 10px"
-                    onclick="window.location.href = '/Ventas/MostrarVentas'">
-                Ver Ventas
-            </button>
-        </div>
-    </div>
-</div>
-
-
-@if (!AutosAVender.listaAutosAVender.Any())
-{
-    <script>document.getElementById("BtnRealizarVenta").style.display = "none"</script>
-}
-else
-{
-    <script>document.getElementById("BtnRealizarVenta").style.display = "block"</script>
-}
-
-
+<script src="~/Scripts/Alerta.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

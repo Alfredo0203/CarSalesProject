@@ -5,7 +5,8 @@
     Layout = null;
 }
 <link href="~/Content/Diseños/Login.css" rel="stylesheet" />
-<link href="~/Content/Diseños/body-color.css" rel="stylesheet" />
+<link href="~/Content/Diseños/Site.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 @using (Html.BeginForm())
 {
@@ -13,7 +14,7 @@
 
     <div class="login">
         @Html.AntiForgeryToken()
-        <img src="~/Content/Diseños/login.png" />
+        <i style="color:#ae61e2; font-size: 50px" class="fas fa-user-circle"></i>
         <input type="text" name="correo" value="" placeholder="Correo" />
         <input type="text" name="passw" value="" placeholder="Contraseña" />
         <input type="submit" value="Iniciar Sesión" />

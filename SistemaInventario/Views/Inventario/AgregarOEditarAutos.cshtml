@@ -9,7 +9,14 @@
 {
     @Html.HiddenFor(x => x.idAuto)
 <div class="formulario auto">
-    <h3>Agregar Autos</h3>
+    @if (Model.idAuto > 0)
+    {
+        <h3>Editar auto</h3>
+    }
+    else
+    {
+        <h3>Agregar auto</h3>
+    }
     <div class="inputs marca-model">
         <div class="marca">
             <label>
@@ -60,4 +67,4 @@
 
     <input type="submit" value="Registrar" />
 </div>
-            }
+}
