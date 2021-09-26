@@ -53,9 +53,16 @@
         </div>
         <div class="fecha">
             <label>
-                Fecha:
-                @Html.TextBoxFor(x => x.fechaLanzamiento, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.fechaLanzamiento, null, new { @class = "text-danger" })
+                Fecha Lanzamiento:
+                @if (Model.idAuto > 0)
+                {
+                    @Html.TextBoxFor(x => x.fechaLanzamiento, new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.TextBoxFor(x => x.fechaLanzamiento, new { @class = "form-control", @type = "Date" })
+                    @Html.ValidationMessageFor(x => x.fechaLanzamiento, null, new { @class = "text-danger" })
+                }
             </label>
         </div>
     </div>

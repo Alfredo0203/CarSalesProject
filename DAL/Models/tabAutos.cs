@@ -2,6 +2,7 @@ namespace DAL.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -50,8 +51,11 @@ namespace DAL.Models
 
         public DateTime fechaLanzamiento { get; set; }
 
+        //Retornar la fecha actual
         [Column(TypeName = "date")]
-        public DateTime fechaRegistro { get; set; }
+        public DateTime fechaRegistro {
+            get { return DateTime.Now; }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabDetalleCompras> tabDetalleCompras { get; set; }
