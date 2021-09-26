@@ -243,22 +243,23 @@
         color: #ea363d;
         font-size: 20px;
     }
-.card button {
-    color: white;
-    text-align: center;
+
+.buttonNav{
     background-color: #1e1732;
     width: 100%;
+    height: 25px;
 }
-.card a {
+
+.dropdown-menu.card a {
+    color: white;
+    text-align: center;
     text-decoration: none;
     color: #e5bfff;
 }
-.card a:hover {
-    color: white;
-}
-.card button:hover {
-    border: 1px solid white;
-}
+
+    .dropdown-menu.card a:hover {
+        color: white;
+    }
 /*::::::::::::::::::::dispositivos más pequeños (max-width: 767px):::::::::::::::::::::: */
 
 @media (max-width: 767px) {
