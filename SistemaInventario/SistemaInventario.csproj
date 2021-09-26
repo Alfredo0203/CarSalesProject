@@ -220,7 +220,6 @@
     <Content Include="Views\Usuarios\MostrarUsuarios.cshtml" />
     <Content Include="Views\Usuarios\EditarOCrearUsuarios.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Inventario\InventarioClientes.cshtml" />
     <Content Include="Views\Carrito\MostrarCarrito.cshtml" />
   </ItemGroup>
   <ItemGroup>
