@@ -53,11 +53,16 @@
                                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compras</a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="https://localhost:44366/Compras/MostrarCompras">Ver compras</a>
-                                                @if (permisos == true){
-                                                <a class="dropdown-item" href="https://localhost:44366/Proveedores/MostrarProveedores">Proveedores</a>
+                                                @if (permisos == true)
+                                                {
+                                                    <a class="dropdown-item" href="https://localhost:44366/Compras/MostrarCompras">Ver compras</a>
+                                                    <a class="dropdown-item" href="https://localhost:44366/Proveedores/MostrarProveedores">Proveedores</a>
                                                 }
-                                            </div>
+                                                else
+                                                {
+                                                    <a class="dropdown-item" href="https://localhost:44366/Ventas/MostrarVentas">Ver compras</a>
+                                                }
+                                                </div>
                                         </li>
                                         if (permisos == true)
                                         {

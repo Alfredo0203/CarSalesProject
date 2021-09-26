@@ -9,7 +9,14 @@
 {
     @Html.HiddenFor(x => x.idCliente)
 <div class="formulario cliente">
-    <h3>Agregar Clientes</h3>
+    @if (Model.idCliente > 0)
+    {
+        <h3>Editar cliente</h3>
+    }
+    else
+    {
+        <h3>Agregar cliente</h3>
+    }
 
     <label>Nombre Cliente: </label>
     @Html.TextBoxFor(x => x.nombre, htmlAttributes: new { @class = "form-control" })

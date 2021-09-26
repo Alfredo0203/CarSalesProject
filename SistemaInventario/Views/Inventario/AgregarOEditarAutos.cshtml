@@ -8,56 +8,63 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(x => x.idAuto)
-    <div class="formulario auto">
-        <h3>Agregar Autos</h3>
-        <div class="inputs marca-model">
-            <div class="marca">
-                <label>
-                    Marca:
-                    @Html.DropDownListFor(x => x.fk_marca, (IEnumerable<SelectListItem>)ViewBag.listaMarcas, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.fk_marca, null, new { @class = "text-danger" })
-                </label>
-            </div>
-            <div class="modelo">
-                <label>
-                    Modelo:
-                    @Html.TextBoxFor(x => x.modelo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.modelo, null, new { @class = "text-danger" })
-                </label>
-            </div>
+<div class="formulario auto">
+    @if (Model.idAuto > 0)
+    {
+        <h3>Editar auto</h3>
+    }
+    else
+    {
+        <h3>Agregar auto</h3>
+    }
+    <div class="inputs marca-model">
+        <div class="marca">
+            <label>
+                Marca:
+                @Html.DropDownListFor(x => x.fk_marca, (IEnumerable<SelectListItem>)ViewBag.listaMarcas, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.fk_marca, null, new { @class = "text-danger" })
+            </label>
         </div>
-
-        <label>Placa: </label>
-        @Html.TextBoxFor(x => x.placa, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.placa, null, new { @class = "text-danger" })
-        <label>Imagen: </label>
-        @Html.TextBoxFor(x => x.imagen, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.imagen, null, new { @class = "text-danger" })
-        <label>Color: </label>
-        @Html.TextBoxFor(x => x.color, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.color, null, new { @class = "text-danger" })
-        <div class="inputs motor-fecha">
-            <div class="motor">
-                <label>
-                    Motor:
-                    @Html.TextBoxFor(x => x.motor, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.motor, null, new { @class = "text-danger" })
-                </label>
-            </div>
-            <div class="fecha">
-                <label>
-                    Fecha:
-                    @Html.TextBoxFor(x => x.fechaLanzamiento, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.fechaLanzamiento, null, new { @class = "text-danger" })
-                </label>
-            </div>
+        <div class="modelo">
+            <label>
+                Modelo:
+                @Html.TextBoxFor(x => x.modelo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.modelo, null, new { @class = "text-danger" })
+            </label>
         </div>
-
-
-        <label>Descripción: </label>
-        @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "text-danger" })
-
-        <input type="submit" value="Registrar" />
     </div>
+
+    <label>Placa: </label>
+    @Html.TextBoxFor(x => x.placa, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.placa, null, new { @class = "text-danger" })
+    <label>Imagen: </label>
+    @Html.TextBoxFor(x => x.imagen, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.imagen, null, new { @class = "text-danger" })
+    <label>Color: </label>
+    @Html.TextBoxFor(x => x.color, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.color, null, new { @class = "text-danger" })
+    <div class="inputs motor-fecha">
+        <div class="motor">
+            <label>
+                Motor:
+                @Html.TextBoxFor(x => x.motor, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.motor, null, new { @class = "text-danger" })
+            </label>
+        </div>
+        <div class="fecha">
+            <label>
+                Fecha:
+                @Html.TextBoxFor(x => x.fechaLanzamiento, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.fechaLanzamiento, null, new { @class = "text-danger" })
+            </label>
+        </div>
+    </div>
+
+
+    <label>Descripción: </label>
+    @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "text-danger" })
+
+    <input type="submit" value="Registrar" />
+</div>
 }
