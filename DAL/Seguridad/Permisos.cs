@@ -16,42 +16,53 @@ namespace DAL.Seguridad
             base.OnActionExecuting(filterContext);
 
             var UserId = HttpContext.Current.Session["UserId"];
-            var id_string = "0";
 
-            if (UserId != null)
-            {
-                id_string = UserId.ToString();
-            }
-
-            if (!PermisosPorRol.IsAdmin(int.Parse(id_string)))
+            if (UserId == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
                     new
                     {
                         controller = "Home",
-                        action = "Error"
+                        action = "Login"
                     }
                     ));
             }
-            
+
         }
+
+
     }
 
-    public class PermisosPorRol
+    public class Admin : ActionFilterAttribute
     {
-        public static bool IsAdmin(int UserId)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (UserId <= 0)
-            {
-                return false;
-            }
+            base.OnActionExecuting(filterContext);
 
-            using (var context = new Contexto())
+            var UserId = HttpContext.Current.Session["UserId"];
+
+            using (Contexto db = new Contexto())
             {
-                var User = context.tabUsuarios.FirstOrDefault(x => x.idUsuario == UserId);
-                return User.rol == Rol.admin ? true : false;
+                var user = db.tabUsuarios.FirstOrDefault(x => x.idUsuario.ToString() == UserId.ToString());
+                if (user.rol == Rol.cliente)
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                       new
+                       {
+                           controller = "Home",
+                           action = "Error"
+                       }
+                       ));
+
+                }
+
             }
         }
-    }
 
+    }
 }
+
+
+
+
+    

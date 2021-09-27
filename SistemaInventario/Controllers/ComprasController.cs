@@ -10,6 +10,8 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
+    [Permisos]
+    [Admin]
     public class ComprasController : Controller
     {
         private Contexto contexto = new Contexto();
@@ -17,6 +19,7 @@ namespace SistemaInventario.Controllers
         private IProveedoresRepository proveedoresRepositoty;
         private IAutosRepository autosRepository;
         //INICIALIZACIÓN DE LOS OBJETOS DE CLASE E INTERFACE
+       
         public ComprasController()
         {
             this.comprasRepository = new ComprasRepository(new Contexto());
@@ -24,10 +27,12 @@ namespace SistemaInventario.Controllers
             this.autosRepository = new AutosRepository(new Contexto());
         }
         // MÉTODO LISTAR Compras
-        public ActionResult MostrarCompras()
+
+
+        public ActionResult MostrarCompras()    
         {
-   
-              var listadoCompras = comprasRepository.ListarDetalleCompras();
+           
+                var listadoCompras = comprasRepository.ListarDetalleCompras();
             ViewBag.Compras = contexto.tabCompras.ToList();
             return View(listadoCompras);
            

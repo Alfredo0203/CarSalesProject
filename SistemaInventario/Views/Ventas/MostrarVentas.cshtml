@@ -1,31 +1,19 @@
 ﻿@using DAL.Models
-@using DAL.Seguridad
 @model List<tabDetalleVentas>
 @{
     ViewBag.Title = "MostrarProductos";
     var ventas = ViewBag.Ventas;
-    var permisos = false;
+
 }
 
-@if (Session["UserId"] != null)
-{
-    var id = Session["UserId"];
-    var idStr = id.ToString();
-    var idInt = int.Parse(idStr);
-    permisos = PermisosPorRol.IsAdmin(idInt);
-}
+z
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
             <center>
-                @if (permisos == true)
-                {
+    
                     <h1>Ventas</h1>
-                }
-                else
-                {
-                    <h1>Mis compras</h1>
-                }
+              
             </center>
             <br />
 

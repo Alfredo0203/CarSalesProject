@@ -38,9 +38,7 @@ namespace DAL.Models
     { 
         [Description("Administrador")]
         admin = 1,
-        [Description("Vendedor")]
-        vendedor = 2,
         [Description("Cliente")]
-        cliente = 3
+        cliente = 2
     }
 }

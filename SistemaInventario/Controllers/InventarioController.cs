@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
-    //[Permisos]
+    [Permisos]
     public class InventarioController : Controller
     {
         //:::::::::::::::::::::::::VARIABLES GLOBALES::::::::::::::::::::::::::::::::
@@ -34,7 +34,7 @@ namespace SistemaInventario.Controllers
         }
 
         //AGREGAR AUTOS
-        [Permisos]
+        [Admin]
         public ActionResult AgregarOEditarAutos(int id = 0)
         {
             
@@ -49,7 +49,7 @@ namespace SistemaInventario.Controllers
         }
 
         //EDITAR AUTOS
-        [Permisos]
+        [Admin]
         [HttpPost]
         public ActionResult AgregarOEditarAutos(tabAutos model)
         {
@@ -71,7 +71,7 @@ namespace SistemaInventario.Controllers
         }
 
         //MÉTODO ELIMINAR AUTOS
-        [Permisos]
+        [Admin]
         public ActionResult EliminarAutos(int id = 0)
         {
             //Almacena cantidad de autos de tabla inventario
@@ -84,7 +84,6 @@ namespace SistemaInventario.Controllers
             
             return RedirectToAction("MostrarInventario");
         }
-        [Permisos]
 
         //MÉTODO AGREGAR MARCAS AL ELEMENTO SelectListItem
         public List<SelectListItem> SeleccionarMarcas()

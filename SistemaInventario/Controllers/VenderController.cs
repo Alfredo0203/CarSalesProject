@@ -1,12 +1,13 @@
 ﻿using BAL.ProductoParaVender;
 using DAL.Models;
+using DAL.Seguridad;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
- 
+    [Permisos]
     public class VenderController : Controller
     {
         Contexto contexto = new Contexto();

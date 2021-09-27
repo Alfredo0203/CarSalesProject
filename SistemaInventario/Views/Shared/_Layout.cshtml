@@ -1,14 +1,6 @@
-﻿@using DAL.Seguridad
-@{
-    var permisos = false;
-}
-@if (Session["UserId"] != null)
-{
-    var id = Session["UserId"];
-    var idStr = id.ToString();
-    var idInt = int.Parse(idStr);
-    permisos = PermisosPorRol.IsAdmin(idInt);
-}
+﻿
+
+
     <!DOCTYPE html>
     <html>
     <head>
@@ -38,34 +30,27 @@
 
                                     @if (Session["UserId"] != null)
                                     {
+                                        if (Session["UserRol"].Equals("Administrador"))
+                                        {
+                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Autos</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="https://localhost:44366/Inventario/MostrarInventario">Ver autos</a>
 
-                                        <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Autos</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="https://localhost:44366/Inventario/MostrarInventario">Ver autos</a>
-                                                @if (permisos == true)
-                                                {
                                                     <a class="dropdown-item" href="https://localhost:44366/Marcas/MostrarMarcas">Marcas</a>
 
-                                                }
-                                            </div>
-                                        </li>
-                                        <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compras</a>
-                                            <div class="dropdown-menu">
-                                                @if (permisos == true)
-                                                {
+
+                                                </div>
+                                            </li>
+                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compras</a>
+                                                <div class="dropdown-menu">
+
                                                     <a class="dropdown-item" href="https://localhost:44366/Compras/MostrarCompras">Ver compras</a>
                                                     <a class="dropdown-item" href="https://localhost:44366/Proveedores/MostrarProveedores">Proveedores</a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="dropdown-item" href="https://localhost:44366/Ventas/MostrarVentas">Ver compras</a>
-                                                }
+
                                                 </div>
-                                        </li>
-                                        if (permisos == true)
-                                        {
+                                            </li>
 
                                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ventas</a>
@@ -76,53 +61,67 @@
                                             </li>
                                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                                 <a class="nav-link" href="https://localhost:44366/Usuarios/MostrarUsuarios">Usuario</a>
-                                            </li>
-                                        }
-                                            <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
-                                                <a class="nav-link" href="https://localhost:44366/Carrito/MostrarCarrito"><i style="font-size:19px" class="fas fa-shopping-cart"></i></a>
-                                                <div class="dropdown-menu card">
-                                                    <div class="card navb">
-                                                        <div class="fila">
-                                                            <div class="columna 1">
-                                                                <img style="border-radius:5px; width: 100px; height: 100px;" src="~/Content/img_cars/blackCar.jpg" alt="">
-                                                            </div>
-                                                            <div class="columna 2">
-                                                                <p class=" descripcion">Modelo</p>
-                                                                <p class=" descripcion">Marca </p>
-                                                            </div>
-                                                            <i class="fas fa-times-circle"></i>
-                                                        </div>
-                                                        <div class="fila">
-                                                            <div class="columna precio">
-                                                                <p class="precio">Total</p>
-                                                            </div>
-                                                            <div class="columna total">
-                                                                <p class="total">$2000.00</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="btn">
-                                                        <a href="https://localhost:44366/Carrito/MostrarCarrito">Ver detalles de carrrito</a>
-                                                    </button>
-                                                </div>
 
                                             </li>
                                         }
-                                        <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
-                                            <a class="dropdown-toggle nav-link navbar-brand" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size: 25px" class="fas fa-user-circle"></i> @*<h5 style="background-color: #e5bfff; color: #1e1732; border-radius: 100%; height: 30px; width: 30px; padding:5px" >AT</h5>*@ </a>
-                                            <div class="dropdown-menu">
-                                                @if (Session["UserId"] != null)
-                                                {
-                                                    <a class="dropdown-item" href="https://localhost:44366/Home/LogOut">Salir</a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="dropdown-item" href="https://localhost:44366/Home/Login">Iniciar Sesión</a>
-                                                    <a class="dropdown-item" href="https://localhost:44366">Registrarse</a>
-                                                }
-                                            </div>
+                                        else
+                                        {
+                                        <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                            <a class="nav-link" href="https://localhost:44366/Inventario/MostrarInventario">Ver autos</a>
                                         </li>
-                                    </ul>
+                                        <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                            <a class="nav-link" href="https://localhost:44366/Clientes/MostrarClientes">Mis Compras</a>
+                                        </li>
+                                        <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
+                                            <a class="nav-link" href="https://localhost:44366/Carrito/MostrarCarrito"><i style="font-size:19px" class="fas fa-shopping-cart"></i></a>
+                                            <div class="dropdown-menu card">
+                                                <div class="card navb">
+                                                    <div class="fila">
+                                                        <div class="columna 1">
+                                                            <img style="border-radius:5px; width: 100px; height: 100px;" src="~/Content/img_cars/blackCar.jpg" alt="">
+                                                        </div>
+                                                        <div class="columna 2">
+                                                            <p class=" descripcion">Modelo</p>
+                                                            <p class=" descripcion">Marca </p>
+                                                        </div>
+                                                        <i class="fas fa-times-circle"></i>
+                                                    </div>
+                                                    <div class="fila">
+                                                        <div class="columna precio">
+                                                            <p class="precio">Total</p>
+                                                        </div>
+                                                        <div class="columna total">
+                                                            <p class="total">$2000.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn">
+                                                    <a href="https://localhost:44366/Carrito/MostrarCarrito">Ver detalles de carrrito</a>
+                                                </button>
+                                            </div>
+
+                                        </li>
+                                        }
+                                    }
+                                    <li class="nav-item i pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="dropdown-toggle nav-link navbar-brand" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size: 25px" class="fas fa-user-circle"></i> @*<h5 style="background-color: #e5bfff; color: #1e1732; border-radius: 100%; height: 30px; width: 30px; padding:5px" >AT</h5>*@ </a>
+                                        <div class="dropdown-menu">
+                                            @if (Session["UserId"] != null)
+                                            {
+                                                <a class="dropdown-item" href="https://localhost:44366/Home/LogOut">Salir</a>
+                                            }
+                                            else
+                                            {
+                                            <a class="dropdown-item" href="https://localhost:44366/Home/Login">Iniciar Sesión</a>
+                                            <a class="dropdown-item" href="https://localhost:44366">Registrarse</a>
+                                            }
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+
+                                    
                             </div>
                         </nav>
                     </div>

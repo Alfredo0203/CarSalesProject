@@ -1,16 +1,6 @@
 ﻿@using DAL.Models
-@using DAL.Seguridad
 @using BAL.ProductoParaVender;
-@{
-    var permisos = false;
-}
-@if (Session["UserId"] != null)
-{
-    var id = Session["UserId"];
-    var idStr = id.ToString();
-    var idInt = int.Parse(idStr);
-    permisos = PermisosPorRol.IsAdmin(idInt);
-}
+
 @model List<tabInventario>
 @{
     ViewBag.Title = "MostrarAutos";
@@ -18,7 +8,7 @@
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 <center><h1>Autos</h1></center>
 <br />
-@if (permisos == true)
+@if (Session["UserRol"].Equals("Administrador"))
 {
     <center>
         <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
@@ -34,7 +24,7 @@
     {
         foreach (var car in Model)
         {
-            if (permisos == true)
+            if (Session["UserRol"].Equals("Administrador"))
             {
                 <div class="card">
                     <img src="~/Content/img_cars/@car.Image" />

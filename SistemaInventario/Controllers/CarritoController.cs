@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
-    //[Permisos]
+    [Permisos]
     public class CarritoController : Controller
     {
         // GET: Carrito

@@ -9,8 +9,10 @@ using System.Web.Security;
 
 namespace SistemaInventario.Controllers
 {
+
     public class HomeController : Controller
     {
+       
         Contexto contexto = new Contexto();
         //Crear redirección para login
         public ActionResult Login()
@@ -30,6 +32,8 @@ namespace SistemaInventario.Controllers
                 if (User != null)
                 {
                     Session["UserId"] = User.idUsuario.ToString();
+                    
+                    Session["UserRol"] = User.rol.ToString();
                     return RedirectToAction("Index", "Home");
                 }
                 else

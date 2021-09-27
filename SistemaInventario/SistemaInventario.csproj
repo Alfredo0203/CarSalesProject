@@ -221,6 +221,7 @@
     <Content Include="Views\Usuarios\EditarOCrearUsuarios.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Carrito\MostrarCarrito.cshtml" />
+    <Content Include="Views\Clientes\ComprasClientes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 namespace SistemaInventario.Controllers
 {
     [Permisos]
+    [Admin]
     public class ProveedoresController : Controller
     {
         private IProveedoresRepository proveedoresRepository;

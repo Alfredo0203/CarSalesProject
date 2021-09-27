@@ -10,7 +10,8 @@ using System.Web.Mvc;
 
 namespace SistemaInventario.Controllers
 {
-    //[Permisos]
+    [Permisos]
+    [Admin]
     public class VentasController : Controller
     {
         Contexto contexto = new Contexto();
@@ -29,6 +30,7 @@ namespace SistemaInventario.Controllers
             try
             {
                 var model = detalleVentasRepository.ListarDetalleVentas();
+                ViewBag.Id = Session["UserId"].ToString();
                 ViewBag.Ventas = contexto.tabVentas.ToList();
                 return View(model);
             } 
