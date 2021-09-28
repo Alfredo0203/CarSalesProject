@@ -24,7 +24,7 @@
 
         <p>Precio total $ @auto.SubTotal</p>
         <button class="btn btn-danger"
-                onclick="window.location.href='/Vender/EliminarElementoDeLaLista?id='+@auto.Id">
+                onclick="AlertaDelete('/Vender/EliminarElementoDeLaLista?id='+@auto.Id)">
             Quitar del carrito
         </button>
     </div>
@@ -43,11 +43,5 @@
             onclick="window.location.href = '/Vender/Vender'">
         Comprar
     </button>
-
-    <button class="btn btn-success"
-            onclick="window.location.href = '/Ventas/MostrarVentas'">
-        Ver compras
-    </button>
-
 
 </center>

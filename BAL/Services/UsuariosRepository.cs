@@ -40,6 +40,7 @@ namespace BAL.Services
             bool success;
             try
             {
+                usuarios.pass = EncriptarPassword.EncriptarPass(usuarios.pass);
                 if (usuarios.idUsuario > 0)
                 {
                     contexto.Entry(usuarios).State = EntityState.Modified;

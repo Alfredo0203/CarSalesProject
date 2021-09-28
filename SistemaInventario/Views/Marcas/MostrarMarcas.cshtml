@@ -31,7 +31,7 @@
                                     <button class="btn btn-info" onclick="window.location.href='/Marcas/AgregarOEditarMarcas?idMarca=' +@mar.idMarca"><i class="fas fa-pencil-alt"></i> Editar</button>
                                 </td>
                                 <td width="20">
-                                    <button class="btn btn-danger" onclick="window.location.href='/Marcas/EliminarMarcas?id=' +@mar.idMarca"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    <button class="btn btn-danger" onclick="AlertaDelete('/Marcas/EliminarMarcas?id=' +@mar.idMarca)"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
                                 </td>
                             </tr>

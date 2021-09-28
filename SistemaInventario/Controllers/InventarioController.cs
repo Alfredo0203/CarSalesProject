@@ -4,6 +4,7 @@ using DAL.Models;
 using DAL.Seguridad;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,8 +52,11 @@ namespace SistemaInventario.Controllers
         //EDITAR AUTOS
         [Admin]
         [HttpPost]
-        public ActionResult AgregarOEditarAutos(tabAutos model)
+        public ActionResult AgregarOEditarAutos(tabAutos model, HttpPostedFileBase imagen)
         {
+            ViewBag.listaMarcas = SeleccionarMarcas();
+            if (imagen != null) model.imagen = GuardarImagen(imagen);
+            if (model.imagen == "0") ModelState.AddModelError("Mensaje", "La imagen es obligatoria");
             if (ModelState.IsValid)
             {
 
@@ -74,9 +78,8 @@ namespace SistemaInventario.Controllers
         [Admin]
         public ActionResult EliminarAutos(int id = 0)
         {
-            //Almacena cantidad de autos de tabla inventario
-            var hayAutos = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).existenciaProducto;
-            if (hayAutos == 0 && id>0)
+
+            if (id > 0)
             {
                     autosRepository.EliminarAutos(id);
             }
@@ -98,6 +101,34 @@ namespace SistemaInventario.Controllers
             return listaMarcas;
         }
 
+        //Método Guardar Imagen
+
+        public string GuardarImagen(HttpPostedFileBase imagen)
+        {
+
+            string nombre = Path.GetFileName(imagen.FileName);
+
+            string RutaSitio = Server.MapPath("~/");
+
+            string PathArchivo1 = Path.Combine(RutaSitio + "Content/img_cars/" + nombre);
+
+
+
+            if (System.IO.File.Exists(PathArchivo1))
+            {
+                int i = 1;
+                while (System.IO.File.Exists(PathArchivo1))
+                {
+                    string extencion = Path.GetExtension(imagen.FileName);
+                    string cambiarnombre = Path.GetFileNameWithoutExtension(imagen.FileName);
+                    PathArchivo1 = Path.Combine(RutaSitio + "Content/img_cars" + cambiarnombre + i + extencion);
+                    i++;
+                }
+
+            }
+            imagen.SaveAs(PathArchivo1);
+            return nombre;
+        }
 
     }
 }

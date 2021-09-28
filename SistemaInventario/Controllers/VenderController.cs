@@ -11,41 +11,57 @@ namespace SistemaInventario.Controllers
     public class VenderController : Controller
     {
         Contexto contexto = new Contexto();
-        public ActionResult SeleccionarProducto(int id)
+        public JsonResult SeleccionarProducto(int id)
         {
+            bool success = false;
             int Cantidad = 1;
             AutosAVender auto = new AutosAVender();
             var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).MarcaAuto;
             var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).ModeloAuto;
-            var Precio = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).precio;
+            var Precio = contexto.tabInventario.FirstOrDefault(x => x.idInventario == id).precio;
+
             var Total = Cantidad * Precio;
             AutosAVender.TotalAPagar += Total;
             bool existe = (from a in AutosAVender.listaAutosAVender where a.Id == id select a).Any();
             if (existe == false)
             {
                 auto.AgregarParaVender(id, Marca, Modelo, Cantidad, Precio, Total);
+                success = true;
+
             }
             else
             {
+
                 foreach (var a in AutosAVender.listaAutosAVender.Where(a => a.Id == id))
                 {
+
                     a.Cantidad = a.Cantidad + 1;
-                    a.SubTotal += 10 * Cantidad;
+                    a.SubTotal += Precio * Cantidad;
+                    success = true;
                     break;
                 }
+
+
+
             }
 
-            return RedirectToAction("MostrarInventario", "Inventario");
+            return Json(success, JsonRequestBehavior.AllowGet);
         }
 
+
         //QUITAR ELEMENTOS DELCARRITO
-        public ActionResult EliminarElementoDeLaLista(int id = 0)
+        public JsonResult EliminarElementoDeLaLista(int id = 0)
         {
-            var precio = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Precio;
-            var cantidad = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Cantidad;
-            AutosAVender.TotalAPagar -= (precio * cantidad);
-            AutosAVender.listaAutosAVender.RemoveAll(x => x.Id == id);
-            return RedirectToAction("MostrarInventario", "Inventario");
+            bool success = false;
+            if (id > 0)
+            {
+                var precio = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Precio;
+                var cantidad = AutosAVender.listaAutosAVender.FirstOrDefault(x => x.Id == id).Cantidad;
+                AutosAVender.TotalAPagar -= (precio * cantidad);
+                AutosAVender.listaAutosAVender.RemoveAll(x => x.Id == id);
+                success = true;
+            }
+            return Json(success, JsonRequestBehavior.AllowGet);
         }
 
 

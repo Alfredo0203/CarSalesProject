@@ -5,17 +5,19 @@
 }
 <link href="~/Content/Diseños/formularios.css" rel="stylesheet" />
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AgregarOEditarAutos", "Inventario", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.idAuto)
 <div class="formulario auto">
     @if (Model.idAuto > 0)
     {
         <h3>Editar auto</h3>
+        @Html.HiddenFor(x => x.imagen, new { @class = "text-danger" })
     }
     else
     {
         <h3>Agregar auto</h3>
+        @Html.HiddenFor(x => x.imagen, new { @class = "text-danger", @Value = "0" })
     }
     <div class="inputs marca-model">
         <div class="marca">
@@ -38,8 +40,9 @@
     @Html.TextBoxFor(x => x.placa, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.placa, null, new { @class = "text-danger" })
     <label>Imagen: </label>
-    @Html.TextBoxFor(x => x.imagen, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.imagen, null, new { @class = "text-danger" })
+    <input type="file" name="imagen" style="color: white"/>
+    @Html.ValidationMessage("Mensaje", new { @class = "text-danger" })
+
     <label>Color: </label>
     @Html.TextBoxFor(x => x.color, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.color, null, new { @class = "text-danger" })

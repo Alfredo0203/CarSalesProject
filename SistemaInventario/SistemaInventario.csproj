@@ -172,7 +172,7 @@
     <Content Include="Content\img_cars\red-car.jpg" />
     <Content Include="Content\img_cars\white-black-car.jpg" />
     <Content Include="Content\img_cars\yellow-black-car.jpg" />
-    <Content Include="Scripts\Alerta.js" />
+    <Content Include="Scripts\PeticionesJQuerry\EliminarElementos.js" />
     <Content Include="Scripts\navbar.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -193,6 +193,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PeticionesJQuerry\SacarDelCarrito.js" />
+    <Content Include="Scripts\PeticionesJQuerry\AgregarAlCarrito.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
