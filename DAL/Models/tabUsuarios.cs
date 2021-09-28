@@ -24,7 +24,7 @@ namespace DAL.Models
         public string correo { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string pass { get; set; }
         [Required]
         public bool isActivo { get; set; }

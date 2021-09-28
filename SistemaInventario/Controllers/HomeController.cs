@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DAL.Encriptado;
 
 namespace SistemaInventario.Controllers
 {
@@ -26,9 +27,9 @@ namespace SistemaInventario.Controllers
         {
              if (ModelState.IsValid)
             {
-                //var pass = EncriptarPassword.EncriptarPass(passw);
+                var pass = EncriptarPassword.EncriptarPass(passw);
                 var User = contexto.tabUsuarios.FirstOrDefault(x => x.correo.Equals(correo) &&
-                            x.pass.Equals(passw));
+                            x.pass.Equals(pass));
                 if (User != null)
                 {
                     Session["UserId"] = User.idUsuario.ToString();
@@ -49,7 +50,7 @@ namespace SistemaInventario.Controllers
             FormsAuthentication.SignOut();
             Session.Clear();
             Session.Abandon();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Error()
