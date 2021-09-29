@@ -1,0 +1,17 @@
+﻿@using DAL.Models;
+@model tabClientes
+<link href="~/Content/Diseños/formularios.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(x => x.rol, new { @class = "form-control", @Value = "2" })
+    @Html.HiddenFor(x => x.estadoCliente, new { @class = "form-control", @Value = "Activo" })
+    <div class="formulario cliente">
+
+        <h3>Registrarse</h3>
+
+        @Html.Partial("_ParcialFormularioRegistrarse")
+
+    </div>
+}

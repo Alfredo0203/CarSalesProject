@@ -36,8 +36,8 @@
                             if (ven.FkCliente == idCliente)
                             {
                                 <tr style="padding: 0; margin:0; background-color: cornflowerblue">
-                                    <td> @ven.CodigoFactura  </td>
-                                    <td>@ven.FkCliente </td>
+                                   
+                                    <td>@if(ViewBag.NombreCliente != null){@ViewBag.NombreCliente}</td>
                                     <td> @ven.Fecha</td>
                                     <td> $ @ven.Total</td>
 

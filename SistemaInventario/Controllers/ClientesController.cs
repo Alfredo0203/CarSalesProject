@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DAL.Seguridad;
+using DAL.Encriptado;
 
 namespace SistemaInventario.Controllers
 {
@@ -47,8 +48,10 @@ namespace SistemaInventario.Controllers
         [HttpPost]
         public ActionResult AgregarOEditarClientes(tabClientes cliente)
         {
+
             if (ModelState.IsValid)
             {
+                
                 if (cliente.idCliente > 0)
                 {
                     TempData["Message"] = "Datos de " + cliente.nombre + " actualizados";
@@ -79,11 +82,13 @@ namespace SistemaInventario.Controllers
             try
             {
                 string IdCliente = Session["UserId"].ToString();
+                string RolCliente = Session["UserRol"].ToString();
                 var model = ventasRepository.ListarDetalleVentas();
                 using (Contexto db = new Contexto()) {
                     
                     ViewBag.MisCompras = db.tabVentas.ToList();
                     ViewBag.IdCliente = int.Parse(IdCliente);
+                    ViewBag.NombreCliente = db.tabClientes.FirstOrDefault(x => x.idCliente.ToString() == IdCliente && RolCliente.Equals("cliente")).nombre;
                 }
                 return View(model);
             }

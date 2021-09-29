@@ -7,13 +7,19 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DAL.Encriptado;
+using BAL.Services;
+using BAL.IServices;
 
 namespace SistemaInventario.Controllers
 {
 
     public class HomeController : Controller
     {
-       
+        IClientesRepositoty clientesRepository;
+       public HomeController()
+        {
+            this.clientesRepository = new ClientesRepository(new Contexto());
+        }
         Contexto contexto = new Contexto();
         //Crear redirección para login
         public ActionResult Login()
@@ -30,11 +36,19 @@ namespace SistemaInventario.Controllers
                 var pass = EncriptarPassword.EncriptarPass(passw);
                 var User = contexto.tabUsuarios.FirstOrDefault(x => x.correo.Equals(correo) &&
                             x.pass.Equals(pass));
-                if (User != null)
-                {
+                var User2 = contexto.tabClientes.FirstOrDefault(x => x.correo.Equals(correo) &&
+                            x.pass.Equals(pass));
+                if (User != null) { 
+               
                     Session["UserId"] = User.idUsuario.ToString();
                     
                     Session["UserRol"] = User.rol.ToString();
+                    return RedirectToAction("Index", "Home");
+                } else if(User2!= null)
+            {
+                    Session["UserId"] = User2.idCliente.ToString();
+
+                    Session["UserRol"] = User2.rol.ToString();
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -62,18 +76,28 @@ namespace SistemaInventario.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Registrarse()
         {
-            ViewBag.Message = "Your application description page.";
+          
 
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Registrarse(tabClientes cliente)
         {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
+            
+                cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
+                cliente.ConfirmarPass = EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
+              
+                    clientesRepository.AgregarClientes(cliente);
+                    TempData["Message"] = "Datos de agregados correctamente";
+   
+                return RedirectToAction("Index");
+            
+
+          
         }
     }
 }

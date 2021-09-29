@@ -1,0 +1,22 @@
+﻿@using DAL.Models;
+@model tabClientes
+<label>Nombre Cliente: </label>
+@Html.TextBoxFor(x => x.nombre, htmlAttributes: new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.nombre, null, htmlAttributes: new { @class = "text-danger" })
+<label>Teléfono </label>
+@Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.telefono, null, htmlAttributes: new { @class = "text-danger" })
+<label>Dirección: </label>
+@Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.direccion, null, htmlAttributes: new { @class = "text-danger" })
+<label>Correo: </label>
+@Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.correo, null, htmlAttributes: new { @class = "text-danger" })
+<label>Contraseña: </label>
+@Html.TextBoxFor(x => x.pass, new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.pass, null, htmlAttributes: new { @class = "text-danger" })
+<label>Confirmar Contraseña: </label>
+@Html.TextBoxFor(x => x.ConfirmarPass, new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.ConfirmarPass, null, htmlAttributes: new { @class = "text-danger" })
+
+<input type="submit" value="Registrar" />

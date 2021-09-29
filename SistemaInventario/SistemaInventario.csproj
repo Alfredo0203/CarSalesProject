@@ -224,6 +224,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Carrito\MostrarCarrito.cshtml" />
     <Content Include="Views\Clientes\ComprasClientes.cshtml" />
+    <Content Include="Views\Shared\_ParcialFormularioRegistrarse.cshtml" />
+    <Content Include="Views\Home\Registrarse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

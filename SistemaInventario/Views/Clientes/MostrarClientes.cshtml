@@ -25,6 +25,9 @@
                         <th>Nombre</th>
                         <th>Telléfono</th>
                         <th>Dirección</th>
+                        <th>Correo</th>
+                        <th>Contraseña</th>
+                        <th>Rol</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
@@ -37,15 +40,22 @@
                         <td>@cl.nombre</td>
                         <td>@cl.telefono</td>
                         <td>@cl.direccion</td>
+                        <td>@cl.correo</td>
+                        <td>@cl.pass</td>
+                        <td>@cl.rol</td>
                         <td width="20">
-                      
+
                             <button class="btn btn-info "
-                               onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                    onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente">
+                                <i class="fas fa-pencil-alt"></i> Editar
+                            </button>
                         </td>
                         <td width="20">
-                        <button class="btn btn-danger"
-                           onclick="window.location.href = '/Clientes/EliminarClientes?id='+@cl.idCliente"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                            </td>
+                            <button class="btn btn-danger"
+                                    onclick="AlertaDelete('/Clientes/EliminarClientes?id='+@cl.idCliente)">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </button>
+                        </td>
                     </tr>
 
                         }

@@ -3,7 +3,16 @@
 }
 <link href="~/Content/Diseños/index.css" rel="stylesheet" />
 
-<div class="Contenedor" >
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissable col-md-4 text-center" role="alert" style="margin-top: 10px; width: 35rem;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <b>@TempData["Message"]</b>
+    </div>
+
+}
+
+<div class="Contenedor">
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner caret">
             <div class="carousel-item active">
