@@ -37,8 +37,6 @@
     </div>
 
     <label>Placa: </label>
-    @Html.TextBoxFor(x => x.placa, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.placa, null, new { @class = "text-danger" })
     <label>Imagen: </label>
     <input type="file" name="imagen" style="color: white"/>
     @Html.ValidationMessage("Mensaje", new { @class = "text-danger" })

@@ -26,9 +26,7 @@ namespace DAL.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<tabAutos>()
-                .Property(e => e.placa)
-                .IsUnicode(false);
+          
 
             modelBuilder.Entity<tabAutos>()
                 .Property(e => e.imagen)

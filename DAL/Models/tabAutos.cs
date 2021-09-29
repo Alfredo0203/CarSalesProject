@@ -27,10 +27,6 @@ namespace DAL.Models
 
         [Required]
         [StringLength(55)]
-        public string placa { get; set; }
-
-        [Required]
-        [StringLength(55)]
         public string imagen { get; set; }
 
         [Required]
