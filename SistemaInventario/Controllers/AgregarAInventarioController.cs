@@ -64,7 +64,6 @@ namespace SistemaInventario.Controllers
             var compra = new tabCompras();
             compra.Total = AgregarAInventario.TotalAPagar;
 
-            compra.CodigoFactura = compra.CodigoFactura > 0 ? compra.CodigoFactura = contexto.tabCompras.OrderByDescending(x => x.CodigoFactura).First().CodigoFactura + 1 : compra.CodigoFactura = 1;
             contexto.Entry(compra).State = EntityState.Added;
 
             foreach (var p in AgregarAInventario.listaAutosAComprar)

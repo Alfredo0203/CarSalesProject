@@ -31,10 +31,18 @@ namespace SistemaInventario.Controllers
 
         public ActionResult MostrarCompras()    
         {
-           
+            try
+            {
                 var listadoCompras = comprasRepository.ListarDetalleCompras();
-            ViewBag.Compras = contexto.tabCompras.ToList();
-            return View(listadoCompras);
+                ViewBag.Compras = contexto.tabCompras.ToList();
+                return View(listadoCompras);
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+             
+            
            
         }
 

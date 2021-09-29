@@ -67,10 +67,15 @@ namespace SistemaInventario.Controllers
 
         public ActionResult Vender()
         {
+            string clienteString = Session["UserId"].ToString();
+            int clienteInt = int.Parse(clienteString);
+            string idClienteString = Session["UserRol"].ToString();
+            
+            var IdCliente = contexto.tabClientes.FirstOrDefault(x => x.idCliente == clienteInt && idClienteString.Equals("cliente")).idCliente;
             var ven = new tabVentas();
+            
             ven.Total = AutosAVender.TotalAPagar;
-
-            ven.CodigoFactura = ven.CodigoFactura > 0 ? ven.CodigoFactura = contexto.tabVentas.OrderByDescending(x => x.CodigoFactura).First().CodigoFactura += 1 : ven.CodigoFactura = 1;
+            ven.FkCliente = IdCliente;
             contexto.Entry(ven).State = EntityState.Added;
 
             foreach (var p in AutosAVender.listaAutosAVender)
@@ -86,7 +91,7 @@ namespace SistemaInventario.Controllers
                 model.idVenta = ven.IdVenta;
                 contexto.Entry(model).State = EntityState.Added;
                 contexto.SaveChanges();
-
+                
             }
 
             AutosAVender.listaAutosAVender.RemoveRange(0, AutosAVender.listaAutosAVender.Count());
