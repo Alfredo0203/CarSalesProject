@@ -17,7 +17,6 @@ namespace DAL.Models
         [Key]
         public int IdVenta { get; set; }
 
-        public int CodigoFactura { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Fecha { get; set; }

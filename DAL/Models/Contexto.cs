@@ -22,6 +22,7 @@ namespace DAL.Models
         public virtual DbSet<tabProveedores> tabProveedores { get; set; }
         public virtual DbSet<tabUsuarios> tabUsuarios { get; set; }
         public virtual DbSet<tabVentas> tabVentas { get; set; }
+        public virtual DbSet<Carrito> Carrito { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -147,6 +148,15 @@ namespace DAL.Models
             modelBuilder.Entity<tabUsuarios>()
                 .Property(e => e.pass)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Carrito>()
+               .Property(e => e.Marca)
+               .IsFixedLength();
+
+            modelBuilder.Entity<Carrito>()
+                .Property(e => e.Modelo)
+                .IsFixedLength();
+        
         }
     }
 }
