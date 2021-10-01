@@ -14,6 +14,7 @@ namespace DAL.Models
         public tabCompras()
         {
             tabDetalleCompras = new HashSet<tabDetalleCompras>();
+            this.Fecha = DateTime.Now;
         }
 
         [Key]
