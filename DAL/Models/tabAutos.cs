@@ -17,6 +17,7 @@ namespace DAL.Models
             tabDetalleCompras = new HashSet<tabDetalleCompras>();
             tabDetalleVentas = new HashSet<tabDetalleVentas>();
             tabInventario = new HashSet<tabInventario>();
+            fechaRegistro = DateTime.Now;
         }
 
 
@@ -49,10 +50,8 @@ namespace DAL.Models
 
         //Retornar la fecha actual
         [Column(TypeName = "date")]
-        public DateTime fechaRegistro {
-            get { return DateTime.Now; }
-        }
-
+        public DateTime fechaRegistro { get; set; }
+      
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabDetalleCompras> tabDetalleCompras { get; set; }
 
