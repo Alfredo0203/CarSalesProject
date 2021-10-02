@@ -1,6 +1,6 @@
 ﻿function SacarDelCarrito(id) {
         $.ajax({
-            url: '/Vender/EliminarElementoDeLaLista?id=' + id,
+            url: '/Carrito/EliminarElementoDeLaLista?id=' + id,
             type: 'POST',
             async: true,
             data: '',

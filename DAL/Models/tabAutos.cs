@@ -2,7 +2,6 @@ namespace DAL.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -14,12 +13,12 @@ namespace DAL.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tabAutos()
         {
+            Carrito = new HashSet<Carrito>();
             tabDetalleCompras = new HashSet<tabDetalleCompras>();
             tabDetalleVentas = new HashSet<tabDetalleVentas>();
             tabInventario = new HashSet<tabInventario>();
             fechaRegistro = DateTime.Now;
         }
-
 
         [Key]
         public int idAuto { get; set; }
@@ -51,7 +50,10 @@ namespace DAL.Models
         //Retornar la fecha actual
         [Column(TypeName = "date")]
         public DateTime fechaRegistro { get; set; }
-      
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carrito> Carrito { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabDetalleCompras> tabDetalleCompras { get; set; }
 
@@ -64,11 +66,12 @@ namespace DAL.Models
         public virtual ICollection<tabInventario> tabInventario { get; set; }
 
         [NotMapped]
-        public string NombreMarca 
+        public string NombreMarca
         {
-            get {
+            get
+            {
                 return contexto.tabMarcas.FirstOrDefault(x => x.idMarca == fk_marca).marca;
-            } 
+            }
         }
     }
 }

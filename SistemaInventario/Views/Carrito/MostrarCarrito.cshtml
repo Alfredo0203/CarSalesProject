@@ -1,34 +1,42 @@
-﻿@using BAL.ProductoParaVender;
+﻿@using DAL.Models;
+@model List<tabInventario>
 @{
     ViewBag.Title = "MostrarCarrito";
+    var misAutos = ViewBag.ListaCarrito;
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 
 <div class="containerCards cars">
-    @if (Model.Count > 0)
+    @if (Model.Count() > 0)
     {
-        foreach (var auto in AutosAVender.listaAutosAVender)
+        foreach (var auto in Model)
         {
+            foreach (var carrito in misAutos)
+            {
+                if (carrito.FkAuto == auto.fk_auto)
+                {
     <div class="card">
         <div class="content cars">
-            <img src="~/Content/img_cars/blackCar.jpg">
+            <img src="~/Content/img_cars/@auto.Image">
         </div>
-        <h5>@auto.Marca @auto.Modelo</h5>
-        @if (@auto.Cantidad > 1)
+        <h5>@auto.MarcaAuto @auto.ModeloAuto</h5>
+        @if (@auto.existenciaProducto > 1)
         {
-            <p>@auto.Cantidad autos por @auto.Precio C/U</p> }
+            <p>@auto.existenciaProducto autos por @auto.precio C/U</p> }
         else
         {
-            <p>@auto.Cantidad auto por @auto.Precio C/U</p>
+            <p>@auto.existenciaProducto auto por @auto.precio C/U</p>
         }
 
-        <p>Precio total $ @auto.SubTotal</p>
+        @*<p>Precio total $ @auto.SubTotal</p>*@
         <button class="btn btn-danger"
-                onclick="AlertaDelete('/Vender/EliminarElementoDeLaLista?id='+@auto.Id)">
+                onclick="AlertaDelete('/Carrito/EliminarElementoDeLaLista?id=' +@carrito.FkAuto)">
             Quitar del carrito
         </button>
     </div>
 
+                }
+            }
         }
     }
 
@@ -36,11 +44,11 @@
 
 <center>
 
-    <h4 style="color: #dc3545">Total: $ @AutosAVender.TotalAPagar</h4>
+    @*<h4 style="color: #dc3545">Total: $ @AutosAVender.TotalAPagar</h4>*@
 
 
     <button class="btn btn-primary" id="BtnRealizarVenta"
-            onclick="window.location.href = '/Vender/Vender'">
+            onclick="window.location.href = '/Carrito/Vender'">
         Comprar
     </button>
 
