@@ -18,18 +18,20 @@ namespace BAL.Services
             this.contexto = contexto1;
         }
 
-
-        public void ActualizarCantidad(int id, int cantidad)
-        {
-            var carrito = ObtenerPorId(id);
+        //Recibe el id del Auto, el id de cliente que ha inicido sesión y la cantidad
+        public void ActualizarCantidad(int id, int ClienteId, int cantidad)
+        {    
+            //Obtiene los datos del auto por medio su Id y el IdCliente, Edita la cantidad y guarda los cambios
+            var carrito = ObtenerPorId(id, ClienteId);
             carrito.Cantidad = cantidad;
             contexto.Entry(carrito).State = EntityState.Modified;
             contexto.SaveChanges();
 
         }
-
+        // Método Agregar Al Carrito, Recibe objeto de la tabla Carrito como parametro
         public void AgregarAlCarrito(Carrito carrito)
         {
+            //
             contexto.Entry(carrito).State = EntityState.Added;
             contexto.SaveChanges();
         }
@@ -38,23 +40,25 @@ namespace BAL.Services
         {
             throw new NotImplementedException();
         }
-
-        public Carrito ObtenerPorId(int id)
+        // Recibe el Id del auto y el id del cliente como parámetro
+        public Carrito ObtenerPorId(int id, int ClienteId)
         {
-            var modelo = contexto.Carrito.FirstOrDefault(x => x.FkAuto == id);
-            return modelo;
+            //Obtiene los datos del auto por medio su Id y el IdCliente
+            var auto = contexto.Carrito.FirstOrDefault(x => x.FkAuto == id && x.IdCliente== ClienteId);
+            return auto;
         }
-
-        public List<Carrito> ProductoEnCarrito(int id)
+        // Recibe el idCliente que ha iniciado sesión
+        public List<Carrito> ProductoEnCarrito(int idCliente)
         {
-            
-            var ProductoEnCarrito = contexto.Carrito.Where(x => x.IdCliente == id).ToList();
+            //Obtiene la lista de autos en Carrito que pertenecen al Id del cliente
+            var ProductoEnCarrito = contexto.Carrito.Where(x => x.IdCliente == idCliente).ToList();
             return ProductoEnCarrito;
         }
-
-        public void SacarDelCarrito(int id)
+        // Recibe el Id del Auto y el Id de cliente en sesión
+        public void SacarDelCarrito(int id, int IdCliente)
         {
-            var model = ObtenerPorId(id);
+            //Obtiene los datos del auto según el cliente y el id del auto
+            var model = contexto.Carrito.FirstOrDefault(x => x.IdCliente == IdCliente && x.FkAuto == id);
 
             if (model != null)
             {

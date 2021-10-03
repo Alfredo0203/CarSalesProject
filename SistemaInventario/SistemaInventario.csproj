@@ -136,24 +136,10 @@
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AgregarAInventarioController.cs" />
-    <Compile Include="Controllers\VenderController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Carrito.cs" />
-    <Compile Include="Models\Contexto1.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
-    <Compile Include="Models\tabAutos.cs" />
-    <Compile Include="Models\tabClientes.cs" />
-    <Compile Include="Models\tabCompras.cs" />
-    <Compile Include="Models\tabDetalleCompras.cs" />
-    <Compile Include="Models\tabDetalleVentas.cs" />
-    <Compile Include="Models\tabInventario.cs" />
-    <Compile Include="Models\tabMarcas.cs" />
-    <Compile Include="Models\tabProveedores.cs" />
-    <Compile Include="Models\tabUsuarios.cs" />
-    <Compile Include="Models\tabVentas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +192,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PeticionesJQuerry\EditarCantidadCarrito.js" />
     <Content Include="Scripts\PeticionesJQuerry\SacarDelCarrito.js" />
     <Content Include="Scripts\PeticionesJQuerry\AgregarAlCarrito.js" />
     <Content Include="Web.config" />
@@ -242,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Comprar\" />
     <Folder Include="Views\Vender\" />
   </ItemGroup>

@@ -13,12 +13,12 @@ namespace BAL.IServices
         List<Carrito> ProductoEnCarrito(int idCliente);
         //MÉTODO GUARDAR
         void AgregarAlCarrito(Carrito carrito);
-        //MÉTODO ACTUALIZAR
-        void ActualizarCantidad(int id, int cantidad);
+        //MÉTODO actualizar cantidad de producto en Carrito.
+        void ActualizarCantidad(int id, int ClienteId, int cantidad);
         //MÉTODO OBTENER POR ID
-        Carrito ObtenerPorId(int id);
-        //MÉTODO ELIMINAR
-        void SacarDelCarrito(int id);
+        Carrito ObtenerPorId(int id, int ClienteId);
+        //MÉTODO Sacar del carrito donde pertenezca al cliente que ha iniciado sesion
+        void SacarDelCarrito(int id, int IdCliente);
 
     }
 }

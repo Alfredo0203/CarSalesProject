@@ -2,17 +2,24 @@
 @model List<tabInventario>
 @{
     ViewBag.Title = "MostrarCarrito";
+    //Listado de productos en carrito del cliente logeado
     var misAutos = ViewBag.ListaCarrito;
+    float TotalAPagar = 0.0f; // Variable quecalculará el precio total de los productos en carrito
+
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 
 <div class="containerCards cars">
+
     @if (Model.Count() > 0)
     {
+        // Recorre la lista de autos en inventario
         foreach (var auto in Model)
         {
+            //Recorre la lista de autos en carrito del cliente logeao
             foreach (var carrito in misAutos)
             {
+                //Condición para mostrar solamente los autos con el id igual al de de producto en Carrito del cliente logeado.
                 if (carrito.FkAuto == auto.fk_auto)
                 {
     <div class="card">
@@ -20,15 +27,37 @@
             <img src="~/Content/img_cars/@auto.Image">
         </div>
         <h5>@auto.MarcaAuto @auto.ModeloAuto</h5>
-        @if (@auto.existenciaProducto > 1)
-        {
-            <p>@auto.existenciaProducto autos por @auto.precio C/U</p> }
+        @*Se muestra un select para seleccionar cantidad por cada producto.
+         Cada uno tiene función de editar cantidad
+        El id de cada select se crea uniendo la palabra uniendo la palabra SeleccionarCantidad con el numero de id del carrito, ejemplo con id = 1: SeleccionarCantidad + @carrito.FkAuto. esto es igual a SeleccionarCantidad 1
+        *@
+        <p>
+            Cantidad <select onchange="EditarCantidadCarrito(@carrito.FkAuto)" id="SeleccionarCantidad @carrito.FkAuto" required>
+
+                @for (int i = 1; i <= auto.existenciaProducto; i++) // Las opciones se llena de acuerdo a la cantidad en existencia por cada producto
+                {
+                    if (carrito.Cantidad == i)
+                    {
+                        <option value="@i" selected="selected">@i</option>
+                    }
+                    else
+                    {
+                        <option value="@i">@i</option>
+                    }
+                }
+
+            </select>
+        </p>
+
+        @*Si la existencia del producto en Carrito es 0 No se mostrará el total, sino como agotado*@
+        @if (auto.existenciaProducto == 0)
+        {<label class="text-danger">Agotado</label> }
         else
         {
-            <p>@auto.existenciaProducto auto por @auto.precio C/U</p>
+            <p>Precio total $ @{ var total = @carrito.Cantidad * @auto.precio; TotalAPagar += total;} @total</p>
         }
 
-        @*<p>Precio total $ @auto.SubTotal</p>*@
+
         <button class="btn btn-danger"
                 onclick="AlertaDelete('/Carrito/EliminarElementoDeLaLista?id=' +@carrito.FkAuto)">
             Quitar del carrito
@@ -41,15 +70,48 @@
     }
 
 </div>
-
+@*---------------------------------------BOTÓN PARA COMPRAR------------------------------------------------------------*@
 <center>
+    <h4 style="color: #dc3545">Total: $ @TotalAPagar</h4>
 
-    @*<h4 style="color: #dc3545">Total: $ @AutosAVender.TotalAPagar</h4>*@
-
-
-    <button class="btn btn-primary" id="BtnRealizarVenta"
-            onclick="window.location.href = '/Carrito/Vender'">
-        Comprar
+    <button class="btn btn-primary" id="btnComprar" style="display: none"
+            onclick="RealizarCompra()">
+        Realizar Compra
     </button>
 
 </center>
+
+@*------------------------------------Mostrar BOTON SOLO CUANDO HAYA PRODUCTO EN CARRITO-----------------------------------------*@
+@if (TotalAPagar > 0)
+{
+    <script>
+        document.getElementById("btnComprar").style.display = "inline";
+    </script>
+
+}
+
+@*---------------------------------------FUNCIÓN PARA REALIZAR LA COMPRA------------------------------------------------------------*@
+<script>
+
+    function RealizarCompra() {
+        $.ajax({
+            url: '/Carrito/Vender',
+            type: 'POST',
+            async: true,
+            data: '',
+            success: function (resultado) {
+                if (resultado == true) {
+                    alertify.success('Compra realizada exitosamente');
+                    window.location.reload(true)
+                } else {
+                    alertify.success('No se pudo realizar Compra');
+                }
+            }
+
+        });
+
+    }
+
+</script>
+@*---------------------------------------------------------------------------------------------------------------------------------*@
+<script src="~/Scripts/PeticionesJQuerry/EditarCantidadCarrito.js"></script>

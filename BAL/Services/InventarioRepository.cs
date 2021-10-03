@@ -23,6 +23,12 @@ namespace BAL.Services
             return listaInventario;
         }
 
+        public static int ConvertirAEntero(string id)
+        {
+            int clienteInt = int.Parse(id);
+            return clienteInt;
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();
