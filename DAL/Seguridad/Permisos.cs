@@ -39,12 +39,40 @@ namespace DAL.Seguridad
         {
             base.OnActionExecuting(filterContext);
 
-            var UserId = HttpContext.Current.Session["UserId"];
+
+            var RolUser = HttpContext.Current.Session["UserRol"];
 
             using (Contexto db = new Contexto())
             {
-                var user = db.tabUsuarios.FirstOrDefault(x => x.idUsuario.ToString() == UserId.ToString());
-                if (user.rol == Rol.cliente)
+                if (RolUser.Equals("cliente"))
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                       new
+                       {
+                           controller = "Home",
+                           action = "Error"
+                       }
+                       ));
+
+                }
+
+            }
+        }
+
+    }
+
+    public class Cliente : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+
+            var RolUser = HttpContext.Current.Session["UserRol"];
+
+            using (Contexto db = new Contexto())
+            {
+
+                if (RolUser.Equals("admin"))
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
                        new

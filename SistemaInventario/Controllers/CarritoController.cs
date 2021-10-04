@@ -12,6 +12,7 @@ using System.Web.Mvc;
 namespace SistemaInventario.Controllers
 {
     [Permisos]
+    [Cliente]
     public class CarritoController : Controller
     {
         private readonly ICarritoRepository carritoRepository;

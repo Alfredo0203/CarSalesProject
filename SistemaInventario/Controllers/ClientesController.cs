@@ -12,7 +12,6 @@ using DAL.Encriptado;
 namespace SistemaInventario.Controllers
 {
     [Permisos]
-
     public class ClientesController : Controller
     {
         private IClientesRepositoty clienteRepository;
@@ -70,13 +69,16 @@ namespace SistemaInventario.Controllers
             return View(cliente);
         }
         [Admin]
-        public ActionResult EliminarClientes(int id)
+        public ActionResult EliminarClientes(int id, bool success = false)
         {
+            if(id > 0 && success == true)
+            { 
             TempData["Message"] = "Cliente con nombre" + clienteRepository.ObtenerClientesPorID(id).nombre + " eliminado correctamente";
             clienteRepository.EliminarCliente(id);
+             }
             return RedirectToAction("MostrarClientes");
         }
-
+        [Cliente]
         public ActionResult ComprasClientes()
         {
             try
