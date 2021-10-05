@@ -57,9 +57,12 @@ namespace SistemaInventario.Controllers
             return View(model);
         }
 
-        public ActionResult EliminarMarcas(int id = 0)
+        public ActionResult EliminarMarcas(int id = 0, bool success = false)
         {
-            marcasRepository.EliminarMarcas(id);
+            if (id > 0 && success == true)
+            {
+                marcasRepository.EliminarMarcas(id);
+            }
             return RedirectToAction("MostrarMarcas");
         }
     }

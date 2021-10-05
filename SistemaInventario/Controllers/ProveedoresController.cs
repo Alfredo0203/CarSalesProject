@@ -58,9 +58,12 @@ namespace SistemaInventario.Controllers
         }
 
         //ELIMINAR PROVEEDOR
-        public ActionResult EliminarProveedor(int idProv)
+        public ActionResult EliminarProveedor(int idProv = 0, bool success= false)
         {
-            proveedoresRepository.EliminarProveedor(idProv);
+            if (idProv > 0 && success == true)
+            {
+                proveedoresRepository.EliminarProveedor(idProv);
+            }
             return RedirectToAction("MostrarProveedores");
         }
     }

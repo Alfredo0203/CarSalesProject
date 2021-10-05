@@ -57,8 +57,9 @@ namespace SistemaInventario.Controllers
     }
 
         //ELIMINAR USUARIO
-        public ActionResult EliminarUsuario(int idUsuario)
+        public ActionResult EliminarUsuario(int idUsuario = 0, bool success = false)
     {
+            if(idUsuario > 0 && success == true)
         usuariosRepository.EliminarUsuario(idUsuario);
         return RedirectToAction("MostrarUsuarios");
     }

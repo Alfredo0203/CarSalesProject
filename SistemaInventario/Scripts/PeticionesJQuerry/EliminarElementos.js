@@ -1,4 +1,4 @@
-﻿function AlertaDelete(url, cantidad=0) {
+﻿function AlertaDelete(url, cantidad=0, success=true) {
     if (cantidad == 0) {
         Swal.fire({
             title: '¿Esta seguro que desea eliminar este dato?',
@@ -14,7 +14,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: url,
+                    url: url + '&success=' + success,
                     type: 'POST',
                     async: true,
                     data: '',
