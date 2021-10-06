@@ -97,19 +97,25 @@ namespace SistemaInventario.Controllers
                 int clienteInt = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString()); // ------------------------------------------------------------- Convirte a entero y almacena id delcliente
                 var miProductoEnCarrito = contexto.Carrito.Where(x => x.IdCliente == clienteInt).ToList(); // -------------------------------------------------------- Obtiene listado de producto en carrito del cliente logeado
                 var IdCliente = contexto.tabClientes.FirstOrDefault(x => x.idCliente == clienteInt && rolClienteString.Equals("cliente")).idCliente; // -------------- Obtiene el id delcliente logeado
-                var nuevaVenta = new tabVentas(); // ------------------------------------------------------------------------------------------------------------------------ Crea nuevo objeto de la tabla ventas
-
-                nuevaVenta.FkCliente = IdCliente; // ------------------------------------------------------------------------------------------------------------------------
-                contexto.Entry(nuevaVenta).State = EntityState.Added; // ----------------------------------------------------------------------------------------------------
+                var nuevaVenta = new tabVentas(); // ------------------------------------------------------------------------------------------------------------------------ Crea nuevo objeto de la tabla ventas para generar la venta
+                nuevaVenta.FkCliente = IdCliente; // ------------------------------------------------------------------------------------------------------------------------ Se guarda el Id del cliente al que corresponde la venta
+                contexto.Entry(nuevaVenta).State = EntityState.Added; // ---------------------------------------------------------------------------------------------------- Se preparan el almacemiento de los datos para la venta
+                
+                //INICIO DE PROCESO PARA GUARDAR LOS PRODUCTOS DEL PEDIDO DELCLIENTE
                 foreach (var miProducto in miProductoEnCarrito)
                 {
                     var AutoEnInventario = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == miProducto.FkAuto); // -------------------------------------------- De la tabla inventario Obtiene los datos del producto que tenía el cliente en carrito
                     if (AutoEnInventario.existenciaProducto == 0 && AutoEnInventario.fk_auto == miProducto.FkAuto) continue; // -------------------------------------- Omite (y salta la iteracción) en caso que no haya producto delque elcliente tiene en carrito
-                    var Precio = contexto.tabInventario.FirstOrDefault(x => x.idInventario == miProducto.FkAuto).precio; // ----------------------------------------- Obtiene el precio del auto de la tabla invntario
+
+                    // CAPTURAMOS LAS ESPECIFICACIONES DEL AUTO EN PROCESO DE COMPRA DE LA TABLA INVENTARIO
+                    var Precio = contexto.tabInventario.FirstOrDefault(x => x.idInventario == miProducto.FkAuto).precio; 
+                    var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == miProducto.FkAuto).MarcaAuto;
+                    var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == miProducto.FkAuto).ModeloAuto;
                     var model = new DAL.Models.tabDetalleVentas(); //------------------------------------------------------------------------------------------------- Se crea objeto para guardar los pedidos del cliente como ventas             
 
 
                     //ASIGNACÍÓN DE LOS DATOS AL OBJETO DE LA TABLA DETALLEVENTAS
+                    model.marcaModelo = Marca + " " + Modelo;
                     model.fk_auto = miProducto.FkAuto;
                     model.cantidad = miProducto.Cantidad;
                     model.precio = Precio;
@@ -129,6 +135,7 @@ namespace SistemaInventario.Controllers
                 CompraFinalizada = true;
             } // Finaliza el try
             catch (Exception) { }
+
             return Json(CompraFinalizada, JsonRequestBehavior.AllowGet);
         }
         // Recibe el id del auto y la cantidad 
