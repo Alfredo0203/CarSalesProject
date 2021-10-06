@@ -16,7 +16,7 @@ namespace SistemaInventario.Controllers
     public class HomeController : Controller
     {
         IClientesRepositoty clientesRepository;
-       public HomeController()
+        public HomeController()
         {
             this.clientesRepository = new ClientesRepository(new Contexto());
         }
@@ -31,21 +31,23 @@ namespace SistemaInventario.Controllers
 
         public ActionResult Login(string correo, string passw)
         {
-             if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var pass = EncriptarPassword.EncriptarPass(passw);
                 var User = contexto.tabUsuarios.FirstOrDefault(x => x.correo.Equals(correo) &&
                             x.pass.Equals(pass));
                 var User2 = contexto.tabClientes.FirstOrDefault(x => x.correo.Equals(correo) &&
                             x.pass.Equals(pass));
-                if (User != null) { 
-               
+                if (User != null)
+                {
+
                     Session["UserId"] = User.idUsuario.ToString();
                     Session["NombreUsuario"] = User.nombre + " " + User.apellido;
                     Session["UserRol"] = User.rol.ToString();
                     return RedirectToAction("Index", "Home");
-                } else if(User2!= null)
-            {
+                }
+                else if (User2 != null)
+                {
                     Session["UserId"] = User2.idCliente.ToString();
                     Session["NombreUsuario"] = User2.nombre;
                     Session["UserRol"] = User2.rol.ToString();
@@ -78,7 +80,7 @@ namespace SistemaInventario.Controllers
 
         public ActionResult Registrarse()
         {
-          
+
 
             return View();
         }
@@ -86,18 +88,15 @@ namespace SistemaInventario.Controllers
         [HttpPost]
         public ActionResult Registrarse(tabClientes cliente)
         {
+            //CAPTURA DE CREDENCIALES PARA INGRESAR AUTOMÁTICAMENTE AL SISTEMA DESPUES DEL REGISTRO
+            string correo = cliente.correo;
+            string password = cliente.pass;
+            cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
+            cliente.ConfirmarPass = EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
 
-            
-                cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
-                cliente.ConfirmarPass = EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
-              
-                    clientesRepository.AgregarClientes(cliente);
-                    TempData["Message"] = "Datos de agregados correctamente";
-   
-                return RedirectToAction("Index");
-            
-
-          
+            clientesRepository.AgregarClientes(cliente);
+            TempData["Message"] = cliente.nombre +  ": Bienvenido, gracias por registrarte";
+            return Login(correo, password);
         }
     }
 }
