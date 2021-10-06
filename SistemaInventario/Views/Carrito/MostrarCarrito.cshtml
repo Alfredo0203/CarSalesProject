@@ -59,7 +59,7 @@
 
 
         <button class="btn btn-danger"
-                onclick="AlertaDelete('/Carrito/EliminarElementoDeLaLista?id=' +@carrito.FkAuto)">
+                onclick="SacarDelCarrito(@carrito.FkAuto)">
             Quitar del carrito
         </button>
     </div>
@@ -115,3 +115,4 @@
 </script>
 @*---------------------------------------------------------------------------------------------------------------------------------*@
 <script src="~/Scripts/PeticionesJQuerry/EditarCantidadCarrito.js"></script>
+<script src="~/Scripts/PeticionesJQuerry/SacarDelCarrito.js"></script>

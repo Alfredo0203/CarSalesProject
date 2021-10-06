@@ -7,6 +7,7 @@
             success: function (resultado) {
                 if (resultado == true) {
                     alertify.success('Producto Eliminado de tu coleccion');
+                    window.location.reload(true);
                 }
             }
 

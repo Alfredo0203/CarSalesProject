@@ -2,6 +2,7 @@
 @model List<tabInventario>
 @{
     ViewBag.Title = "MostrarAutos";
+    var YaEnCarrito = ViewBag.ListaCarrito;
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 <center><h1>Autos</h1></center>
@@ -15,6 +16,58 @@
 
     <div class="container">
         <button style="margin-left: 20px" class="btn agregarBtn" onclick="window.location.href='/Inventario/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
+    </div>
+
+
+    <div class="container" id="tabla" style="display: none">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table-hover table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+
+                            <th>Imagen</th>
+                            <th>Color</th>
+                            <th>Motor</th>
+                            <th>Cantidad</th>
+                            <th>Descripción</th>
+                            <th>Fecha registro</th>
+                            <th colspan="2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var car in Model)
+                            {
+                                <tr>
+                                    <td>@car.tabAutos.idAuto</td>
+                                    <td>@car.tabAutos.NombreMarca</td>
+                                    <td>@car.ModeloAuto</td>
+                                    <td>@car.tabAutos.imagen</td>
+                                    <td>@car.tabAutos.color</td>
+                                    <td>@car.tabAutos.motor</td>
+                                    <td>@car.existenciaProducto</td>
+                                    <td>@car.tabAutos.descripcion</td>
+                                    <td>@car.tabAutos.fechaRegistro</td>
+                                    <td width="20">
+                                        <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                    </td>
+                                    <td width="20">
+
+                                        <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 }
 <div class="containerCards" id="tarjetas">
@@ -32,9 +85,9 @@
                     <p>@car.tabAutos.descripcion</p>
                     <label>
                         <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
-                     
-                    <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                      
+
+                        <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
+
                     </label>
                 </div>
             }
@@ -42,14 +95,25 @@
             {
                 if (car.existenciaProducto > 0)
                 {
-<div class="card">
-    <img src="~/Content/img_cars/@car.Image" />
-    <h4>@car.MarcaAuto @car.precio</h4>
-    <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
-    <p>Cantidad disponible: @car.existenciaProducto</p>
-    <p>@car.tabAutos.descripcion</p>
-    <button class="btn btn-info" onclick="AgregarAlCarrito('@car.fk_auto')">Añadir al carrito</button>
-</div>
+                    <div class="card">
+                        <img src="~/Content/img_cars/@car.Image" />
+                        <h4>@car.MarcaAuto @car.precio</h4>
+                        <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
+                        <p>Cantidad disponible: @car.existenciaProducto</p>
+                        <p>@car.tabAutos.descripcion</p>
+
+                        @if (YaEnCarrito != null && YaEnCarrito.Contains(car.fk_auto))
+                        {
+                            <button class="btn btn-danger" onclick="SacarDelCarrito(@car.fk_auto)">Quitar del carrito</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-info" onclick="AgregarAlCarrito('@car.fk_auto')">Añadir al carrito</button>
+                        }
+
+
+
+                    </div>
                 }
 
             }
@@ -73,55 +137,6 @@
 
 </script>
 
-<div class="container" id="tabla" style="display: none">
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table-hover table-striped ">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-
-                        <th>Imagen</th>
-                        <th>Color</th>
-                        <th>Motor</th>
-                        <th>Cantidad</th>
-                        <th>Descripción</th>
-                        <th>Fecha registro</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null)
-                    {
-                        foreach (var car in Model)
-                        {
-                    <tr>
-                        <td>@car.tabAutos.idAuto</td>
-                        <td>@car.tabAutos.NombreMarca</td>
-                        <td>@car.ModeloAuto</td>
-                        <td>@car.tabAutos.imagen</td>
-                        <td>@car.tabAutos.color</td>
-                        <td>@car.tabAutos.motor</td>
-                        <td>@car.existenciaProducto</td>
-                        <td>@car.tabAutos.descripcion</td>
-                        <td>@car.tabAutos.fechaRegistro</td>
-                        <td width="20">
-                            <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
-                        </td>
-                        <td width="20">
-                           
-                                <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                          
-                        </td>
-                    </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 <script src="~/Scripts/Alerta.js"></script>
 <script src="~/Scripts/PeticionesJQuerry/AgregarAlCarrito.js"></script>
+<script src="~/Scripts/PeticionesJQuerry/SacarDelCarrito.js"></script>

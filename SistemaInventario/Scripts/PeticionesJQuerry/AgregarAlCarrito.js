@@ -8,8 +8,9 @@
             success: function (resultado) {
                 if (resultado == true) {
                     alertify.success('Producto agregado exitosamente');
-                } else {
-                    alertify.success('No se pudo agregar alcarrito');
+                    window.location.reload(true);
+                } else if (resultado == "Ya existe") {
+                    alertify.success('Ya existe en carrito');
                 }
             }
 

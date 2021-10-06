@@ -49,11 +49,13 @@ namespace SistemaInventario.Controllers
             bool success = false;
             if (id > 0)
             {
+                int clienteInt = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString());
+                bool ExisteEnCarrito = contexto.Carrito.Any(x => x.FkAuto == id && x.IdCliente == clienteInt);
+                if(ExisteEnCarrito) return Json("Ya existe", JsonRequestBehavior.AllowGet);
                 try
                 {  //Crea un objeto de la entidad carrito
                     Carrito elemento = new Carrito();
                     //Obtiene y convierte el id Del Cliente en sesión
-                    int clienteInt = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString());
                     //Asignación de valores al objeto
                     elemento.FkAuto = id;
                     elemento.Cantidad = 1;

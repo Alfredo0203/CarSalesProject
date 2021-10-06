@@ -33,7 +33,13 @@ namespace SistemaInventario.Controllers
            var model = inventarioRepository.ListarInventario();
             int idCliente = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString());
             var autosEnCarrito = contexto.Carrito.Where(x => x.IdCliente == idCliente).ToList();
-            ViewBag.ListaCarrito = autosEnCarrito;
+            List<int> IdAutosEnCarrito = new List<int>(); // ---------------------------------- Esta lista almacenará los elementos en Carrito del cliente en sesión
+            foreach(var ids in autosEnCarrito) //---------------------------------------------- Se llena el la lista con los Ids productos en Carrito.
+            {
+                IdAutosEnCarrito.Add(ids.FkAuto);
+            }
+            Session["AutosEnCarrito"] = IdAutosEnCarrito; // --------------------------------- Asigna los Id de autos a la sesión
+            ViewBag.ListaCarrito = Session["AutosEnCarrito"];
             return View(model);
         }
 
