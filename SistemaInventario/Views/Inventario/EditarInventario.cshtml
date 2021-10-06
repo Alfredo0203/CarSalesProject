@@ -1,0 +1,25 @@
+﻿@using DAL.Models
+@model tabInventario
+
+@{
+    ViewBag.Title = "EditarInventario";
+}
+
+<h2>EditarInventario</h2>
+
+@using (Html.BeginForm("EditarInventario", "Inventario", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+{
+
+    @Html.HiddenFor(x => x.idInventario)
+    @Html.HiddenFor(x => x.fk_auto)
+    @Html.HiddenFor(x => x.estado)
+    @Html.HiddenFor(x => x.existenciaProducto)
+
+    <label>
+        Precio:
+        @Html.TextBoxFor(x => x.precio, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.precio, null, new { @class = "text-danger" })
+    </label>
+    <input type="submit" value="Guardar" />
+}
+

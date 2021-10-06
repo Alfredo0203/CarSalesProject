@@ -8,26 +8,30 @@
 }
 
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <center>
                 <br />
-                <br />
-                <br />
                 <h1>Mis compras</h1>
+                <br />
+                <button class="btn btn-danger"
+                        onclick="window.location.href = '/Reportes/ImprimirDetalleCompras'">
+                    <i class="fas fa-print"></i> PDF
+                </button>
 
             </center>
-            <br />
-
 
             @if (ventas != null)
             {
                 <br />
-                <table class="table ">
+                <table>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>ID</th>
+                            <th>FECHA</th>
+                            <th>TOTAL</th>
+                            <th>DETALLECOMPRA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,27 +39,20 @@
                         {
                             if (ven.FkCliente == idCliente)
                             {
-                                <tr style="padding: 0; margin:0; background-color: cornflowerblue">
+                                <tr>
                                    
                                     <td>@if(ViewBag.NombreCliente != null){@ViewBag.NombreCliente}</td>
                                     <td> @ven.Fecha</td>
                                     <td> $ @ven.Total</td>
 
                                     <td>
-                                        <table class="table " style="padding: 0; margin:0; border: solid 2px black">
-                                            <thead style="background-color: darkgray; padding: 0; margin: 0; border: solid 2px black">
-                                                <tr style="border: solid 2px black; text-align: center">
-
+                                        <table style="margin-top:1px">
+                                            <thead>
+                                                <tr>
                                                     <th>Marca y Modelo </th>
                                                     <th>Cantidad </th>
                                                     <th>Precio Venta</th>
                                                     <th>SubTotal</th>
-                                                    <th rowspan="2">
-                                                        <button class="btn btn-success"
-                                                                onclick="window.location.href=''">
-                                                            Ver Detalles
-                                                        </button>
-                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -65,14 +62,11 @@
                                                     {
                                                         if (prod.idVenta == ven.IdVenta)
                                                         {
-                                                            <tr style="border: solid 2px black; text-align: center">
-
+                                                            <tr>
                                                                 <td>@prod.marcaModelo</td>
                                                                 <td>@prod.cantidad</td>
                                                                 <td>@prod.precio</td>
                                                                 <td>@prod.subTotal</td>
-
-
                                                             </tr>
                                                         }
                                                     }

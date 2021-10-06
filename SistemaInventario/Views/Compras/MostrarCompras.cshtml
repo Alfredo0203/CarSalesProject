@@ -7,7 +7,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <center>
                     <h1>Compras</h1>
                 </center>
@@ -18,10 +18,12 @@
                 </button>
                 <br />
                 <center>
-                    <table class="" style="margin-bottom: 10px">
+                    <table>
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>fECHA</th>
+                                <th>TOTAL</th>
+                                <th>DETALLE COMPRAS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,16 +31,16 @@
                             {
                                 foreach (var com in Compras)
                                 {
-                                    <tr style="padding: 0; margin:0;">
+                                    <tr>
                                         
 
                                         <td> @com.Fecha</td>
                                         <td> $ @com.Total</td>
 
                                         <td>
-                                            <table class="" style=" margin-bottom:10px; border: solid 2px black">
-                                                <thead style=" padding: 0; margin: 0; border: solid 2px black">
-                                                    <tr style="border: solid 2px black; text-align: center">
+                                            <table style="margin-top:1px;">
+                                                <thead>
+                                                    <tr>
 
                                                         <th>Marca y Modelo </th>
                                                         <th>Cantidad </th>
@@ -54,7 +56,7 @@
                                                         {
                                                             if (prod.idCompra == com.IdCompra)
                                                             {
-                                                                <tr style="border: solid 2px black; text-align: center">
+                                                                <tr>
 
                                                                     <td>@prod.marcaModelo</td>
                                                                     <td>@prod.cantidad</td>

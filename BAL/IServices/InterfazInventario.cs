@@ -10,5 +10,7 @@ namespace BAL.IServices
    public interface InterfazInventario : IDisposable
     {
         List<tabInventario> ListarInventario();
+        void ModificarInventario(tabInventario i);
+        tabInventario ObtenerInventarioPorID(int idInventario);
     }
 }

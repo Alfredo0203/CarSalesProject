@@ -56,6 +56,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -134,6 +137,7 @@
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AgregarAInventarioController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
@@ -171,6 +175,11 @@
     <Content Include="Content\img_cars\red-car.jpg" />
     <Content Include="Content\img_cars\white-black-car.jpg" />
     <Content Include="Content\img_cars\yellow-black-car.jpg" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\AgregarAutos.js" />
     <Content Include="Scripts\PeticionesJQuerry\EliminarElementos.js" />
     <Content Include="Scripts\navbar.js" />
     <Content Include="favicon.ico" />
@@ -181,6 +190,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\img_cars\car2.webp" />
     <Content Include="Content\img_cars\5.jpg" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -226,6 +236,9 @@
     <Content Include="Views\Clientes\ComprasClientes.cshtml" />
     <Content Include="Views\Shared\_ParcialFormularioRegistrarse.cshtml" />
     <Content Include="Views\Home\Registrarse.cshtml" />
+    <Content Include="Views\Reportes\DetalleVenta.cshtml" />
+    <Content Include="Views\Reportes\DetalleCompras.cshtml" />
+    <Content Include="Views\Inventario\EditarInventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
