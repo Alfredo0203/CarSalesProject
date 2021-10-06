@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgregarAInventario\AgregarAInventario.cs" />
+    <Compile Include="IServices\ICarritoRepository.cs" />
     <Compile Include="IServices\IDetalleComprasRepository.cs" />
     <Compile Include="IServices\IAutosRepository.cs" />
     <Compile Include="IServices\IClientesRepositoty.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="AutosAVender\AutosAVender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AutosRepository.cs" />
+    <Compile Include="Services\CarritoRepository.cs" />
     <Compile Include="Services\ClientesRepository.cs" />
     <Compile Include="Services\ComprasRepository.cs" />
     <Compile Include="Services\InventarioRepository.cs" />

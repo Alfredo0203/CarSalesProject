@@ -31,6 +31,9 @@ namespace SistemaInventario.Controllers
         public ActionResult MostrarInventario()
         {
            var model = inventarioRepository.ListarInventario();
+            int idCliente = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString());
+            var autosEnCarrito = contexto.Carrito.Where(x => x.IdCliente == idCliente).ToList();
+            ViewBag.ListaCarrito = autosEnCarrito;
             return View(model);
         }
 

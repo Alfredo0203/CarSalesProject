@@ -1,7 +1,10 @@
 namespace DAL.Models
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
     [Table("Carrito")]
     public partial class Carrito
@@ -11,21 +14,12 @@ namespace DAL.Models
 
         public int IdCliente { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Marca { get; set; }
+        public int FkAuto { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Modelo { get; set; }
-        [Required]
-        public double Precio { get; set; }
-        [Required]
         public int Cantidad { get; set; }
-        [Required]
-        public double SubTotal { get; set; }
 
-        [NotMapped]
-        public static double TotalAPagar { get; set; }
+        public virtual tabClientes tabClientes { get; set; }
+
+        public virtual tabAutos tabAutos { get; set; }
     }
 }

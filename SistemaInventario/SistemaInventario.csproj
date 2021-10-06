@@ -140,7 +140,6 @@
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AgregarAInventarioController.cs" />
-    <Compile Include="Controllers\VenderController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +202,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PeticionesJQuerry\EditarCantidadCarrito.js" />
     <Content Include="Scripts\PeticionesJQuerry\SacarDelCarrito.js" />
     <Content Include="Scripts\PeticionesJQuerry\AgregarAlCarrito.js" />
     <Content Include="Web.config" />

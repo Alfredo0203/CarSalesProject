@@ -41,13 +41,13 @@ namespace SistemaInventario.Controllers
                 if (User != null) { 
                
                     Session["UserId"] = User.idUsuario.ToString();
-                    
+                    Session["NombreUsuario"] = User.nombre + " " + User.apellido;
                     Session["UserRol"] = User.rol.ToString();
                     return RedirectToAction("Index", "Home");
                 } else if(User2!= null)
             {
                     Session["UserId"] = User2.idCliente.ToString();
-
+                    Session["NombreUsuario"] = User2.nombre;
                     Session["UserRol"] = User2.rol.ToString();
                     return RedirectToAction("Index", "Home");
                 }

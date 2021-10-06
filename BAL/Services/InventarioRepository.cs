@@ -35,6 +35,13 @@ namespace BAL.Services
             var inventario = contexto.tabInventario.FirstOrDefault(x => x.idInventario == idInventario);
             return inventario;
         }
+
+        public static int ConvertirAEntero(string id)
+        {
+            int clienteInt = int.Parse(id);
+            return clienteInt;
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();

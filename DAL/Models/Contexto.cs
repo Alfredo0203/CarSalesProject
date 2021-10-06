@@ -12,6 +12,7 @@ namespace DAL.Models
         {
         }
 
+        public virtual DbSet<Carrito> Carrito { get; set; }
         public virtual DbSet<tabAutos> tabAutos { get; set; }
         public virtual DbSet<tabClientes> tabClientes { get; set; }
         public virtual DbSet<tabCompras> tabCompras { get; set; }
@@ -22,12 +23,9 @@ namespace DAL.Models
         public virtual DbSet<tabProveedores> tabProveedores { get; set; }
         public virtual DbSet<tabUsuarios> tabUsuarios { get; set; }
         public virtual DbSet<tabVentas> tabVentas { get; set; }
-        public virtual DbSet<Carrito> Carrito { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-          
-
             modelBuilder.Entity<tabAutos>()
                 .Property(e => e.imagen)
                 .IsUnicode(false);
@@ -47,6 +45,11 @@ namespace DAL.Models
             modelBuilder.Entity<tabAutos>()
                 .Property(e => e.descripcion)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<tabAutos>()
+                .HasMany(e => e.Carrito)
+                .WithRequired(e => e.tabAutos)
+                .HasForeignKey(e => e.FkAuto);
 
             modelBuilder.Entity<tabAutos>()
                 .HasMany(e => e.tabDetalleCompras)
@@ -78,6 +81,14 @@ namespace DAL.Models
             modelBuilder.Entity<tabClientes>()
                 .Property(e => e.estadoCliente)
                 .IsFixedLength();
+
+            modelBuilder.Entity<tabClientes>()
+                .Property(e => e.correo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tabClientes>()
+                .Property(e => e.pass)
+                .IsUnicode(false);
 
             modelBuilder.Entity<tabClientes>()
                 .HasMany(e => e.tabVentas)
@@ -146,15 +157,6 @@ namespace DAL.Models
             modelBuilder.Entity<tabUsuarios>()
                 .Property(e => e.pass)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Carrito>()
-               .Property(e => e.Marca)
-               .IsFixedLength();
-
-            modelBuilder.Entity<Carrito>()
-                .Property(e => e.Modelo)
-                .IsFixedLength();
-        
         }
     }
 }
