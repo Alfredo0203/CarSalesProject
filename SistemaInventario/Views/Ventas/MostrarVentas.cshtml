@@ -3,53 +3,51 @@
 @{
     ViewBag.Title = "MostrarProductos";
     var ventas = ViewBag.Ventas;
-
 }
 
-z
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <center>
-    
-                    <h1>Ventas</h1>
-              
+                <h1> Ventas</h1>
             </center>
             <br />
-
-            <br />
-            <table class="table ">
+            <button class="btn btn-danger"
+                    onclick="window.location.href = '/Reportes/ImprimirDetalleVentas'">
+                <i class="fas fa-print"></i> PDF
+            </button>
+            
+            <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>N° FACTURA</th>
+                        <th>CLIENTE</th>
+                        <th>FECHA</th>
+                        <th>TOTAL</th>
+                        <th>DETALLE VENTA</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @if (ventas != null)
                     {
                         foreach (var ven in ventas)
                         {
-                            <tr style="padding: 0; margin:0; background-color: cornflowerblue">
-
-                                <td>@ven.FkCliente </td>
+                            <tr>
+                                <td>@ven.IdVenta</td>
+                                <td>@ven.tabClientes.nombre </td>
                                 <td> @ven.Fecha</td>
                                 <td> $ @ven.Total</td>
 
                                 <td>
-                                    <table class="table " style="padding: 0; margin:0; border: solid 2px black">
-                                        <thead style="background-color: darkgray; padding: 0; margin: 0; border: solid 2px black">
-                                            <tr style="border: solid 2px black; text-align: center">
+                                    <table style="margin-top: 1px">
+                                        <thead>
+                                            <tr>
 
                                                 <th>Marca y Modelo </th>
                                                 <th>Cantidad </th>
                                                 <th>Precio Venta</th>
                                                 <th>SubTotal</th>
-                                                <th rowspan="2">
-                                                    <button class="btn btn-success"
-                                                            onclick="window.location.href=''">
-                                                        Ver Detalles
-                                                    </button>
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,14 +57,11 @@ z
                                                 {
                                                     if (prod.idVenta == ven.IdVenta)
                                                     {
-                                                        <tr style="border: solid 2px black; text-align: center">
-
+                                                        <tr>
                                                             <td>@prod.marcaModelo</td>
                                                             <td>@prod.cantidad</td>
                                                             <td>@prod.precio</td>
                                                             <td>@prod.subTotal</td>
-
-
                                                         </tr>
                                                     }
                                                 }
@@ -87,6 +82,7 @@ z
 
                 </tbody>
             </table>
+
 
 
         </div>

@@ -150,16 +150,10 @@
         transition: all 200ms linear;
     }
 
-
 /*::::::::::::::::::::::::::::::::::::::::::::::dropdown::::::::::::::::::::::::::::::::::::::::*/
-
 .fila {
-    width: 100%;
+    width: 125px;
     display: flex;
-}
-
-.columna.2{
-    flex: 30%;
 }
 
 .nav-item .dropdown-menu.card {

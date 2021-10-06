@@ -1,0 +1,101 @@
+﻿@using DAL.Models
+@model List<tabDetalleVentas>
+@{
+    ViewBag.Title = "MostrarProductos";
+    var ventas = ViewBag.Ventas;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ImprimirDetalleVentas</title>
+    <link href="~/Content/Diseños/Table.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <center>
+                    <h1> Ventas</h1>
+                </center>
+                <br />
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° FACTURA</th>
+                            <th>CLIENTE</th>
+                            <th>FECHA</th>
+                            <th>TOTAL</th>
+                            <th>DETALLE VENTA</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (ventas != null)
+                        {
+                            foreach (var ven in ventas)
+                            {
+                        <tr>
+                            <td>@ven.IdVenta</td>
+                            <td>@ven.tabClientes.nombre </td>
+                            <td> @ven.Fecha</td>
+                            <td> $ @ven.Total</td>
+
+                            <td>
+                                <table style="margin-top: 1px">
+                                    <thead>
+                                        <tr>
+                                            <th>Marca y Modelo </th>
+                                            <th>Cantidad </th>
+                                            <th>Precio Venta</th>
+                                            <th>SubTotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count() > 0)
+                                        {
+                                            foreach (var prod in Model)
+                                            {
+                                                if (prod.idVenta == ven.IdVenta)
+                                                {
+                                                    <tr>
+                                                        <td>@prod.marcaModelo</td>
+                                                        <td>@prod.cantidad</td>
+                                                        <td>@prod.precio</td>
+                                                        <td>@prod.subTotal</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </td>
+                        </tr>
+
+
+                            }
+
+                        }
+
+
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
