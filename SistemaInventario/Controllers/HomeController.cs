@@ -9,6 +9,7 @@ using System.Web.Security;
 using DAL.Encriptado;
 using BAL.Services;
 using BAL.IServices;
+using System.Text.RegularExpressions;
 
 namespace SistemaInventario.Controllers
 {
@@ -88,15 +89,25 @@ namespace SistemaInventario.Controllers
         [HttpPost]
         public ActionResult Registrarse(tabClientes cliente)
         {
+            Regex regex = new Regex("^\\d{8}$");
+            if(!regex.IsMatch(cliente.telefono)) ModelState.AddModelError("Numero", "Numero incorrecto");
+            if (clientesRepository.ExisteDato(cliente.correo)) ModelState.AddModelError("CorreoExiste", "Este correo ya está en uso");
             //CAPTURA DE CREDENCIALES PARA INGRESAR AUTOMÁTICAMENTE AL SISTEMA DESPUES DEL REGISTRO
-            string correo = cliente.correo;
-            string password = cliente.pass;
-            cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
-            cliente.ConfirmarPass = EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
+            if (ModelState.IsValid)
+            {
+                string correo = cliente.correo;
+                string password = cliente.pass;
+                cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
+                cliente.ConfirmarPass = EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
 
-            clientesRepository.AgregarClientes(cliente);
-            TempData["Message"] = cliente.nombre +  ": Bienvenido, gracias por registrarte";
-            return Login(correo, password);
+                clientesRepository.AgregarClientes(cliente);
+                TempData["Message"] = cliente.nombre + ": Bienvenido, gracias por registrarte";
+                return Login(correo, password);
+            }
+            else
+            {
+                return View("Registrarse");
+            }
         }
     }
 }

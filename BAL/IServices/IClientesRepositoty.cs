@@ -19,5 +19,6 @@ namespace BAL.IServices
         tabClientes ObtenerClientesPorID(int idCliente);
         //MÉTODO ELIMINAR CLIENTE
         void EliminarCliente(int idCliente);
+        bool ExisteDato(string Dato);
     }
 }

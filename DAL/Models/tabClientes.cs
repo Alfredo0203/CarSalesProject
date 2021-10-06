@@ -21,7 +21,8 @@ namespace DAL.Models
         [StringLength(55)]
         public string nombre { get; set; }
 
-        [Required(ErrorMessage = "El número de teléfono es requerido")]
+        [Required(ErrorMessage = "Ingrese número de teléfono")]
+        [DataType(DataType.PhoneNumber)]
         [StringLength(55)]
         public string telefono { get; set; }
 
@@ -35,7 +36,6 @@ namespace DAL.Models
 
         [Required(ErrorMessage = "El correo es requerido")]
         [EmailAddress(ErrorMessage = "Ingrese un correo válido")]
-
         public string correo { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]

@@ -6,12 +6,14 @@
 <label>Teléfono </label>
 @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.telefono, null, htmlAttributes: new { @class = "text-danger" })
+@Html.ValidationMessage("Numero", new { @class = "text-danger" })
 <label>Dirección: </label>
 @Html.TextBoxFor(x => x.direccion, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.direccion, null, htmlAttributes: new { @class = "text-danger" })
 <label>Correo: </label>
 @Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.correo, null, htmlAttributes: new { @class = "text-danger" })
+@Html.ValidationMessage("CorreoExiste", new { @class = "text-danger" })
 <label>Contraseña: </label>
 @Html.TextBoxFor(x => x.pass, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.pass, null, htmlAttributes: new { @class = "text-danger" })
