@@ -35,12 +35,12 @@
             </label>
         </div>
     </div>
-
-    <label>Placa: </label>
-    <label>Imagen: </label>
-    <input type="file" name="imagen" style="color: white"/>
-    @Html.ValidationMessage("Mensaje", new { @class = "text-danger" })
-
+    <div style="width: 280px; margin-bottom: 0px" class="custom-file">
+        <input id="img" type="file" name="imagen" class="custom-file-input">
+        <label style="text-align: left" for="img" class="custom-file-label text-truncate"><i class="fas fa-upload"></i> Subir imagen</label>
+    </div>
+    <br />
+    <label></label>
     <label>Color: </label>
     @Html.TextBoxFor(x => x.color, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.color, null, new { @class = "text-danger" })
@@ -73,6 +73,22 @@
     @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "text-danger" })
 
-    <input type="submit" value="Registrar" />
+    @if (Model.idAuto > 0)
+    {
+
+
+        <input type="submit" value="Guardar" />
+    }
+    else
+    {
+        <input type="submit" value="Registrar" />
+    }
 </div>
 }
+
+<script>
+    $('.custom-file-input').on('change', function () {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>

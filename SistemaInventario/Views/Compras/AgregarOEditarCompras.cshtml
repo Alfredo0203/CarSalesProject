@@ -12,17 +12,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <center><h1>Listado de Inventario</h1></center>
+            <center><h1>Inventario</h1></center>
             <br />
 
             <table class="table-hover table-striped " id="tabla">
                 <thead>
                     <tr>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Precio Venta</th>
-                        <th>Existencia</th>
-                        <th>Estado</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>PRECIO VENTA</th>
+                        <th>EXISTENCIA</th>
+                        <th>ESTADO</th>
+                        <th>ACCION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,29 +55,30 @@
 
 
 
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row" >
+                <div class="col-md-12">
                     <center>
-                        <h5>Elegir Proveedor</h5>
+                        <br />
+                        <h4>Elegir Proveedor</h4>
                         <div class="form-group">
-                            <label>Cliente: </label>
                             @Html.DropDownListFor(x => prov.idProveedor, (IEnumerable<SelectListItem>)ViewBag.listaProveedores, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(x => prov.idProveedor, null, htmlAttributes: new { @class = "text-danger" })
                         </div>
                     </center>
-                    <br />
 
                     <br />
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                            <td>ID</td>
-                            <td>Marca</td>
-                            <td>Modelo</td>
-                            <td>Cantidad</td>
-                            <td>Precio</td>
-                            <td>Total</td>
-                            <td>Sacar de la Lista</td>
-                        </tr>
+                    <table class="table-hover table-striped" id="tabla">
+                        <thead style="color: white">
+                            <tr>
+                                <td>ID</td>
+                                <td>MARCA</td>
+                                <td>MODELO</td>
+                                <td>CCANTIDAD</td>
+                                <td>PRECIO</td>
+                                <td>TOTAR</td>
+                                <td>ACCION</td>
+                            </tr>
+                        </thead>
 
                         @if (Model.Count() > 0)
                         {
@@ -103,26 +105,24 @@
 
                         }
                     </table>
+                    <h4 style="text-align: right; margin-right: 30px">Total: $ @AgregarAInventario.TotalAPagar</h4>
 
-                    <h4 style="color: white">Total: $ @AgregarAInventario.TotalAPagar</h4>
+                    <center>
 
-                    <button class="btn btn-primary" id="BtnRealizarVenta"
-                            onclick="window.location.href = '/AgregarAInventario/RealizarCompras'">
-                        Realizar Compra
-                    </button>
+                        <label>
+                            <button  style="float: left; margin-right: 20px" class="btn btn-primary" id="BtnRealizarVenta"
+                                    onclick="window.location.href = '/AgregarAInventario/RealizarCompras'">
+                                Realizar Compra
+                            </button>
 
-                    <button class="btn btn-success" style="margin-top: 10px"
-                            onclick="window.location.href = '/Compras/MostrarCompras'">
-                        Ver Ventas
-                    </button>
+                            <button class="btn btn-success"
+                                    onclick="window.location.href = '/Compras/MostrarCompras'">
+                                Ver Ventas
+                            </button>
+                        </label>
+                    </center>
                 </div>
             </div>
-
-
-
-
-
-
 
         </div>
     </div>
