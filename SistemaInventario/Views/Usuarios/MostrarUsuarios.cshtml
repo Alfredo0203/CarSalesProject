@@ -6,79 +6,79 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <center>
-                <h1>Usuarios</h1>
-            </center>
-            <br />
-            <button class="btn agregarBtn"
-                    onclick="window.location.href = '/Usuarios/EditarOCrearUsuarios'">
-                <i class="fas fa-plus"></i> Agregar
-            </button>
-            <br />
-            <!--table-striped-->
-            <table class="table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Edad</th>
-                        <th>Correo</th>
-                        <th>Contraseña</th>
-                        <th>Estado</th>
-                        <th>Rol</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Count() > 0)
-                    {
-                        foreach (var i in Model)
-                        {
-                    <tr>
-                        <td>@i.idUsuario</td>
-                        <td>@i.nombre</td>
-                        <td>@i.apellido</td>
-                        <td>@i.edad</td>
-                        <td>@i.correo</td>
-                        <td>@i.pass</td>
-                        @if (i.isActivo == true)
-                        {
-                            <td>Activo</td>
-                        }
-                        else
-                        {
-                            <td>Inactivo</td>
-                        }
-                        <td>@i.rol</td>
-                        <td width="20">
-                            <button class="btn btn-info"
-                                    onclick="window.location.href = '/Usuarios/EditarOCrearUsuarios?idUsuario='+@i.idUsuario">
-                                <i class="fas fa-pencil-alt"></i> Editar
-                            </button>
-                        </td>
-                        <td width="20">
-                            <button class="btn btn-danger"
-                                    onclick="AlertaDelete('/Usuarios/EliminarUsuario?idUsuario='+@i.idUsuario)">
-                                <i class="fas fa-trash-alt"></i> Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                        }
-                    }
-                    else
-                    {
+            @if (Model.Count() > 0)
+            {
+                <center>
+                    <h1>Usuarios</h1>
+                </center>
+                <br />
+                <button class="btn agregarBtn"
+                        onclick="window.location.href = '/Usuarios/EditarOCrearUsuarios'">
+                    <i class="fas fa-plus"></i> Agregar
+                </button>
+                <br />
+                <!--table-striped-->
+                <table class="table-hover table-striped">
+                    <thead>
                         <tr>
-                            <td colspan="6">
-                                <center class="text-danger">
-                                    ¡No hay datos para mostrar!
-                                </center>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Correo</th>
+                            <th>Contraseña</th>
+                            <th>Estado</th>
+                            <th>Rol</th>
+                            <th colspan="2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var i in Model)
+                        {
+                        <tr>
+                            <td>@i.idUsuario</td>
+                            <td>@i.nombre</td>
+                            <td>@i.apellido</td>
+                            <td>@i.edad</td>
+                            <td>@i.correo</td>
+                            <td>@i.pass</td>
+                            @if (i.isActivo == true)
+                            {
+                                <td>Activo</td>
+                            }
+                            else
+                            {
+                                <td>Inactivo</td>
+                            }
+                            <td>@i.rol</td>
+                            <td width="20">
+                                <button class="btn btn-info"
+                                        onclick="window.location.href = '/Usuarios/EditarOCrearUsuarios?idUsuario='+@i.idUsuario">
+                                    <i class="fas fa-pencil-alt"></i> Editar
+                                </button>
+                            </td>
+                            <td width="20">
+                                <button class="btn btn-danger"
+                                        onclick="AlertaDelete('/Usuarios/EliminarUsuario?idUsuario='+@i.idUsuario)">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
                             </td>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+
+                        }
+
+
+
+                       
+                    </tbody>
+                </table>
+            }
+            else
+            {
+            <h2>¡No hay usuarios registrados!</h2>
+            }
+          </div>
     </div>
 </div>
 

@@ -11,24 +11,25 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <center>
-                <br />
-                <h1>Mis compras</h1>
-                <br />
-                <button class="btn btn-danger"
-                        onclick="window.location.href = '/Reportes/ImprimirDetalleCompras'">
-                    <i class="fas fa-print"></i> PDF
-                </button>
 
-            </center>
-
-            @if (ventas != null)
+            @if (Model.Count() > 0)
             {
+                <center>
+                    <br />
+                    <h1>Mis compras</h1>
+                    <br />
+                    <button class="btn btn-danger"
+                            onclick="window.location.href = '/Reportes/ImprimirDetalleCompras'">
+                        <i class="fas fa-print"></i> PDF
+                    </button>
+
+                </center>
                 <br />
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>N° FACTURA</th>
+                            <th>CLIENTE</th>
                             <th>FECHA</th>
                             <th>TOTAL</th>
                             <th>DETALLECOMPRA</th>
@@ -39,54 +40,64 @@
                         {
                             if (ven.FkCliente == idCliente)
                             {
-                                <tr>
-                                   
-                                    <td>@if(ViewBag.NombreCliente != null){@ViewBag.NombreCliente}</td>
-                                    <td> @ven.Fecha</td>
-                                    <td> $ @ven.Total</td>
+                        <tr>
+                            <td>@ven.IdVenta</td>
+                            <td>
+                                @if (ViewBag.NombreCliente != null)
+                                {@ViewBag.NombreCliente}
+                            </td>
+                            <td> @ven.Fecha</td>
+                            <td> $ @ven.Total</td>
 
-                                    <td>
-                                        <table style="margin-top:1px">
-                                            <thead>
-                                                <tr>
-                                                    <th>Marca y Modelo </th>
-                                                    <th>Cantidad </th>
-                                                    <th>Precio Venta</th>
-                                                    <th>SubTotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (Model.Count() > 0)
+                            <td>
+                                <table style="margin-top:1px">
+                                    <thead>
+                                        <tr>
+                                            <th>Marca y Modelo </th>
+                                            <th>Cantidad </th>
+                                            <th>Precio Venta</th>
+                                            <th>SubTotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Count() > 0)
+                                        {
+                                            foreach (var prod in Model)
+                                            {
+                                                if (prod.idVenta == ven.IdVenta)
                                                 {
-                                                    foreach (var prod in Model)
-                                                    {
-                                                        if (prod.idVenta == ven.IdVenta)
-                                                        {
-                                                            <tr>
-                                                                <td>@prod.marcaModelo</td>
-                                                                <td>@prod.cantidad</td>
-                                                                <td>@prod.precio</td>
-                                                                <td>@prod.subTotal</td>
-                                                            </tr>
-                                                        }
-                                                    }
+                                                    <tr>
+                                                        <td>@prod.marcaModelo</td>
+                                                        <td>@prod.cantidad</td>
+                                                        <td>@prod.precio</td>
+                                                        <td>@prod.subTotal</td>
+                                                    </tr>
                                                 }
+                                            }
+                                        }
 
-                                            </tbody>
-                                        </table>
+                                    </tbody>
+                                </table>
 
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
-
-                            }
 
                         }
+
+                    }
 
                     </tbody>
                 </table>
 
 
+            }
+            else
+
+            {
+                <br />
+                <center><h2 style="color: red">Aún no ha realizado compras</h2></center>
+                <center><h2 class="cajaCompra"><i class="fas fa-box-open"></i></h2></center>
             }
 
 

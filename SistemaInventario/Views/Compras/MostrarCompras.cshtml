@@ -8,31 +8,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <center>
-                    <h1>Compras</h1>
-                </center>
                 <br />
-                <button class="btn btn-success"
-                        onclick="window.location.href='AgregarOEditarCompras'"><i class="fas fa-plus"></i>
+                <button style="margin-bottom: -230px" class="btn btn-success"
+                        onclick="window.location.href='AgregarOEditarCompras'">
+                    <i class="fas fa-plus"></i>
                     Agregar A Inventario
                 </button>
                 <br />
-                <center>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>fECHA</th>
-                                <th>TOTAL</th>
-                                <th>DETALLE COMPRAS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Compras != null)
-                            {
-                                foreach (var com in Compras)
+                @if (Model.Count() > 0)
+                {
+                    <button style="margin-bottom: -175px; margin-left: 200px" class="btn btn-danger" onclick="window.location.href = '/Reportes/ImprimirDetalleComprasProveedor'">
+                        <i class="fas fa-print"></i> PDF</button>
+                   
+                        <center>
+                        <h1>Compras</h1>
+                        <br />
+                        <br />
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>fECHA</th>
+                                    <th>TOTAL</th>
+                                    <th>DETALLE COMPRAS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var com in Compras)
                                 {
                                     <tr>
-                                        
+
 
                                         <td> @com.Fecha</td>
                                         <td> $ @com.Total</td>
@@ -78,15 +83,25 @@
 
                                 }
 
-                            }
 
 
 
-                        </tbody>
-                    </table>
+
+
+
+
+                            </tbody>
+                        </table>
                     </center>
+                }
+                else
+                {
+                    <br />
+                    <center><h2 style="color: red">Aún no ha realizado compras</h2></center>
+                    <center><h2 class="cajaCompra"><i class="fas fa-box-open"></i></h2></center>
+                }
 
-</div>
+            </div>
         </div>
     </div>
 

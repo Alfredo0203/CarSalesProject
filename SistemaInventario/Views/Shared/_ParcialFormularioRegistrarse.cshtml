@@ -20,5 +20,11 @@
 <label>Confirmar Contraseña: </label>
 @Html.TextBoxFor(x => x.ConfirmarPass, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.ConfirmarPass, null, htmlAttributes: new { @class = "text-danger" })
-
-<input type="submit" value="Registrar" />
+@if (Model.idCliente > 0)
+{
+    <input type="submit" value="Guardar" />
+}
+else
+{
+    <input type="submit" value="Registrar" />
+}

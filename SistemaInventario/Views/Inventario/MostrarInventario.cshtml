@@ -5,77 +5,96 @@
     var YaEnCarrito = ViewBag.ListaCarrito;
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
-<center><h1>Autos</h1></center>
-<br />
+
 @if (Session["UserRol"].Equals("admin"))
 {
-    <center>
-        <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
-        <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
-    </center>
 
     <div class="container">
-        <button style="margin-left: 20px" class="btn agregarBtn" onclick="window.location.href='/Inventario/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
+        <button style="margin-left: 25px; margin-bottom: -260px;" class="btn agregarBtn" onclick="window.location.href='/Inventario/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
     </div>
 
+    if (Model.Count() > 0)
+    {
+        <center>
+            <h1>Autos</h1>
+            <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
+            <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
+        </center>
+        <br />
+        <div class="container" id="tabla" style="display: none">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table-hover table-striped ">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
 
-    <div class="container" id="tabla" style="display: none">
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table-hover table-striped ">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-
-                            <th>Imagen</th>
-                            <th>Color</th>
-                            <th>Motor</th>
-                            <th>Cantidad</th>
-                            <th>Descripción</th>
-                            <th>Fecha registro</th>
-                            <th colspan="2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null)
-                        {
-                            foreach (var car in Model)
+                                <th>Imagen</th>
+                                <th>Color</th>
+                                <th>Motor</th>
+                                <th>Cantidad</th>
+                                <th>Descripción</th>
+                                <th>Fecha registro</th>
+                                <th colspan="2">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
                             {
-                                <tr>
-                                    <td>@car.tabAutos.idAuto</td>
-                                    <td>@car.tabAutos.NombreMarca</td>
-                                    <td>@car.ModeloAuto</td>
-                                    <td>@car.tabAutos.imagen</td>
-                                    <td>@car.tabAutos.color</td>
-                                    <td>@car.tabAutos.motor</td>
-                                    <td>@car.existenciaProducto</td>
-                                    <td>@car.tabAutos.descripcion</td>
-                                    <td>@car.tabAutos.fechaRegistro</td>
-                                    <td width="20">
-                                        <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
-                                    </td>
-                                    <td width="20">
+                                foreach (var car in Model)
+                                {
+                                    <tr>
+                                        <td>@car.tabAutos.idAuto</td>
+                                        <td>@car.tabAutos.NombreMarca</td>
+                                        <td>@car.ModeloAuto</td>
+                                        <td>@car.tabAutos.imagen</td>
+                                        <td>@car.tabAutos.color</td>
+                                        <td>@car.tabAutos.motor</td>
+                                        <td>@car.existenciaProducto</td>
+                                        <td>@car.tabAutos.descripcion</td>
+                                        <td>@car.tabAutos.fechaRegistro</td>
+                                        <td width="20">
+                                            <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                        </td>
+                                        <td width="20">
 
-                                        <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                            <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-}
-<div class="containerCards" id="tarjetas">
-    @if (Model != null)
+
+    }
+    else
     {
-        foreach (var car in Model)
-        {
-            if (Session["UserRol"].Equals("admin"))
+        <h2>No hay autos</h2>
+        <h2 class="car"><i class="fas fa-car-side"></i></h2>
+    }
+}
+else
+{
+    if (Model.Count() == 0)
+    {
+        <h2>No hay autos disponibles</h2>
+        <h2 class="car"><i class="fas fa-car-side"></i></h2>
+    }
+}
+
+@if (Model.Count > 0)
+{
+    foreach (var car in Model)
+    {
+        <div class="containerCards" id="tarjetas">
+
+            @if (Session["UserRol"].Equals("admin"))
             {
                 <div class="card">
                     <img src="~/Content/img_cars/@car.Image" />
@@ -110,16 +129,21 @@
                         {
                             <button class="btn btn-info" onclick="AgregarAlCarrito('@car.fk_auto')">Añadir al carrito</button>
                         }
-
-
-
                     </div>
                 }
-
+                else
+                {
+                    <h2>No hay autos disponibles </h2>
+                }
             }
-        }
+        </div>
     }
-</div>
+}
+
+
+
+
+
 <script type="text/javascript">
     function mostrarTabla() {
         var tabla = document.getElementById("tabla");

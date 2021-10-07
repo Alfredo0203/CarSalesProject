@@ -239,6 +239,7 @@
     <Content Include="Views\Reportes\DetalleVenta.cshtml" />
     <Content Include="Views\Reportes\DetalleCompras.cshtml" />
     <Content Include="Views\Inventario\EditarInventario.cshtml" />
+    <Content Include="Views\Reportes\DetalleComprasProveedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,30 +8,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <center>
-                <h1> Ventas</h1>
-            </center>
-            <br />
-            <button class="btn btn-danger"
-                    onclick="window.location.href = '/Reportes/ImprimirDetalleVentas'">
-                <i class="fas fa-print"></i> PDF
-            </button>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>N° FACTURA</th>
-                        <th>CLIENTE</th>
-                        <th>FECHA</th>
-                        <th>TOTAL</th>
-                        <th>DETALLE VENTA</th>
-                    </tr>
-                </thead>
+            @if (Model.Count() > 0)
+            {
+                <center>
+                    <h1> Ventas</h1>
+                </center>
+                <br />
+                <button class="btn btn-danger"
+                        onclick="window.location.href = '/Reportes/ImprimirDetalleVentas'">
+                    <i class="fas fa-print"></i> PDF
+                </button>
 
-                <tbody>
-                    @if (ventas != null)
-                    {
-                        foreach (var ven in ventas)
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° FACTURA</th>
+                            <th>CLIENTE</th>
+                            <th>FECHA</th>
+                            <th>TOTAL</th>
+                            <th>DETALLE VENTA</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var ven in ventas)
                         {
                             <tr>
                                 <td>@ven.IdVenta</td>
@@ -76,15 +77,18 @@
 
                         }
 
-                    }
 
 
+                    </tbody>
+                </table>
 
-                </tbody>
-            </table>
-
-
-
+            }
+            else
+            {
+                <br>
+                <h2>No se ha realizado ninguna venta</h2>
+                <h2 ><i class="fas fa-frown"></i></h2>
+            }
         </div>
     </div>
 </div>

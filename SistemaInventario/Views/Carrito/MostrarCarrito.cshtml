@@ -9,12 +9,12 @@
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 
-<div class="containerCards cars">
 
-    @if (Model.Count() > 0)
-    {
-        // Recorre la lista de autos en inventario
-        foreach (var auto in Model)
+@if (Model.Count() > 0)
+{
+    <div class="containerCards cars">
+
+        @foreach (var auto in Model)
         {
             //Recorre la lista de autos en carrito del cliente logeao
             foreach (var carrito in misAutos)
@@ -22,74 +22,86 @@
                 //Condición para mostrar solamente los autos con el id igual al de de producto en Carrito del cliente logeado.
                 if (carrito.FkAuto == auto.fk_auto)
                 {
-    <div class="card">
-        <div class="content cars">
-            <img src="~/Content/img_cars/@auto.Image">
-        </div>
-        <h5>@auto.MarcaAuto @auto.ModeloAuto</h5>
-        @*Se muestra un select para seleccionar cantidad por cada producto.
-         Cada uno tiene función de editar cantidad
-        El id de cada select se crea uniendo la palabra uniendo la palabra SeleccionarCantidad con el numero de id del carrito, ejemplo con id = 1: SeleccionarCantidad + @carrito.FkAuto. esto es igual a SeleccionarCantidad 1
-        *@
-        <p>
-            Cantidad <select onchange="EditarCantidadCarrito(@carrito.FkAuto)" id="SeleccionarCantidad @carrito.FkAuto" required>
+                    <div class="card">
+                        <div class="content cars">
+                            <img src="~/Content/img_cars/@auto.Image">
+                        </div>
+                        <h5>@auto.MarcaAuto @auto.ModeloAuto</h5>
+                        @*Se muestra un select para seleccionar cantidad por cada producto.
+                             Cada uno tiene función de editar cantidad
+                            El id de cada select se crea uniendo la palabra uniendo la palabra SeleccionarCantidad con el numero de id del carrito, ejemplo con id = 1: SeleccionarCantidad + @carrito.FkAuto. esto es igual a SeleccionarCantidad 1
+                        *@
+                        <p>
+                            Cantidad <select onchange="EditarCantidadCarrito(@carrito.FkAuto)" id="SeleccionarCantidad @carrito.FkAuto" required>
 
-                @for (int i = 1; i <= auto.existenciaProducto; i++) // Las opciones se llena de acuerdo a la cantidad en existencia por cada producto
-                {
-                    if (carrito.Cantidad == i)
-                    {
-                        <option value="@i" selected="selected">@i</option>
-                    }
-                    else
-                    {
-                        <option value="@i">@i</option>
-                    }
-                }
+                                @for (int i = 1; i <= auto.existenciaProducto; i++) // Las opciones se llena de acuerdo a la cantidad en existencia por cada producto
+                                {
+                                    if (carrito.Cantidad == i)
+                                    {
+                                        <option value="@i" selected="selected">@i</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
 
-            </select>
-        </p>
+                            </select>
+                        </p>
 
-        @*Si la existencia del producto en Carrito es 0 No se mostrará el total, sino como agotado*@
-        @if (auto.existenciaProducto == 0)
-        {<label class="text-danger">Agotado</label> }
-        else
-        {
-            <p>Precio total $ @{ var total = @carrito.Cantidad * @auto.precio; TotalAPagar += total;} @total</p>
-        }
+                        @*Si la existencia del producto en Carrito es 0 No se mostrará el total, sino como agotado*@
+                        @if (auto.existenciaProducto == 0)
+                        {<label class="text-danger">Agotado</label> }
+                        else
+                        {
+                            <p>Precio total $ @{ var total = @carrito.Cantidad * @auto.precio; TotalAPagar += total;} @total</p>
+                        }
 
 
-        <button class="btn btn-danger"
-                onclick="SacarDelCarrito(@carrito.FkAuto)">
-            Quitar del carrito
-        </button>
-    </div>
+                        <button class="btn btn-danger"
+                                onclick="SacarDelCarrito(@carrito.FkAuto)">
+                            Quitar del carrito
+                        </button>
+                    </div>
 
                 }
             }
         }
-    }
 
-</div>
-@*---------------------------------------BOTÓN PARA COMPRAR------------------------------------------------------------*@
-<center>
-    <h4 style="color: #dc3545">Total: $ @TotalAPagar</h4>
+    </div>
 
-    <button class="btn btn-primary" id="btnComprar" style="display: none"
-            onclick="RealizarCompra()">
-        Realizar Compra
-    </button>
 
-</center>
+    @*---------------------------------------BOTÓN PARA COMPRAR------------------------------------------------------------*@
+    <center>
+        <h4 id="precio" style="color: #dc3545; display: none">Total: $ @TotalAPagar</h4>
 
+        <button class="btn btn-primary" id="btnComprar" style="display: none"
+                onclick="RealizarCompra()">
+            Realizar Compra
+        </button>
+
+    </center>
+}
+else
+{
+    <h2>No hay autos seleccionados</h2>
+    <center><h2 class="cajaCompra"><i class="fas fa-shopping-cart"></i></h2></center>
+
+}
 @*------------------------------------Mostrar BOTON SOLO CUANDO HAYA PRODUCTO EN CARRITO-----------------------------------------*@
 @if (TotalAPagar > 0)
 {
     <script>
         document.getElementById("btnComprar").style.display = "inline";
+        document.getElementById("precio").style.display = "block";
     </script>
+}
+else
+{
+    <h2>No hay autos seleccionados</h2>
+    <center><h2 class="cajaCompra"><i class="fas fa-shopping-cart"></i></h2></center>
 
 }
-
 @*---------------------------------------FUNCIÓN PARA REALIZAR LA COMPRA------------------------------------------------------------*@
 <script>
 
