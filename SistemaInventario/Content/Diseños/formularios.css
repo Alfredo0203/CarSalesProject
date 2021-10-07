@@ -12,31 +12,32 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 6px 6px 1px #893dc2;
 }
 
-    .formulario h3 {
-        background-color: #893dc2;
-        width: 100%;
-        border-radius: 20px 0px 20px 0px;
-        color: black;
-    }
+.formulario h3 {
+    background-color: #893dc2;
+    width: 95%;
+    border-radius: 20px 0px 20px 0px;
+    color: black;
+}
 
     .formulario.marca {
-        width: 260px;
-        height: 280px;
+        width: 240px;
+        height: 230px;
     }
 
-    .formulario.proveedores, .formulario.cliente{
+    .formulario.proveedores {
         width: 300px !important;
-        height: 500px !important;
+        height: 300px !important;
     }
     .formulario.usuario {
         width: 400px;
     }
     .formulario.auto{
-        width: 400px;
+        width: 350px;
+        padding-top: 10px;
     }
     .formulario.auto input, .marca select{
         height: 30px;
@@ -84,12 +85,13 @@
     grid-template-columns: 1fr 1fr;
 }
     .inputs .marca {
-        margin-right: 30px;
+        margin-right: 36.5px;
        
     }
-   
+
     .inputs .modelo {
         width: 130px;
+        margin-left: 10px;
     }
     .inputs .fecha{
         margin-left: -12px;
