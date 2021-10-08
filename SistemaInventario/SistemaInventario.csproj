@@ -205,6 +205,7 @@
     <Content Include="Scripts\PeticionesJQuerry\EditarCantidadCarrito.js" />
     <Content Include="Scripts\PeticionesJQuerry\SacarDelCarrito.js" />
     <Content Include="Scripts\PeticionesJQuerry\AgregarAlCarrito.js" />
+    <Content Include="Scripts\tarjetasTablas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
