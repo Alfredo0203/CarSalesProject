@@ -55,7 +55,7 @@ namespace SistemaInventario.Controllers
             var cantidad = AgregarAInventario.listaAutosAComprar.FirstOrDefault(x => x.Id == id).Cantidad;
             AgregarAInventario.TotalAPagar -= (precio * cantidad);
             AgregarAInventario.listaAutosAComprar.RemoveAll(x => x.Id == id);
-            return RedirectToAction("MostrarCompras", "Compras");
+            return RedirectToAction("AgregarOEditarCompras", "Compras");
         }
 
 
