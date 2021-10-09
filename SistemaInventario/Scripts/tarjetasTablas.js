@@ -19,7 +19,6 @@ function mostrarTarjeta() {
     //Almacenar datos de manera local
     localStorage.setItem("estadoTabla", tabla.style.display);
     localStorage.setItem("estadoTarjeta", tarjeta.style.display);
-
 }
 
 window.onload = function () {

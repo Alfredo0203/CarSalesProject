@@ -30,15 +30,18 @@
 
     .formulario.proveedores {
         width: 300px !important;
-        height: 300px !important;
     }
     .formulario.usuario {
         width: 400px;
+        height: 600px;
     }
-    .formulario.auto{
-        width: 350px;
-        padding-top: 10px;
-    }
+        .formulario.usuario h3{
+            margin-top: 10px !important;
+        }
+        .formulario.auto {
+            width: 350px;
+            padding-top: 10px;
+        }
     .formulario.auto input, .marca select{
         height: 30px;
         margin-top: -3px;

@@ -5,18 +5,54 @@
     var YaEnCarrito = ViewBag.ListaCarrito;
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
-
+<center><h1 id="titulo">AUTOS</h1></center>
 @if (Session["UserRol"].Equals("admin"))
 {
-
     <div class="container">
         <button style="margin-left: 25px; margin-bottom: -260px;" class="btn agregarBtn" onclick="window.location.href='/Inventario/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
     </div>
+    if (Model.Count() == 0)
+    {
+        <h2>No hay autos disponibles!</h2>
+        <h2 class="car"><i class="fas fa-car-side"></i></h2>
+        <script>document.getElementById("titulo").style.display = "none";</script>
+    }
+}
+else
+{
+    if (Model.Count() == 0)
+    {
+        <h2>No hay autos disponibles!</h2>
+        <h2 class="car"><i class="fas fa-car-side"></i></h2>
+        <script>document.getElementById("titulo").style.display = "none";</script>
+    }
+    else
+    {
+        var contarNoHay = 0;
+        var contarAmbos = 0;
+        foreach (var car in Model)
+        {
+            contarAmbos = contarAmbos + 1;//Cuenta la cantidad de autos
+            if (car.existenciaProducto == 0)
+            {
+                contarNoHay = contarNoHay + 1;//Cuando la existencia en inventario = 0
+            }
+        }
+        //Valida si todos los autos tienen su existencia a cero
+        if (contarAmbos == contarNoHay)
+        {
+            <h2>No hay autos disponibless!</h2>
+            <h2 class="car"><i class="fas fa-car-side"></i></h2>
+            <script>document.getElementById("titulo").style.display = "none";</script>
+        }
+    }
 
+}
+@if (Session["UserRol"].Equals("admin"))
+{
     if (Model.Count() > 0)
     {
         <center>
-            <h1>Autos</h1>
             <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
             <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
         </center>
@@ -60,12 +96,14 @@
                                         </td>
                                         <td width="20">
 
-                                            <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                            <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
                                         </td>
                                     </tr>
                                 }
                             }
+
+
                         </tbody>
                     </table>
                 </div>
@@ -73,28 +111,15 @@
         </div>
 
     }
-    else
-    {
-        <h2>No hay autos</h2>
-        <h2 class="car"><i class="fas fa-car-side"></i></h2>
-    }
-}
-else
-{
-    if (Model.Count() == 0)
-    {
-        <h2>No hay autos disponibles</h2>
-        <h2 class="car"><i class="fas fa-car-side"></i></h2>
-    }
-}
 
-@if (Model.Count > 0)
-{
-    foreach (var car in Model)
+}
+<br />
+<div class="containerCards" id="tarjetas">
+    @if (Model.Count() > 0)
     {
-        <div class="containerCards" id="tarjetas">
-
-            @if (Session["UserRol"].Equals("admin"))
+        foreach (var car in Model)
+        {
+            if (Session["UserRol"].Equals("admin"))
             {
                 <div class="card">
                     <img src="~/Content/img_cars/@car.Image" />
@@ -129,16 +154,17 @@ else
                         {
                             <button class="btn btn-info" onclick="AgregarAlCarrito('@car.fk_auto')">Añadir al carrito</button>
                         }
+
+
+
+
                     </div>
                 }
-                else
-                {
-                    <h2>No hay autos disponibles </h2>
-                }
+
             }
-        </div>
+        }
     }
-}
+</div>
 <script src="~/Scripts/tarjetasTablas.js"></script>
 <script src="~/Scripts/Alerta.js"></script>
 <script src="~/Scripts/PeticionesJQuerry/AgregarAlCarrito.js"></script>

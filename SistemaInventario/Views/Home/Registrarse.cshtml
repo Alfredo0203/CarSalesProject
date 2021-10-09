@@ -7,11 +7,10 @@
 
     @Html.HiddenFor(x => x.rol, new { @class = "form-control", @Value = "2" })
     @Html.HiddenFor(x => x.estadoCliente, new { @class = "form-control", @Value = "Activo" })
-    <div class="formulario usuario">
+<div class="formulario usuario">
+    <h3 style="margin-top: 10px">Registrarse</h3>
 
-        <h3>Registrarse</h3>
-
-        @Html.Partial("_ParcialFormularioRegistrarse")
-
-    </div>
+    @Html.Partial("_ParcialFormularioRegistrarse")
+    <input type="submit" value="Guardar" />
+</div>
 }

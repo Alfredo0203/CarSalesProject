@@ -2,7 +2,6 @@
 @model tabUsuarios
 @{
     ViewBag.Tittle = "Login";
-    Layout = null;
 }
 <link href="~/Content/Diseños/Login.css" rel="stylesheet" />
 <link href="~/Content/Diseños/Site.css" rel="stylesheet" />
@@ -11,12 +10,12 @@
 @using (Html.BeginForm())
 {
     <center> @Html.ValidationSummary()</center>
-
+    <br />
     <div class="login">
         @Html.AntiForgeryToken()
         <i style="color:#ae61e2; font-size: 50px" class="fas fa-user-circle"></i>
         <input type="text" name="correo" value="" placeholder="Correo" />
         <input type="text" name="passw" value="" placeholder="Contraseña" />
-        <input type="submit" value="Iniciar Sesión" />
+        <input style="width: 130px" type="submit" value="Iniciar Sesión" />
     </div>
 }

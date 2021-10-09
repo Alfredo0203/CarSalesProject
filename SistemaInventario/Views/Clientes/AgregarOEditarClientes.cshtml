@@ -9,7 +9,7 @@
 {
     @Html.HiddenFor(x => x.idCliente)
     @Html.HiddenFor(x => x.rol, new { @class = "form-control", @Value = "2" })
-<div class="formulario cliente">
+<div class="formulario cliente" style="width: 340px; height: 580px">
     @if (Model.idCliente > 0)
     {
         <h3>Editar cliente</h3>
@@ -19,6 +19,13 @@
         <h3>Agregar cliente</h3>
     }
     @Html.Partial("_ParcialFormularioRegistrarse")
-
+    @if (Model.idCliente > 0)
+    {
+        <input type="submit" value="Guardar" />
+    }
+    else
+    {
+        <input type="submit" value="Registrar" />
+    }
 </div>
 }
