@@ -5,71 +5,98 @@
 }
 @if (TempData["Message"] != null)
 {
-<div class="alert alert-success alert-dismissable col-md-4 text-center" role="alert" style="margin-top: 10px; width: 35rem;">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <b>@TempData["Message"]</b>
-</div>
+    <div class="alert alert-success alert-dismissable col-md-4 text-center" role="alert" style="margin-top: 10px; width: 35rem;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <b>@TempData["Message"]</b>
+    </div>
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn agregarBtn" style="margin-bottom: -230px" onclick="window.location.href='/Clientes/AgregarOEditarClientes'"><i class="fas fa-plus"></i> Agregar</button>
-            @if (Model.Count() > 0)
-            {
-                <center><h1>Clientes</h1></center>
-                <br />
-                <br />
-                <table class="table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Telléfono</th>
-                            <th>Dirección</th>
-                            <th>Correo</th>
-                            <th>Contraseña</th>
-                            <th>Rol</th>
-                            <th colspan="2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var cl in Model)
-                        {
+@if (Session["UserRol"].Equals("admin"))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn agregarBtn" style="margin-bottom: -230px" onclick="window.location.href='/Clientes/AgregarOEditarClientes'"><i class="fas fa-plus"></i> Agregar</button>
+                @if (Model.Count() > 0)
+                {
+                    <center><h1>Clientes</h1></center>
+                    <br />
+                    <br />
+                    <table class="table-hover table-striped">
+                        <thead>
                             <tr>
-                                <td>@cl.nombre</td>
-                                <td>@cl.telefono</td>
-                                <td>@cl.direccion</td>
-                                <td>@cl.correo</td>
-                                <td>@cl.pass</td>
-                                <td>@cl.rol</td>
-                                <td width="20">
-
-                                    <button class="btn btn-info "
-                                            onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente">
-                                        <i class="fas fa-pencil-alt"></i> Editar
-                                    </button>
-                                </td>
-                                <td width="20">
-                                    <button class="btn btn-danger"
-                                            onclick="AlertaDelete('/Clientes/EliminarClientes?id='+@cl.idCliente)">
-                                        <i class="fas fa-trash-alt"></i> Eliminar
-                                    </button>
-                                </td>
+                                <th>Nombre</th>
+                                <th>Telléfono</th>
+                                <th>Dirección</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th colspan="2">Acciones</th>
                             </tr>
-                        }
+                        </thead>
+                        <tbody>
+
+                            @foreach (var cl in Model)
+                            {
+                                <tr>
+                                    <td>@cl.nombre</td>
+                                    <td>@cl.telefono</td>
+                                    <td>@cl.direccion</td>
+                                    <td>@cl.correo</td>
+                                    <td>@cl.rol</td>
+                                    <td>@cl.estadoCliente</td>
+                                    <td width="20">
+
+                                        <button class="btn btn-info "
+                                                onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@cl.idCliente">
+                                            <i class="fas fa-pencil-alt"></i> Editar
+                                        </button>
+                                    </td>
+                                   
+                                </tr>
+                            }
 
 
 
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <h2> ¡No hay clientes registrados! </h2>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <h2> ¡No hay clientes registrados! </h2>
 
-            }
+                }
 
+            </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    foreach (var MiPerfil in ViewBag.MiPerfil)
+    {
+        <center>
+            <div class="card" style="width: 300px; border: 1px solid black">
+                <center> <img class="card-img-top" src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png" alt="Card image cap" style="border-radius: 100%; height: 160px; width: 160px;"></center>
+                <div class="card-body">
+                    <h5 class="card-title">Mi Perfil</h5>
+                    <p class="card-text text-left"><b>Nombre:</b> @MiPerfil.nombre</p>
+                    <p class="card-text text-left"><b>Correo:</b> @MiPerfil.correo</p>
+                    <p class="card-text text-left"><b>Teléfono:</b> @MiPerfil.telefono</p>
+                    <p class="card-text text-left"><b>Dirrección:</b> @MiPerfil.direccion</p>
+                </div>
+                <button class="btn btn-info"
+                        onclick="window.location.href = '/Clientes/AgregarOEditarClientes?idCliente='+@MiPerfil.idCliente">
+                    <i class="fas fa-pencil-alt"></i> Editar
+                </button>
+
+
+                <button class="btn btn-danger"
+                        onclick="AlertaDelete('/Clientes/EliminarClientes?id='+@MiPerfil.idCliente)">
+                    <i class="fas fa-trash-alt"></i> Eliminar mi cuenta
+                </button>
+            </div>
+
+        </center>
+    }
+}

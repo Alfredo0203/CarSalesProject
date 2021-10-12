@@ -21,16 +21,25 @@ namespace SistemaInventario.Controllers
             this.clienteRepository = new ClientesRepository(new Contexto());
             this.ventasRepository = new VentasRepository(new Contexto());
         }
-        [Admin]
+        
         public ActionResult MostrarClientes()
         {
             var clientes = clienteRepository.ListaClientes();
+            if (Session["UserRol"].Equals("cliente"))
+            {
+                using (Contexto con = new Contexto())
+                {
+                    int clienteInt = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString());
+                    var MisDatos = con.tabClientes.Where(x => x.idCliente == clienteInt).ToList();
+                    ViewBag.MiPerfil = MisDatos;
+                }
 
+            }
             return View(clientes);
         }
 
         //REDIRECCIÓN A LA VISTA CON EL OBJETO CLIENTE
-        [Admin]
+        [Cliente]
         public ActionResult AgregarOEditarClientes(int idCliente = 0)
         {
             var cliente = new tabClientes();
@@ -43,7 +52,7 @@ namespace SistemaInventario.Controllers
             return View(cliente);
         }
         // INSERCIÓN DE LOS DATOS
-        [Admin]
+        [Cliente]
         [HttpPost]
         public ActionResult AgregarOEditarClientes(tabClientes cliente)
         {
@@ -68,15 +77,29 @@ namespace SistemaInventario.Controllers
 
             return View(cliente);
         }
-        [Admin]
+        [Cliente]
         public ActionResult EliminarClientes(int id, bool success = false)
         {
-            if(id > 0 && success == true)
-            { 
-            TempData["Message"] = "Cliente con nombre" + clienteRepository.ObtenerClientesPorID(id).nombre + " eliminado correctamente";
-            clienteRepository.EliminarCliente(id);
-             }
-            return RedirectToAction("MostrarClientes");
+            if (id > 0 && success == true)
+            {
+                var contexto = new Contexto();
+                tabClientes cliente = new tabClientes();
+                cliente = clienteRepository.ObtenerClientesPorID(id);
+
+                if (!contexto.tabVentas.Any(x => x.FkCliente == id))
+                {
+                    TempData["Message"] = "Cliente con nombre" + clienteRepository.ObtenerClientesPorID(id).nombre + " eliminado correctamente";
+                    clienteRepository.EliminarCliente(id);
+                }
+                else
+                {
+                    cliente.estadoCliente = "Inactivo";
+                    cliente.ConfirmarPass = cliente.pass;
+                    clienteRepository.ActualizarClientes(cliente);
+
+                }
+            }
+                    return RedirectToAction("MostrarClientes");
         }
         [Cliente]
         public ActionResult ComprasClientes()
