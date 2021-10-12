@@ -79,10 +79,6 @@ namespace DAL.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<tabClientes>()
-                .Property(e => e.estadoCliente)
-                .IsFixedLength();
-
-            modelBuilder.Entity<tabClientes>()
                 .Property(e => e.correo)
                 .IsUnicode(false);
 

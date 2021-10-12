@@ -30,9 +30,8 @@ namespace DAL.Models
         [StringLength(55)]
         public string direccion { get; set; }
 
-        [StringLength(20)]
         [Required(ErrorMessage = "El estado es requerido")]
-        public string estadoCliente { get; set; }
+        public bool estadoCliente { get; set; }
 
         [Required(ErrorMessage = "El correo es requerido")]
         [EmailAddress(ErrorMessage = "Ingrese un correo válido")]
