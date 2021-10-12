@@ -12,6 +12,7 @@ namespace DAL.Models
         public tabClientes()
         {
             tabVentas = new HashSet<tabVentas>();
+            this.isActivo = true;
         }
 
         [Key]
@@ -22,16 +23,14 @@ namespace DAL.Models
         public string nombre { get; set; }
 
         [Required(ErrorMessage = "Ingrese número de teléfono")]
-        [DataType(DataType.PhoneNumber)]
-        [StringLength(55)]
+     
         public string telefono { get; set; }
 
         [Required(ErrorMessage = "La dirección es requerida")]
-        [StringLength(55)]
+
         public string direccion { get; set; }
 
-        [Required(ErrorMessage = "El estado es requerido")]
-        public bool estadoCliente { get; set; }
+        public bool isActivo { get; set; }
 
         [Required(ErrorMessage = "El correo es requerido")]
         [EmailAddress(ErrorMessage = "Ingrese un correo válido")]

@@ -39,6 +39,7 @@ namespace SistemaInventario.Controllers
                             x.pass.Equals(pass));
                 var User2 = contexto.tabClientes.FirstOrDefault(x => x.correo.Equals(correo) &&
                             x.pass.Equals(pass));
+
                 if (User != null)
                 {
 
@@ -49,10 +50,16 @@ namespace SistemaInventario.Controllers
                 }
                 else if (User2 != null)
                 {
-                    Session["UserId"] = User2.idCliente.ToString();
-                    Session["NombreUsuario"] = User2.nombre;
-                    Session["UserRol"] = User2.rol.ToString();
-                    return RedirectToAction("Index", "Home");
+                    if (User2.isActivo)
+                    {
+                        Session["UserId"] = User2.idCliente.ToString();
+                        Session["NombreUsuario"] = User2.nombre;
+                        Session["UserRol"] = User2.rol.ToString();
+                        return RedirectToAction("Index", "Home");
+                    } else
+                    {
+                        ModelState.AddModelError("InvalidCredentials", "Esta cuenta está desactivada; puede comunicarse con nosotros al correo: sistemainventario@outlook.com");
+                    }
                 }
                 else
                 {
@@ -89,9 +96,12 @@ namespace SistemaInventario.Controllers
         [HttpPost]
         public ActionResult Registrarse(tabClientes cliente)
         {
-            Regex regex = new Regex("^\\d{8}$");
-            if(!regex.IsMatch(cliente.telefono)) ModelState.AddModelError("Numero", "Numero incorrecto");
-            if (clientesRepository.ExisteDato(cliente.correo)) ModelState.AddModelError("CorreoExiste", "Este correo ya está en uso");
+            //Regex regex = new Regex("^\\d{8}$");
+            //if(!regex.IsMatch(cliente.telefono)) ModelState.AddModelError("Numero", "Numero incorrecto");
+            if (clientesRepository.ExisteDato(cliente.correo))
+            {
+                ModelState.AddModelError("CorreoExiste", "Este correo ya está en uso");
+            }
             //CAPTURA DE CREDENCIALES PARA INGRESAR AUTOMÁTICAMENTE AL SISTEMA DESPUES DEL REGISTRO
             if (ModelState.IsValid)
             {

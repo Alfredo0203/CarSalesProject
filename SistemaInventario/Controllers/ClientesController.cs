@@ -56,13 +56,15 @@ namespace SistemaInventario.Controllers
         [HttpPost]
         public ActionResult AgregarOEditarClientes(tabClientes cliente)
         {
-
+           cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
+           cliente.ConfirmarPass= EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
             if (ModelState.IsValid)
             {
                 
                 if (cliente.idCliente > 0)
                 {
-                    TempData["Message"] = "Datos de " + cliente.nombre + " actualizados";
+
+                    TempData["Message"] = "Datos actualizados";
                     clienteRepository.ActualizarClientes(cliente);
 
                 }
@@ -93,9 +95,10 @@ namespace SistemaInventario.Controllers
                 }
                 else
                 {
-                    cliente.estadoCliente = "Inactivo";
+                    cliente.isActivo = false;
                     cliente.ConfirmarPass = cliente.pass;
                     clienteRepository.ActualizarClientes(cliente);
+                    return RedirectToAction("LogOut", "Home");
 
                 }
             }

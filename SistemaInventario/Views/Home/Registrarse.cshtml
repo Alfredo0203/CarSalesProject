@@ -6,7 +6,7 @@
 {
 
     @Html.HiddenFor(x => x.rol, new { @class = "form-control", @Value = "2" })
-    @Html.HiddenFor(x => x.estadoCliente, new { @class = "form-control", @Value = "Activo" })
+     @Html.HiddenFor(x => x.isActivo, htmlAttributes: new { @Value= true });
 <div class="formulario usuario">
     <h3 style="margin-top: 10px">Registrarse</h3>
 

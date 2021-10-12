@@ -8,21 +8,21 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(x => x.idCliente)
-    @Html.HiddenFor(x => x.estadoCliente, new { @Value = "Activo" })
     @Html.HiddenFor(x => x.rol, new { @class = "form-control", @Value = "2" })
-<div class="formulario cliente" style="width: 340px; height: 580px">
-    @if (Model.idCliente > 0)
-    {
-        <h3>Editar Datos</h3>
-        @Html.Partial("_ParcialFormularioRegistrarse")
-        <input type="submit" value="Guardar" />
-    }
-    else
-    {
-        <h3>Agregar cliente</h3>
-        @Html.Partial("_ParcialFormularioRegistrarse")
-        <input type="submit" value="Registrar" />
-    }
+    @Html.HiddenFor(x => x.isActivo, htmlAttributes: new { @Value = true });
+    <div class="formulario cliente" style="width: 340px; height: 580px">
+        @if (Model.idCliente > 0)
+        {
+            <h3>Editar Datos</h3>
+            @Html.Partial("_ParcialFormularioRegistrarse")
+            <input type="submit" value="Guardar" />
+        }
+        else
+        {
+            <h3>Agregar cliente</h3>
+            @Html.Partial("_ParcialFormularioRegistrarse")
+            <input type="submit" value="Registrar" />
+        }
 
-</div>
+    </div>
 }
