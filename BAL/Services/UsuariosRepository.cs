@@ -70,7 +70,17 @@ namespace BAL.Services
                 contexto.SaveChanges();
             }
         }
-       
+
+        public bool ExisteDato(string Dato)
+        {
+            bool existe = false;
+            using (Contexto db = new Contexto())
+            {
+                existe = contexto.tabClientes.Any(x => x.correo == Dato);
+                if (existe == false) existe = contexto.tabUsuarios.Any(x => x.correo == Dato);
+            }
+            return existe;
+        }
         public void Dispose()
         {
             throw new NotImplementedException();

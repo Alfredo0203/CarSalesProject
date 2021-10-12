@@ -15,8 +15,8 @@
 @Html.ValidationMessageFor(x => x.correo, null, htmlAttributes: new { @class = "text-danger" })
 @Html.ValidationMessage("CorreoExiste", new { @class = "text-danger" })
 <label>Contraseña: </label>
-@Html.TextBoxFor(x => x.pass, new { @class = "form-control" })
+@Html.PasswordFor(x => x.pass, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.pass, null, htmlAttributes: new { @class = "text-danger" })
 <label>Confirmar Contraseña: </label>
-@Html.TextBoxFor(x => x.ConfirmarPass, new { @class = "form-control" })
+@Html.PasswordFor(x => x.ConfirmarPass, new { @class = "form-control" })
 @Html.ValidationMessageFor(x => x.ConfirmarPass, null, htmlAttributes: new { @class = "text-danger" })

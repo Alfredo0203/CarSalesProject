@@ -17,5 +17,7 @@ namespace BAL.IServices
         tabUsuarios ObtenenerUsuarioPorId(int idUsuario);
         //ELIMINAR USUARIO
         void EliminarUsuario(int idUsuario);
+
+        bool ExisteDato(string Dato);
     }
 }

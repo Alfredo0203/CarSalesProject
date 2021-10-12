@@ -45,7 +45,11 @@ namespace SistemaInventario.Controllers
     //AGREGAR USUARIO
     public ActionResult EditarOCrearUsuarios(tabUsuarios usuarios)
     {
-        if (ModelState.IsValid)
+            if (usuariosRepository.ExisteDato(usuarios.correo))
+            {
+                ModelState.AddModelError("CorreoExiste", "Este correo ya está en uso");
+            }
+            if (ModelState.IsValid)
         {
             var creado = usuariosRepository.CrearOEditarUsuario(usuarios);
                 if (creado)
