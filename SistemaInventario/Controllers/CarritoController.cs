@@ -91,8 +91,7 @@ namespace SistemaInventario.Controllers
         public JsonResult Vender()
         {
             bool CompraFinalizada = false;
-            try
-            {
+           
                 string rolClienteString = Session["UserRol"].ToString(); // ------------------------------------------------------------------------------------------ Almacena nombre del rol en una variable
                 int clienteInt = InventarioRepository.ConvertirAEntero(Session["UserId"].ToString()); // ------------------------------------------------------------- Convirte a entero y almacena id delcliente
                 var miProductoEnCarrito = contexto.Carrito.Where(x => x.IdCliente == clienteInt).ToList(); // -------------------------------------------------------- Obtiene listado de producto en carrito del cliente logeado
@@ -108,7 +107,7 @@ namespace SistemaInventario.Controllers
                     if (AutoEnInventario.existenciaProducto == 0 && AutoEnInventario.fk_auto == miProducto.FkAuto) continue; // -------------------------------------- Omite (y salta la iteracción) en caso que no haya producto delque elcliente tiene en carrito
 
                     // CAPTURAMOS LAS ESPECIFICACIONES DEL AUTO EN PROCESO DE COMPRA DE LA TABLA INVENTARIO
-                    var Precio = contexto.tabInventario.FirstOrDefault(x => x.idInventario == miProducto.FkAuto).precio; 
+                    var Precio = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == miProducto.FkAuto).precio; 
                     var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == miProducto.FkAuto).MarcaAuto;
                     var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == miProducto.FkAuto).ModeloAuto;
                     var model = new DAL.Models.tabDetalleVentas(); //------------------------------------------------------------------------------------------------- Se crea objeto para guardar los pedidos del cliente como ventas             
@@ -133,8 +132,7 @@ namespace SistemaInventario.Controllers
                     contexto.SaveChanges();
                 }
                 CompraFinalizada = true;
-            } // Finaliza el try
-            catch (Exception) { }
+            
 
             return Json(CompraFinalizada, JsonRequestBehavior.AllowGet);
         }

@@ -22,7 +22,7 @@ namespace SistemaInventario.Controllers
             AgregarAInventario auto = new AgregarAInventario();
             var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).tabAutos.NombreMarca;
             var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).tabAutos.modelo;
-            var Precio = contexto.tabInventario.FirstOrDefault(x => x.idInventario == id).precio;
+            var Precio = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).precio;
             var Total = Cantidad * Precio;
             AgregarAInventario.TotalAPagar += Total;
             bool existe = (from a in AgregarAInventario.listaAutosAComprar where a.Id == id select a).Any();

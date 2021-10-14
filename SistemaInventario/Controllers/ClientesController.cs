@@ -56,11 +56,11 @@ namespace SistemaInventario.Controllers
         [HttpPost]
         public ActionResult AgregarOEditarClientes(tabClientes cliente)
         {
-           cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
-           cliente.ConfirmarPass= EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
+           
             if (ModelState.IsValid)
             {
-                
+                cliente.pass = EncriptarPassword.EncriptarPass(cliente.pass);
+                cliente.ConfirmarPass = EncriptarPassword.EncriptarPass(cliente.ConfirmarPass);
                 if (cliente.idCliente > 0)
                 {
 
