@@ -89,27 +89,28 @@ else
                             {
                                 foreach (var car in Model)
                                 {
-                                    <tr>
-                                        <td>@car.fk_auto</td>
-                                        <td>@car.tabAutos.NombreMarca</td>
-                                        <td>@car.ModeloAuto</td>
-                                        <td>@car.tabAutos.imagen</td>
-                                        <td>@car.tabAutos.color</td>
-                                        <td style=" position:center"><input class="cantidad1" id="@car.fk_auto" style="width: 70px" type="number" /></td>
+                            <tr>
+                                <td>@car.fk_auto</td>
+                                <td>@car.tabAutos.NombreMarca</td>
+                                <td>@car.ModeloAuto</td>
+                                <td>@car.tabAutos.imagen</td>
+                                <td>@car.tabAutos.color</td>
+                                <td style=" position:center"><input class="cantidad1" id="@car.fk_auto" style="width: 70px" type="number" /></td>
 
-                                        <td>@car.tabAutos.motor</td>
-                                        <td class="precio1" style=" border: none; position:center"><input onblur="ValidarPrecios(@idsprecios)" class="precios1" id="@idsprecios" style="width: 70px" type="text" value="@car.precio" /></td>
-                                        <td>@car.tabAutos.descripcion</td>
-                                        <td>@car.tabAutos.fechaRegistro</td>
-                                        <td width="20">
-                                            <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
-                                        </td>
-                                        <td width="20">
+                                <td>@car.tabAutos.motor</td>
+                                <td class="precio1" style=" border: none; position:center"><input onblur="ValidarPrecios(@idsprecios)" class="precios1" id="@idsprecios" style="width: 70px" type="text" value="@car.precio" /></td>
+                                <td>@car.tabAutos.descripcion</td>
+                                <td>@car.tabAutos.fechaRegistro</td>
+                                <td width="20">
+                                    <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
+                                </td>
+                                <td width="20">
 
-                                            <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    <button class="btn btn-danger" onclick="AlertaDelete('/Inventario/EliminarAutos?id=' +@car.tabAutos.idAuto, @car.existenciaProducto)"><i class="fas fa-trash-alt"></i> Eliminar</button>
 
-                                        </td>
-                                    </tr>
+                                </td>
+                         
+                            </tr>
                                     idsprecios++;
                                 }
                             }
@@ -189,6 +190,7 @@ else
         var ArrayCantidades = new Array(@Model.Count())
         var ArrayidsPrecios= new Array(@Model.Count())
         var ArrayPrecios = new Array(@Model.Count())
+        // Capturación de elementos input que contienen los valores
         var cantidades = document.getElementsByClassName("cantidad1")
         var precios = document.getElementsByClassName("precios1")
         //LLenado de valores
@@ -197,16 +199,48 @@ else
             ArrayCantidades[i] = cantidades[i].value
             ArrayidsPrecios[i] = precios[i].id
             ArrayPrecios[i] = precios[i].value.trim()
-
+            if (ArrayCantidades[i] > 0 && ArrayPrecios[i] < 1000) {
+                $("#errorSpan").html("Ingrese precio en campos cuya cantidad sea mayor a cero");
+                ArrayPrecios[i].focus();
             }
+        }
 
+        //ENVÍO DE DATOS AL CONTROLADOR
         $.ajax({
             url: '/AgregarAInventario/RealizarCompras',
             data: { IdAutos: ArrayidsAutos, Cantidades: ArrayCantidades, precios: ArrayPrecios},
-            type: 'POST'
+            type: 'POST',
+            success: function (resultado) {
+                if (resultado == true) {
+                     //INICIA ELDIALOGO DE NOTIFICACIÓN
+                    Swal.fire({
+                        title: '¡Compra realizada exitosamente!',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    })
+                    window.location.reload(true);
+                    //FINALIZA EL DIALOGO E NOTIFICACIÓN
+                } else {
+                    //INICIA ELDIALOGO DE NOTIFICACIÓN
+                    Swal.fire({
+                        title: '¡No se pudo completar la compra!',
+                        text: "Es posible que no se haya agragado cantidad a ningún producto",
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonPosition: 'center',
+                        confirmButtonColor: '#0067b8',
+                        timer: 9000,
+                    })
+                    //FINALIZA EL DIALOGO E NOTIFICACIÓN
+                }
+            }
         });
     }
 
+    // Validar que precios sean numeros enteros o decimal
     function ValidarPrecios(id) {
         const isValid = /^(\d+)$|^(\d+\.\d{1,10})?$/;
         var precios = document.getElementsByClassName("precios1")
