@@ -16,73 +16,33 @@ namespace SistemaInventario.Controllers
     {
 
         Contexto contexto = new Contexto();
-        public ActionResult SeleccionarProducto(int id)
+
+        public ActionResult RealizarCompras(int[] IdAutos, int[] Cantidades, double[] precios)
         {
-            int Cantidad = 1;
-            AgregarAInventario auto = new AgregarAInventario();
-            var Marca = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).tabAutos.NombreMarca;
-            var Modelo = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).tabAutos.modelo;
-            var Precio = contexto.tabInventario.FirstOrDefault(x => x.fk_auto == id).precio;
-            var Total = Cantidad * Precio;
-            AgregarAInventario.TotalAPagar += Total;
-            bool existe = (from a in AgregarAInventario.listaAutosAComprar where a.Id == id select a).Any();
-            if (existe == false)
-            {
-                auto.AgregarparaComprar(id, Marca, Modelo, Cantidad, Precio, Total);
-
-            }
-            else
-            {
-
-                foreach (var a in AgregarAInventario.listaAutosAComprar.Where(a => a.Id == id))
-                {
-
-                    a.Cantidad = a.Cantidad + 1;
-                    a.SubTotal += Precio * Cantidad;
-                    break;
-
-                }
-
-            }
-
-            return RedirectToAction("AgregarOEditarCompras","Compras");
-        }
-
-        //QUITAR ELEMENTOS DELCARRITO
-        public ActionResult EliminarElementoDeLaLista(int id = 0)
-        {
-            var precio = AgregarAInventario.listaAutosAComprar.FirstOrDefault(x => x.Id == id).PrecioCompra;
-            var cantidad = AgregarAInventario.listaAutosAComprar.FirstOrDefault(x => x.Id == id).Cantidad;
-            AgregarAInventario.TotalAPagar -= (precio * cantidad);
-            AgregarAInventario.listaAutosAComprar.RemoveAll(x => x.Id == id);
-            return RedirectToAction("AgregarOEditarCompras", "Compras");
-        }
-
-
-        public ActionResult RealizarCompras()
-        {
-            var compra = new tabCompras();
-            compra.Total = AgregarAInventario.TotalAPagar;
-
+            var compra = new tabCompras();       
             contexto.Entry(compra).State = EntityState.Added;
-
-            foreach (var p in AgregarAInventario.listaAutosAComprar)
+            //Seleccionar inventariodondela cantidad sea mayor a cero
+            int i = 0;
+            var listaiInventario = contexto.tabInventario.ToList();
+            foreach(var listado in listaiInventario)
             {
-
-                var model = new DAL.Models.tabDetalleCompras();
-                model.fk_auto= p.Id;
-                model.marcaModelo = p.Marca + " " + p.Modelo;
-                model.cantidad = p.Cantidad;
-                model.precioCompra= p.PrecioCompra;
-                model.subTotal = p.SubTotal;
-                model.idCompra = compra.IdCompra;
-                contexto.Entry(model).State = EntityState.Added;
-                contexto.SaveChanges();
-
+                if(IdAutos[i] == listado.fk_auto && Cantidades[i] > 0)
+                {
+                    precios[i] = Math.Round(precios[i], 2);
+                    var model = new DAL.Models.tabDetalleCompras();
+                    model.fk_auto = listado.fk_auto;
+                    model.marcaModelo = listado.MarcaAuto + " " + listado.ModeloAuto;
+                    model.cantidad = Cantidades[i];
+                    model.precioCompra = precios[i];
+                    model.subTotal = Cantidades[i] * precios[i];
+                    model.idCompra = compra.IdCompra;
+                    contexto.Entry(model).State = EntityState.Added;
+                    contexto.SaveChanges();
+                   
+                }
+                i++;
             }
-
-            AgregarAInventario.listaAutosAComprar.RemoveRange(0, AgregarAInventario.listaAutosAComprar.Count());
-            AgregarAInventario.TotalAPagar = 0;
+                  
             return RedirectToAction("MostrarCompras", "Compras");
         }
 

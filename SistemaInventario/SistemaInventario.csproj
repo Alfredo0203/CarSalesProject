@@ -228,7 +228,6 @@
     <Content Include="Views\Ventas\MostrarVentas.cshtml" />
     <Content Include="Views\Ventas\AgregarOEditarVentas.cshtml" />
     <Content Include="Views\Compras\MostrarCompras.cshtml" />
-    <Content Include="Views\Compras\AgregarOEditarCompras.cshtml" />
     <Content Include="Views\Inventario\MostrarInventario.cshtml" />
     <Content Include="Views\Usuarios\MostrarUsuarios.cshtml" />
     <Content Include="Views\Usuarios\EditarOCrearUsuarios.cshtml" />
@@ -245,7 +244,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Comprar\" />
     <Folder Include="Views\Vender\" />
   </ItemGroup>
   <ItemGroup>

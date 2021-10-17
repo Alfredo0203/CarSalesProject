@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "MostrarAutos";
     var YaEnCarrito = ViewBag.ListaCarrito;
+    int idsprecios = 0;
 }
 <link href="~/Content/Diseños/tarjetas.css" rel="stylesheet" />
 <center><h1 id="titulo">AUTOS</h1></center>
@@ -55,10 +56,15 @@ else
         <center>
             <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
             <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
+            <button class="btn btn-success" onclick="Comprando()" id="agregar"> <i class="fas fa-plus"></i> Agregar A Inventario </button>
+            <button class="btn btn-success" id="cancelar"> <i class="fas fa-plus"></i> Cancelar</button>
+            <button class="btn btn-success" onclick="Comprando()"> <i class="fas fa-plus"></i> Finalizar compra </button>
+            <input type="checkbox" id="comprando" />
         </center>
         <br />
         <br />
         <br />
+        <center><span id="errorSpan" class="text-danger"></span> </center>
         <div class="container" id="tabla" style="display: none">
             <div class="row">
                 <div class="col-md-12">
@@ -68,11 +74,11 @@ else
                                 <th>Id</th>
                                 <th>Marca</th>
                                 <th>Modelo</th>
-
                                 <th>Imagen</th>
                                 <th>Color</th>
-                                <th>Motor</th>
                                 <th>Cantidad</th>
+                                <th>Motor</th>
+                                <th>Precio</th>
                                 <th>Descripción</th>
                                 <th>Fecha registro</th>
                                 <th colspan="2">Acciones</th>
@@ -84,13 +90,15 @@ else
                                 foreach (var car in Model)
                                 {
                                     <tr>
-                                        <td>@car.tabAutos.idAuto</td>
+                                        <td>@car.fk_auto</td>
                                         <td>@car.tabAutos.NombreMarca</td>
                                         <td>@car.ModeloAuto</td>
                                         <td>@car.tabAutos.imagen</td>
                                         <td>@car.tabAutos.color</td>
+                                        <td style=" position:center"><input class="cantidad1" id="@car.fk_auto" style="width: 70px" type="number" /></td>
+
                                         <td>@car.tabAutos.motor</td>
-                                        <td>@car.existenciaProducto</td>
+                                        <td class="precio1" style=" border: none; position:center"><input onblur="ValidarPrecios(@idsprecios)" class="precios1" id="@idsprecios" style="width: 70px" type="text" value="@car.precio" /></td>
                                         <td>@car.tabAutos.descripcion</td>
                                         <td>@car.tabAutos.fechaRegistro</td>
                                         <td width="20">
@@ -102,6 +110,7 @@ else
 
                                         </td>
                                     </tr>
+                                    idsprecios++;
                                 }
                             }
 
@@ -171,3 +180,47 @@ else
 <script src="~/Scripts/Alerta.js"></script>
 <script src="~/Scripts/PeticionesJQuerry/AgregarAlCarrito.js"></script>
 <script src="~/Scripts/PeticionesJQuerry/SacarDelCarrito.js"></script>
+
+<script>
+
+    function Comprando() {
+
+        var ArrayidsAutos = new Array(@Model.Count())
+        var ArrayCantidades = new Array(@Model.Count())
+        var ArrayidsPrecios= new Array(@Model.Count())
+        var ArrayPrecios = new Array(@Model.Count())
+        var cantidades = document.getElementsByClassName("cantidad1")
+        var precios = document.getElementsByClassName("precios1")
+        //LLenado de valores
+        for (var i = 0; i < @Model.Count(); i++) {
+            ArrayidsAutos[i] = cantidades[i].id
+            ArrayCantidades[i] = cantidades[i].value
+            ArrayidsPrecios[i] = precios[i].id
+            ArrayPrecios[i] = precios[i].value.trim()
+
+            }
+
+        $.ajax({
+            url: '/AgregarAInventario/RealizarCompras',
+            data: { IdAutos: ArrayidsAutos, Cantidades: ArrayCantidades, precios: ArrayPrecios},
+            type: 'POST'
+        });
+    }
+
+    function ValidarPrecios(id) {
+        const isValid = /^(\d+)$|^(\d+\.\d{1,10})?$/;
+        var precios = document.getElementsByClassName("precios1")
+        precios[id].value = precios[id].value.trim()
+        if (!isValid.test(precios[id].value )) {
+            precios[id].focus();
+            $("#errorSpan").html("Precio debe ser numero entero o decimal");
+        } else if (precios[id].value < 1000) {
+            $("#errorSpan").html("El precio debe ser mayor a 1000");
+            precios[id].focus();
+        }
+        else {
+            $("#errorSpan").html("");
+        }
+
+    }
+</script>

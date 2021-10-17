@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgregarAInventario\AgregarAInventario.cs" />
     <Compile Include="IServices\ICarritoRepository.cs" />
     <Compile Include="IServices\IDetalleComprasRepository.cs" />
     <Compile Include="IServices\IAutosRepository.cs" />
