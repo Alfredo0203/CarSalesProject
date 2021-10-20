@@ -21,6 +21,21 @@ function mostrarTarjeta() {
     localStorage.setItem("estadoTarjeta", tarjeta.style.display);
 }
 
+function AgregarAInventario() {
+    var btn1 = document.getElementById("btnTarjeta");
+    var btn2 = document.getElementById("btnTabla");
+    var btn3 = document.getElementById("agregar");
+    var btn4 = document.getElementById("finalizarCompra");
+    var contenedor = document.getElementById("agregarA");
+    var titulo = document.getElementById("titulo");
+    btn1.style.display = "none";
+    btn2.style.display = "none";
+    btn3.style.display = "none";
+    btn4.style.display = "block";
+    contenedor.style.display = "none";
+    titulo.innerHTML = "Agregar al inventario";
+}
+
 window.onload = function () {
     //Al recargar la pagina se leeran los datos almacenados en las 
     //variables locales "localStorage.setItem"

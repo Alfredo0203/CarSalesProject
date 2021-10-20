@@ -9,7 +9,7 @@
 <center><h1 id="titulo">AUTOS</h1></center>
 @if (Session["UserRol"].Equals("admin"))
 {
-    <div class="container">
+    <div id="agregarA" class="container">
         <button style="margin-left: 25px; margin-bottom: -260px;" class="btn agregarBtn" onclick="window.location.href='/Inventario/AgregarOEditarAutos'"><i class="fas fa-plus"></i> Agregar Auto</button>
     </div>
     if (Model.Count() == 0)
@@ -56,14 +56,13 @@ else
         <center>
             <button class="btn btn-info" onclick="mostrarTarjeta()" id="btnTarjeta">Ver en tarjetas</button>
             <button class="btn btn-info" onclick="mostrarTabla()" id="btnTabla">Ver en tabla</button>
-            <button class="btn btn-success" onclick="Comprando()" id="agregar"> <i class="fas fa-plus"></i> Agregar A Inventario </button>
-            <button class="btn btn-success" id="cancelar"> <i class="fas fa-plus"></i> Cancelar</button>
-            <button class="btn btn-success" onclick="Comprando()"> <i class="fas fa-plus"></i> Finalizar compra </button>
-            <input type="checkbox" id="comprando" />
+            <button class="btn btn-success" onclick="AgregarAInventario()" id="agregar"> <i class="fas fa-plus"></i> Agregar A Inventario </button>
+            <button style="display: none" class="btn btn-success" onclick="Comprando()" id="finalizarCompra"> <i class="fas fa-plus"></i> Finalizar compra </button>
         </center>
         <br />
         <br />
         <br />
+        
         <center><span id="errorSpan" class="text-danger"></span> </center>
         <div class="container" id="tabla" style="display: none">
             <div class="row">
@@ -135,9 +134,10 @@ else
             {
                 <div class="card">
                     <img src="~/Content/img_cars/@car.Image" />
-                    <h4>@car.MarcaAuto @car.precio</h4>
-                    <p>Modelo: @car.ModeloAuto Motor: @car.tabAutos.motor</p>
-                    <p>Cantidad disponible: @car.existenciaProducto</p>
+                    <h4 style="font-weight: bold">@car.MarcaAuto <span style="color: #17a2b8">$@car.precio</span> </h4>
+                    <p><span style="font-weight: bold">Modelo: </span>@car.ModeloAuto</p>
+                    <p><span style="font-weight: bold">Motor: </span>@car.tabAutos.motor</p>
+                    <p><span style="font-weight: bold">Cantidad disponible: </span>@car.existenciaProducto</p>
                     <p>@car.tabAutos.descripcion</p>
                     <label>
                         <button class="btn btn-info" onclick="window.location.href='/Inventario/AgregarOEditarAutos?id=' +@car.tabAutos.idAuto"><i class="fas fa-pencil-alt"></i> Editar</button>
